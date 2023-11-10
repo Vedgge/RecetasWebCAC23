@@ -163,3 +163,5 @@ Muestra/~$TablasEnExcel.xlsx
 actualizarBdD.py
 .gitignore
 
+CrearBdD.sql
+datos.txt
