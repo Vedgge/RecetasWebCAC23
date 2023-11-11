@@ -2,7 +2,8 @@ import mysql.connector
 import os
 
 class Credenciales:
-    def __init__(self, ruta):
+    def __init__(self):
+        ruta = "RecetasWebCAC23/datos.txt"
         if os.path.exists(ruta):
             with open(ruta, "r") as archivo:
                 lineas = archivo.readlines()    
@@ -55,16 +56,28 @@ class Credenciales:
         self.conexion.close()
 
 
+class Consulta(Credenciales):
+    def __init__(self, seleccion, tabla):
+        super().__init__()
+        self.seleccion = seleccion
+        self.tabla = tabla
+    
+    def consultar(self):
+        self.conectar()
+        self.cursor.execute (f"SELECT {self.seleccion} from {self.tabla}")
+
+        self.resultados = self.cursor.fetchall()
+        for fila in self.resultados:
+            print(fila)
+
+        Credenciales.desconectar(self)
+
+
+
+
+cons = Consulta("*","categorias")
+cons.consultar()
+
+
+
 # cursor.execute ("INSERT INTO categorias (Categoria) VALUES ('Cerdo')")
-
-credenciales = Credenciales("RecetasWebCAC23/datos.txt")
-
-
-credenciales.conectar()
-credenciales.cursor.execute ("SELECT * from categorias")
-
-resultados = credenciales.cursor.fetchall()
-for fila in resultados:
-    print(fila)
-
-credenciales.desconectar()
