@@ -2,6 +2,9 @@ import mysql.connector
 import os
 
 class Credenciales:
+    # Obtiene credenciales para operar en la Base de Datos (BdD).
+    # Abre y cierra la conección con la misma.
+    # A modo de prueba es capaz de imprimirlas también.
     def __init__(self):
         ruta = "RecetasWebCAC23/datos.txt"
         if os.path.exists(ruta):
@@ -54,9 +57,11 @@ class Credenciales:
     def desconectar(self):
         self.conexion.commit()
         self.conexion.close()
-
+        print("Desconectado")
+# 
 
 class Consulta(Credenciales):
+
     def __init__(self, seleccion, tabla):
         super().__init__()
         self.seleccion = seleccion
@@ -70,14 +75,31 @@ class Consulta(Credenciales):
         for fila in self.resultados:
             print(fila)
 
+
+
+class CargaDatos(Credenciales):
+
+    def __init__(self,tabla, columnas, valores):
+        super().__init__()
+        self.tabla = tabla
+        self.columnas = columnas
+        self.valores = valores
+    
+    def insertarDato(self):
+        self.conectar()
+        self.cursor.execute(f"INSERT INTO {self.tabla} ({self.columnas}) VALUES ('{self.valores}')")
         Credenciales.desconectar(self)
+    
+    def imprimir(self):
+        print(f"INSERT INTO {self.tabla} ({self.columnas}) VALUES ('{self.valores}')")
 
 
 
+# cons = Consulta("*","categorias")
+# cons.consultar()
 
-cons = Consulta("*","categorias")
-cons.consultar()
-
-
-
-# cursor.execute ("INSERT INTO categorias (Categoria) VALUES ('Cerdo')")
+# carga = CargaDatos("categorias","Categoria","Veganas")
+# carga.imprimir()
+# carga.insertarDato()
+# cons.consultar()
+# # cursor.execute ("INSERT INTO categorias (Categoria) VALUES ('Cerdo')")
