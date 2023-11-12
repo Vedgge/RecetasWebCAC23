@@ -1,5 +1,7 @@
 import mysql.connector
 import os
+from flask import Flask, request
+app = Flask(__name__)
 
 # Falta agregar una forma de utilizar la consulta agregando la opción --where--
 
@@ -59,7 +61,7 @@ class Credenciales:
     
     def comitear(self):
         self.conexion.commit()
-        print("Comieteado")
+        print("Comiteado")
 
     def desconectar(self):
         self.conexion.close()
@@ -78,9 +80,9 @@ class Consulta(Credenciales):
             self.conectar()
             self.cursor.execute (f"SELECT {self.seleccion} from {self.tabla}")
 
-        self.resultados = self.cursor.fetchall()
-        for fila in self.resultados:
-            print(fila)
+            self.resultados = self.cursor.fetchall()
+            # for fila in self.resultados:
+            #     print(fila)
 #
 class CargaDatos(Credenciales):
     # valores, al igual que columnas por algún motivo necesita ingresar entre "", y si por algún motivo
@@ -101,61 +103,46 @@ class CargaDatos(Credenciales):
         print(f"INSERT INTO {self.tabla} ({self.columnas}) VALUES ({self.valores})")
 #
 
+def appRoute():
+    
+# @app.route("/nuevousuario", methods=["POST"])
+# def process():
+#     page = ""
+#     form = request.form
+#     nombre = form["username"]
+#     apellido = form["lastname"]
+#     nacimiento = form["year"]
+#     email = form["email"]
+#     pwr = form["Password"]
+#     genero = form["genero"]
+    
+    
+#     if email not in listaEmail:
+#         pass
+        
+#     else:
+#         mensaje = "email existente"
+#     return page
+    pass
+
+
+
 # #######################
 # Conexión de la BdD
 # Inicio de código CRUD
 cc = Credenciales()
 cc.conectar()
 
-# # #######################
-# # CRUD en tabla categorias
-
-# categoriaNueva = CargaDatos("categorias","Categoria","'Veganas'")
-# categoriaNueva.imprimir()
-# categoriaNueva.insertarDato()
-
-# consultaCategorias = Consulta("*","categorias",False)
-# consultaCategorias.consultar()
-
-# # #######################
-# # CRUD en tabla usuarios
-
-# datoUsuario = "'NOm', 'AP', '2005', 'mail@gmail.com', 'jklñ', 'masc'"
-# usuario = CargaDatos("usuarios","Nombre, Apellido, Nacimiento, correoElectrónico, Hash, Genero",datoUsuario)
-# usuario.imprimir()
-# usuario.insertarDato()
-
-# consultaUsuarios = Consulta("*","usuarios",False)
-# consultaUsuarios.consultar()
-
-# # #######################
-# # CRUD en tabla recetas
-
-# datosReceta ="'NOm', 'AP', '20', 'mail@gmail.com', '2', '1', '6', 'Intermedio'"
-# receta = CargaDatos("recetas","NombreReceta, Receta, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad",datosReceta)
-# receta.imprimir()
-# receta.insertarDato()
-
-# consultaRecetas = Consulta("*","usuarios",False)
-# consultaRecetas.consultar()
 
 # #######################
-# CRUD en tabla favoritos
-
-# favoritoNuevo = CargaDatos("favoritos","idReceta, idUsuario","'1', '1'")
-# favoritoNuevo.imprimir()
-# favoritoNuevo.insertarDato()
-
-# consultaFavoritos = Consulta("*","favoritos",False)
-# consultaFavoritos.consultar()
-
-
-
-print("#"*60)
-
+# Obtención de lista completa de recetas y tipos
+recetas = Consulta('*','recetas',False)
+recetas.consultar()
+print(recetas.resultados[2][2])
 
 
 # #######################
 # Desconexión de la BdD
 # Fin de código CRUD
 cc.desconectar()
+print("\033[31m","#"*60,"\033[0m")
