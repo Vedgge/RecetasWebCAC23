@@ -3,7 +3,6 @@ import os
 from flask import Flask, request
 app = Flask(__name__)
 
-# Falta agregar una forma de utilizar la consulta agregando la opción --where--
 
 class Credenciales:
     # Obtiene credenciales para operar en la Base de Datos (BdD).
@@ -57,7 +56,7 @@ class Credenciales:
             password = self._password,
             database = self._database,
         )
-        self.cursor = self.conexion.cursor()
+        self.cursor = self.conexion.cursor(dictionary=True)
     
     def comitear(self):
         self.conexion.commit()
@@ -76,13 +75,21 @@ class Consulta(Credenciales):
         self.condicion = condicion
     
     def consultar(self):
+        self.conectar()
+
         if not self.condicion:
-            self.conectar()
-            self.cursor.execute ("SELECT %s from %s" % (self.seleccion,self.tabla,))
-            
-            self.resultados = self.cursor.fetchall()
-            # for fila in self.resultados:
-            #     print(fila)
+            self.cursor.execute ("SELECT %s FROM %s" % (self.seleccion,self.tabla,))
+        else:
+            self.cursor.execute ("SELECT %s FROM %s WHERE %s" % (self.seleccion,self.tabla,self.condicion,))
+        
+        self.resultados = self.cursor.fetchall()
+
+    def imprimir(self):
+        if not self.condicion:
+            print("SELECT %s FROM %s" % (self.seleccion,self.tabla,))
+        else:
+            print("SELECT %s FROM %s WHERE %s" % (self.seleccion,self.tabla,self.condicion,))
+        
 #
 class CargaDatos(Credenciales):
     # valores, al igual que columnas por algún motivo necesita ingresar entre "", y si por algún motivo
@@ -140,9 +147,14 @@ cc.conectar()
 # recetas.consultar()
 # print(recetas.resultados[2][2])
 
-consultaUsuarios = Consulta("*","usuarios",False)
+consultaUsuarios = Consulta("*","usuarios","idUsuario = '2'")
+consultaUsuarios.imprimir()
 consultaUsuarios.consultar()
-print(consultaUsuarios.consultar())
+print(consultaUsuarios.resultados)
+print(consultaUsuarios.resultados[0]["Nombre"])
+
+
+
 
 # #######################
 # Desconexión de la BdD
