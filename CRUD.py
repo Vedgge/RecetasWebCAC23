@@ -78,8 +78,8 @@ class Consulta(Credenciales):
     def consultar(self):
         if not self.condicion:
             self.conectar()
-            self.cursor.execute (f"SELECT {self.seleccion} from {self.tabla}")
-
+            self.cursor.execute ("SELECT %s from %s" % (self.seleccion,self.tabla,))
+            
             self.resultados = self.cursor.fetchall()
             # for fila in self.resultados:
             #     print(fila)
@@ -96,11 +96,11 @@ class CargaDatos(Credenciales):
     
     def insertarDato(self):
         self.conectar()
-        self.cursor.execute(f"INSERT INTO {self.tabla} ({self.columnas}) VALUES ({self.valores})")
+        self.cursor.execute("INSERT INTO %s (%s) VALUES (%s)" % (self.tabla, self.columnas, self.valores,))
         Credenciales.comitear(self)
     
     def imprimir(self):
-        print(f"INSERT INTO {self.tabla} ({self.columnas}) VALUES ({self.valores})")
+        print("INSERT INTO %s (%s) VALUES (%s)" % (self.tabla, self.columnas, self.valores,))
 #
 
 def appRoute():
@@ -136,10 +136,13 @@ cc.conectar()
 
 # #######################
 # Obtención de lista completa de recetas y tipos
-recetas = Consulta('*','recetas',False)
-recetas.consultar()
-print(recetas.resultados[2][2])
+# recetas = Consulta('*','recetas',False)
+# recetas.consultar()
+# print(recetas.resultados[2][2])
 
+consultaUsuarios = Consulta("*","usuarios",False)
+consultaUsuarios.consultar()
+print(consultaUsuarios.consultar())
 
 # #######################
 # Desconexión de la BdD
