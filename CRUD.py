@@ -88,8 +88,7 @@ class Consulta(Credenciales):
         if not self.condicion:
             print("SELECT %s FROM %s" % (self.seleccion,self.tabla,))
         else:
-            print("SELECT %s FROM %s WHERE %s" % (self.seleccion,self.tabla,self.condicion,))
-        
+            print("SELECT %s FROM %s WHERE %s" % (self.seleccion,self.tabla,self.condicion,))       
 #
 class CargaDatos(Credenciales):
     # valores, al igual que columnas por algún motivo necesita ingresar entre "", y si por algún motivo
@@ -109,50 +108,80 @@ class CargaDatos(Credenciales):
     def imprimir(self):
         print("INSERT INTO %s (%s) VALUES (%s)" % (self.tabla, self.columnas, self.valores,))
 #
-
-def appRoute():
+class ModificarDatos(Credenciales):
+    def __init__(self,tabla, valores,id):
+        super().__init__()
+        self.tabla = tabla
+        self.valores = valores
+        self.id = id
     
-# @app.route("/nuevousuario", methods=["POST"])
-# def process():
-#     page = ""
-#     form = request.form
-#     nombre = form["username"]
-#     apellido = form["lastname"]
-#     nacimiento = form["year"]
-#     email = form["email"]
-#     pwr = form["Password"]
-#     genero = form["genero"]
-    
-    
-#     if email not in listaEmail:
-#         pass
-        
-#     else:
-#         mensaje = "email existente"
-#     return page
-    pass
+    def insertarDato(self):
+        self.conectar()
+        if self.tabla == 'recetas':
+            self.cursor.execute("UPDATE recetas SET NombreReceta = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
+                % (self.valores["NombreReceta"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.id)) 
+            
+        elif self.tabla == 'categorias':
+            self.cursor.execute("UPDATE categorias SET Categoria = '%s' WHERE idCategoria = %s" % (self.valores["Categoria"], self.id))
 
+        elif self.tabla == 'favoritos':
+            self.cursor.execute("UPDATE favoritos SET idReceta = %s, idUsuario = %s WHERE idFavorito = %s" % (self.valores["idReceta"], self.valores["idUsuario"], self.id))
 
+        elif self.tabla == 'usuarios':
+            self.cursor.execute("UPDATE usuarios SET Nombre = '%s', Apellido = '%s',  Nacimiento = %s, correoElectronico = '%s', Hash = %s, Genero = '%s' WHERE idUsuario = %s" 
+                % (self.valores["Nombre"], self.valores["Apellido"], self.valores["Nacimiento"], self.valores["correoElectronico"], self.valores["Hash"], self.valores["Genero"], self.id)) 
+        else:
+            print("Error, tabla ingresada, no válida")
+        Credenciales.comitear(self)
+    
+    def imprimir(self): 
+        if self.tabla == 'recetas':
+            print("UPDATE recetas SET NombreReceta = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
+                % (self.valores["NombreReceta"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.id)) 
+            
+        elif self.tabla == 'categorias':
+            print("UPDATE categorias SET Categoria = '%s' WHERE idCategoria = %s" % (self.valores["Categoria"], self.id))
+
+        elif self.tabla == 'favoritos':
+            print("UPDATE favoritos SET idReceta = %s, idUsuario = %s WHERE idFavorito = %s" % (self.valores["idReceta"], self.valores["idUsuario"], self.id))
+
+        elif self.tabla == 'usuarios':
+            print("UPDATE usuarios SET Nombre = '%s', Apellido = '%s',  Nacimiento = %s, correoElectronico = '%s', Hash = %s, Genero = '%s' WHERE idUsuario = %s" 
+                % (self.valores["Nombre"], self.valores["Apellido"], self.valores["Nacimiento"], self.valores["correoElectronico"], self.valores["Hash"], self.valores["Genero"], self.id)) 
+        else:
+            print("Error, tabla ingresada, no válida")
+
+class EliminarDatos(Credenciales):
+
+    def __init__(self, seleccion, tabla,condicion):
+        super().__init__()
+        self.seleccion = seleccion
+        self.tabla = tabla
+        self.condicion = condicion
+    
+    def borrar(self):
+        self.conectar()
+
+        if not self.condicion:
+            self.cursor.execute ("DELETE FROM %s" % (self.tabla,))
+        else:
+            self.cursor.execute ("DELETE FROM %s WHERE %s" % (self.tabla,self.condicion,))
+        Credenciales.comitear(self)
+
+    def imprimir(self):
+        if not self.condicion:
+            print("DELETE FROM %s" % (self.tabla,))
+        else:
+            print("DELETE FROM %s WHERE %s" % (self.tabla,self.condicion,))       
+#
+print("\033[32m","#"*60,"\033[0m")
 
 # #######################
 # Conexión de la BdD
 # Inicio de código CRUD
+
 cc = Credenciales()
 cc.conectar()
-
-
-# #######################
-# Obtención de lista completa de recetas y tipos
-# recetas = Consulta('*','recetas',False)
-# recetas.consultar()
-# print(recetas.resultados[2][2])
-
-consultaUsuarios = Consulta("*","usuarios","idUsuario = '2'")
-consultaUsuarios.imprimir()
-consultaUsuarios.consultar()
-print(consultaUsuarios.resultados)
-print(consultaUsuarios.resultados[0]["Nombre"])
-
 
 
 
