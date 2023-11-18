@@ -184,16 +184,30 @@ class EliminarDatos(Credenciales):
 
 print("\033[32m","#"*60,"\033[0m")
 
-@app.route("/")
+# Sección apertura de links y webs
+# @app.route("/")
+# def inicial():
+#     f = open('RecetasWebCAC23/index.html', 'r')
+#     pagina = f.read()
+#     f.close()
+#     return pagina
+
+@app.route('/', methods=["GET"])
 def inicial():
-    f = open('RecetasWebCAC23/index.html', 'r')
-    # f = open('RecetasWebCAC23/testeo2.html', 'r')
+    data = request.args
+    if data == {}:
+        direccion = 'RecetasWebCAC23/index.html'
+    else:
+        direccion = f'RecetasWebCAC23/{data[""]}'
+
+    f = open(direccion, 'r')
     pagina = f.read()
     f.close()
     return pagina
 
+# Sección métodos POST
 @app.route("/registro-receta", methods=["POST"])
-def process():
+def altaReceta():
     form = request.form
     pagina = "Llegué"
     pagina += "<br>"
