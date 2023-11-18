@@ -157,7 +157,7 @@ class ModificarDatos(Credenciales):
                 % (self.valores["Nombre"], self.valores["Apellido"], self.valores["Nacimiento"], self.valores["correoElectronico"], self.valores["Hash"], self.valores["Genero"], self.id)) 
         else:
             print("Error, tabla ingresada, no válida")
-
+#
 class EliminarDatos(Credenciales):
 
     def __init__(self, seleccion, tabla,condicion):
@@ -184,14 +184,6 @@ class EliminarDatos(Credenciales):
 
 print("\033[32m","#"*60,"\033[0m")
 
-# Sección apertura de links y webs
-# @app.route("/")
-# def inicial():
-#     f = open('RecetasWebCAC23/index.html', 'r')
-#     pagina = f.read()
-#     f.close()
-#     return pagina
-
 @app.route('/', methods=["GET"])
 def inicial():
     data = request.args
@@ -202,6 +194,10 @@ def inicial():
 
     f = open(direccion, 'r')
     pagina = f.read()
+    with open ('RecetasWebCAC23/formulariosweb/style.html', 'r') as archivo:
+        pagina = pagina.replace("{{style}}",archivo.read())
+        archivo.close()
+    
     f.close()
     return pagina
 
@@ -221,7 +217,6 @@ def altaReceta():
     registroReceta = CargaDatos("recetas", columnas, receta)
     registroReceta.insertarDato()
     
-
     cons = Consulta('*','recetas',False)
     cons.consultar()
 
@@ -233,7 +228,7 @@ def altaReceta():
 
     cc.desconectar()
     return pagina
-
+#
 @app.route("/registro-usuario", methods=["POST"])
 def altausuario():
     form = request.form
@@ -250,7 +245,6 @@ def altausuario():
     registroUsuario = CargaDatos("usuarios", columnas, usuario)
     registroUsuario.insertarDato()
     
-
     cons = Consulta('*','usuarios',False)
     cons.consultar()
     
@@ -262,7 +256,8 @@ def altausuario():
 
     cc.desconectar()
     return pagina
-    
-app.run(host='0.0.0.0', port=81) #Debe ir siempre al final
+#
+
+app.run(host='0.0.0.0', port=81) 
 
 print("\033[31m","#"*60,"\033[0m")
