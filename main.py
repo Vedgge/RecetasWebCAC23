@@ -1,3 +1,7 @@
+
+from flask import Flask, request
+app = Flask(__name__)
+
 import mysql.connector
 import os
 
@@ -178,9 +182,73 @@ class EliminarDatos(Credenciales):
             print("DELETE FROM %s WHERE %s" % (self.tabla,self.condicion,))       
 #
 
-# cc = Credenciales()
-# cc.conectar()
-# cons = Consulta('*','recetas',False)
-# cons.consultar()
-# print(cons.resultados)
-# cc.desconectar()
+print("\033[32m","#"*60,"\033[0m")
+
+@app.route("/")
+def inicial():
+    f = open('RecetasWebCAC23/index.html', 'r')
+    # f = open('RecetasWebCAC23/testeo2.html', 'r')
+    pagina = f.read()
+    f.close()
+    return pagina
+
+@app.route("/registro-receta", methods=["POST"])
+def process():
+    form = request.form
+    pagina = "Llegué"
+    pagina += "<br>"
+    pagina += "<hr>"
+
+    cc = Credenciales()
+    cc.conectar()
+
+    columnas = "NombreReceta, Receta, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad"
+    receta = f"""'{form["NombreReceta"]}','{form["Receta"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{form["idUsuario"]},{form["idCategoria"]},'{form["dificultad"]}'"""
+    registroReceta = CargaDatos("recetas", columnas, receta)
+    registroReceta.insertarDato()
+    
+
+    cons = Consulta('*','recetas',False)
+    cons.consultar()
+
+    pagina += f'{registroReceta.imprimir()}'
+    pagina += "<br>"
+    pagina += "<hr>"
+    pagina += receta
+    pagina += f"{cons.resultados}"
+
+    cc.desconectar()
+    return pagina
+
+@app.route("/registro-usuario", methods=["POST"])
+def altausuario():
+    form = request.form
+    pagina = "Llegué"
+    pagina += "<br>"
+    pagina += "<hr>"
+
+    cc = Credenciales()
+    cc.conectar()
+    hashContrasena = form["Contrasena"] # hay que hacer un Hash de la contraseña
+
+    columnas = "Nombre, Apellido, Nacimiento, correoElectronico, Hash, Genero"
+    usuario = f"""'{form["Nombre"]}','{form["Apellido"]}',{form["Nacimiento"]},'{form["correoElectronico"]}',{hashContrasena},'{form["Genero"]}'"""
+    registroUsuario = CargaDatos("usuarios", columnas, usuario)
+    registroUsuario.insertarDato()
+    
+
+    cons = Consulta('*','usuarios',False)
+    cons.consultar()
+    
+    pagina += f'{registroUsuario.imprimir()}'
+    pagina += "<br>"
+    pagina += "<hr>"
+    pagina += usuario
+    pagina += f"{cons.resultados}"
+
+    cc.desconectar()
+    return pagina
+    
+app.run(host='0.0.0.0', port=81) #Debe ir siempre al final
+
+print("\033[31m","#"*60,"\033[0m")
