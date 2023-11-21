@@ -3,10 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Buscar</title>
     {{style}}
 </head>
 <body>
-    
+  <h1>Buscar Usuario</h1>
+  <div class="formulario">
+      <form method="get" action="/buscar-usuario">
+
+          <p>Nombre<input type="text" name="idUsuario" required></p>
+
+          <button type="submit">Buscar por Nombre</button>
+      </form>
+  </div>
+  <h1>Buscar Receta</h1>
+  <div class="formulario">
+      <form method="post" action="/buscar-receta">
+
+          <p>Nombre Receta<input type="text" name="nombreReceta" required></p>
+
+          <button type="submit">Buscar</button>
+      </form>
+  </div>
+  <div class="formulario">
+    <form method="post" action="/buscar-recetas-categoria">
+      <label for="categoría">Categoría</label>
+      <select name="cat" id="categoría">
+        {{opciones}}
+      </select>
+      <button type="submit">Buscar</button>
+    </form>
+</div>
+
+</div>
 </body>
 </html>

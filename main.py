@@ -184,6 +184,25 @@ class EliminarDatos(Credenciales):
 
 print("\033[32m","#"*60,"\033[0m")
 
+def reemplazosPagina(pagina):
+    # Agregar esta función en cada @app.route que contenga un "return pagina"
+    # Creación de estilos
+    with open ('RecetasWebCAC23/formulariosweb/style.html', 'r') as archivo:
+        pagina = pagina.replace("{{style}}",archivo.read())
+        archivo.close()
+    
+    # Carga de categorias en forma de lista
+    categorias = Consulta('Categoria','categorias', False)
+    categorias.consultar()
+    seleccion = ""
+    for item in categorias.resultados:
+        seleccion += f'''<option value="{item['Categoria']}">{item['Categoria']}</option>'''
+    
+    pagina = pagina.replace("{{opciones}}",seleccion)
+        
+
+    return pagina
+
 @app.route('/', methods=["GET"])
 def inicial():
     data = request.args
@@ -194,11 +213,9 @@ def inicial():
 
     f = open(direccion, 'r')
     pagina = f.read()
-    with open ('RecetasWebCAC23/formulariosweb/style.html', 'r') as archivo:
-        pagina = pagina.replace("{{style}}",archivo.read())
-        archivo.close()
     
     f.close()
+    pagina = reemplazosPagina(pagina)
     return pagina
 
 # Sección métodos POST
@@ -227,6 +244,7 @@ def altaReceta():
     pagina += f"{cons.resultados}"
 
     cc.desconectar()
+    pagina = reemplazosPagina(pagina)
     return pagina
 #
 @app.route("/registro-usuario", methods=["POST"])
@@ -255,8 +273,29 @@ def altausuario():
     pagina += f"{cons.resultados}"
 
     cc.desconectar()
+    pagina = reemplazosPagina(pagina)
     return pagina
 #
+@app.route("/busqueda", methods=['POST'])
+def busqueda():
+    data = request.form['buscar']
+    pagina = 'FUNCIONÓ'
+    pagina = reemplazosPagina(pagina)
+    return pagina
+#
+@app.route("/buscar-usuario", methods=['GET'])
+def buscarUsuario():
+    data = request.args
+    
+    # SELECT * FROM usuarios WHERE Nombre = 'usuario3'
+    usuario = Consulta('*','usuarios', f"Nombre = '{data['idUsuario']}'")
+    usuario.consultar()
+
+
+    pagina = f"{usuario.resultados}"
+    
+    pagina = reemplazosPagina(pagina)
+    return pagina
 
 app.run(host='0.0.0.0', port=81) 
 
