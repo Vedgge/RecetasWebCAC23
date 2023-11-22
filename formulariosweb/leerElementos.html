@@ -11,24 +11,24 @@
   <div class="formulario">
       <form method="get" action="/buscar-usuario">
 
-          <p>Nombre<input type="text" name="idUsuario" required></p>
+          <p>Nombre<input type="text" name="nombreUsuario" required></p>
 
           <button type="submit">Buscar por Nombre</button>
       </form>
   </div>
   <h1>Buscar Receta</h1>
   <div class="formulario">
-      <form method="post" action="/buscar-receta">
+      <form method="get" action="/buscar-receta">
 
-          <p>Nombre Receta<input type="text" name="nombreReceta" required></p>
+          <p>Nombre Receta<input type="text" name="NombreReceta" required></p>
 
           <button type="submit">Buscar</button>
       </form>
   </div>
   <div class="formulario">
-    <form method="post" action="/buscar-recetas-categoria">
+    <form method="get" action="/buscar-receta-categoria">
       <label for="categoría">Categoría</label>
-      <select name="cat" id="categoría">
+      <select name="categoria" id="categoria">
         {{opciones}}
       </select>
       <button type="submit">Buscar</button>

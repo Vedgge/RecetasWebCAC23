@@ -178,9 +178,9 @@ class EliminarDatos(Credenciales):
             print("DELETE FROM %s WHERE %s" % (self.tabla,self.condicion,))       
 #
 
-# cc = Credenciales()
-# cc.conectar()
-# cons = Consulta('*','recetas',False)
-# cons.consultar()
-# print(cons.resultados)
-# cc.desconectar()
+cc = Credenciales()
+cc.conectar()
+cons = Consulta('*','recetas',False)
+cons.consultar()
+print(cons.resultados)
+cc.desconectar()

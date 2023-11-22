@@ -3,7 +3,8 @@ app = Flask(__name__)
 app.config['encoding'] = 'UTF-8'
 
 import mysql.connector
-import os
+import os, hashlib
+from datetime import datetime
 
 #  NOTAS DE CÓDIGO:
 # CREO QUE HAY QUE CAMBIAR, DENTRO DE LA BASE DE DATOS, "URL-IMAGEN" POR "IMAGEN"
@@ -122,7 +123,7 @@ class ModificarDatos(Credenciales):
         self.valores = valores
         self.id = id
     
-    def insertarDato(self):
+    def ModificarDato(self):
         self.conectar()
         if self.tabla == 'recetas':
             self.cursor.execute("UPDATE recetas SET NombreReceta = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
@@ -202,7 +203,7 @@ def reemplazosPagina(pagina):
         
 
     return pagina
-
+#
 @app.route('/', methods=["GET"])
 def inicial():
     data = request.args
@@ -222,15 +223,14 @@ def inicial():
 @app.route("/registro-receta", methods=["POST"])
 def altaReceta():
     form = request.form
-    pagina = "Llegué"
-    pagina += "<br>"
-    pagina += "<hr>"
+    pagina = ""
 
     cc = Credenciales()
     cc.conectar()
-
-    columnas = "NombreReceta, Receta, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad"
-    receta = f"""'{form["NombreReceta"]}','{form["Receta"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{form["idUsuario"]},{form["idCategoria"]},'{form["dificultad"]}'"""
+    fecha_actual = datetime.now()
+    fecha = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
+    columnas = "NombreReceta, Receta, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
+    receta = f"""'{form["NombreReceta"]}','{form["Receta"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{form["idUsuario"]},{form["idCategoria"]},'{form["dificultad"]}','{fecha}'"""
     registroReceta = CargaDatos("recetas", columnas, receta)
     registroReceta.insertarDato()
     
@@ -250,16 +250,14 @@ def altaReceta():
 @app.route("/registro-usuario", methods=["POST"])
 def altausuario():
     form = request.form
-    pagina = "Llegué"
-    pagina += "<br>"
-    pagina += "<hr>"
-
+    pagina = ""
     cc = Credenciales()
     cc.conectar()
-    hashContrasena = form["Contrasena"] # hay que hacer un Hash de la contraseña
+    
+    hashContrasena = hashlib.sha256(form["Contrasena"].encode()).hexdigest()
 
-    columnas = "Nombre, Apellido, Nacimiento, correoElectronico, Hash, Genero"
-    usuario = f"""'{form["Nombre"]}','{form["Apellido"]}',{form["Nacimiento"]},'{form["correoElectronico"]}',{hashContrasena},'{form["Genero"]}'"""
+    columnas = "NombreUsuario, Nombre, Apellido, Nacimiento, correoElectronico, Hash, Genero"
+    usuario = f"""'{form["NombreUsuario"]}','{form["Nombre"]}','{form["Apellido"]}',{form["Nacimiento"]},'{form["correoElectronico"]}',{hashContrasena},'{form["Genero"]}'"""
     registroUsuario = CargaDatos("usuarios", columnas, usuario)
     registroUsuario.insertarDato()
     
@@ -276,26 +274,46 @@ def altausuario():
     pagina = reemplazosPagina(pagina)
     return pagina
 #
-@app.route("/busqueda", methods=['POST'])
-def busqueda():
-    data = request.form['buscar']
-    pagina = 'FUNCIONÓ'
-    pagina = reemplazosPagina(pagina)
-    return pagina
-#
 @app.route("/buscar-usuario", methods=['GET'])
 def buscarUsuario():
     data = request.args
-    
-    # SELECT * FROM usuarios WHERE Nombre = 'usuario3'
-    usuario = Consulta('*','usuarios', f"Nombre = '{data['idUsuario']}'")
-    usuario.consultar()
 
+    columnas = "NombreUsuario, Nacimiento, correoElectronico, Genero"
+    usuario = Consulta(columnas,'usuarios', f"NombreUsuario LIKE '%{data['nombreUsuario']}%'")
+    usuario.consultar()
 
     pagina = f"{usuario.resultados}"
     
     pagina = reemplazosPagina(pagina)
     return pagina
+#
+@app.route("/buscar-receta", methods=['GET'])
+def buscarReceta():
+    data = request.args
+
+    receta = Consulta('*','recetas', f"NombreReceta LIKE '%{data['NombreReceta']}%'")
+    receta.consultar()
+
+    pagina = f"{receta.resultados}"
+    
+    pagina = reemplazosPagina(pagina)
+    return pagina
+#
+@app.route("/buscar-receta-categoria", methods=['GET'])
+def buscarRecetaCategoria():
+    data = request.args
+
+    categoria = Consulta('idCategoria','categorias', f"Categoria = '{data['categoria']}'")
+    categoria.consultar()
+    
+    receta = Consulta('*','recetas', f"idCategoria= '{categoria.resultados[0]['idCategoria']}'")
+    receta.consultar()
+
+    pagina = f"{receta.resultados}"
+    
+    pagina = reemplazosPagina(pagina)
+    return pagina
+#
 
 app.run(host='0.0.0.0', port=81) 
 
