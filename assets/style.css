@@ -1,0 +1,421 @@
+/*--------------------CSS RESET Y TIPOGRAFÍA-------------------*/
+@font-face {
+    font-family: SpiritNeutralRegular;
+    src: url(./fonts/spirits-neutral-regular.otf);
+}
+
+@font-face {
+    font-family: SpiritSharpRegular;
+    src: url(./fonts/spirits-sharp-regular.otf);
+}
+
+@font-face {
+    font-family: SpiritSoftRegular;
+    src: url(./fonts/spirits-soft-regular.otf);
+}
+
+@font-face {
+    font-family: SpiritNeutralMedium;
+    src: url(./fonts/spirits-neutral-medium.otf);
+}
+
+@font-face {
+    font-family: SpiritSharpMedium;
+    src: url(./fonts/spirits-neutral-medium.otf);
+}
+
+@font-face {
+    font-family: SpiritNeutralMedium;
+    src: url(./fonts/spirits-neutral-medium.otf);
+}
+
+@font-face {
+    font-family: SpiritNeutralLight;
+    src: url(./fonts/spirits-neutral-light.otf);
+}
+
+@font-face {
+    font-family: SpiritNeutralBlack;
+    src: url(./fonts/spirits-neutral-black.otf);
+}
+
+@font-face {
+    font-family: SpiritSharpBlack;
+    src: url(./fonts/spirits-sharp-black.otf);
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    /* font-family: 'Raleway', sans-serif; */
+}
+
+body {
+    margin: 0;
+    background: #fffdf9;
+}
+
+header {
+    position: relative;
+    z-index: 11;
+    width: 100%;
+}
+
+main {
+    position: relative;
+}
+
+ol,
+ul,
+dl {
+    margin-top: 0;
+    margin-bottom: 0rem !important;
+}
+
+section {
+    padding: 10px 0;
+    position: relative;
+}
+
+h1 {
+    font-size: 150px;
+    font-family: "SpiritSharpBlack";
+}
+
+/*-------------------- HEADER - NAVBAR -------------------*/
+header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navheader {
+    background-color: #fffdf9;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.contenedor-items-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 5px 0;
+    margin: 0 100px;
+}
+
+.contenedor-items-menu li {
+    position: relative;
+}
+
+.contenedor-items-menu li a::after,
+.contenedor-lista-hero li a::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: #22272a;
+    transition: .3s;
+}
+
+.contenedor-items-menu li a:hover::after,
+.contenedor-lista-hero li a:hover::after {
+    width: 100%;
+}
+
+.lista-navbar-menu-btns {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+}
+
+.navbar-menus a {
+    color: #22272a;
+    /* font-family: "SpiritNeutralMedium"; */
+    /* letter-spacing: 0.5px; */
+}
+
+.contenedor-ul-navbar-dpdown-menus {
+    display: none;
+    background: #fffdf9;
+    position: absolute;
+    top: 23px;
+    right: -200px;
+    padding: 10px 15px;
+    z-index: 10;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 3px 5px 5px 5px rgba(0, 0, 0, .1);
+    white-space: nowrap;
+}
+
+.contenedor-ul-navbar-dpdown-menus li {
+    margin: 10px 0 10px;
+}
+
+.navbar-menus:hover div {
+    display: flex;
+    gap: 20px;
+}
+
+.ul-navbar-menus {
+    border-right: 1px solid #e0e0e0;
+    padding-right: 20px;
+}
+
+.ul-navbar-menus h4 {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.ul-navbar-menus h4::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background: #22272a;
+}
+
+.lista-navbar-menu-btns i {
+    font-size: 30px;
+    align-items: center;
+    color: #22272a;
+    transition: 0.3s;
+}
+
+.lista-navbar-menu-btns i:hover {
+    transform: scale(1.1);
+}
+
+/*-------------------- MAIN -------------------*/
+/* .custom-shape-divider-bottom-1700522759 {
+    display: block;
+    position: relative;
+    top: -2px;
+    height: 500px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1903 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(235, 65, 74, 1)" d="M 0 500 C 340 500 340 501 680 501 L 680 501 L 680 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(235, 65, 74, 1)" d="M 679 501 C 1068.5 501 1068.5 12 1458 12 L 1458 12 L 1458 0 L 679 0 Z" stroke-width="0"></path> <path fill="rgba(235, 65, 74, 1)" d="M 1457 12 C 1680 12 1680 92 1903 92 L 1903 92 L 1903 0 L 1457 0 Z" stroke-width="0"></path></svg>');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media (max-width:1886px) {
+    .custom-shape-divider-bottom-1700522759 {
+        background-size: contain;
+    }
+} */
+
+.hero-article {
+    position: relative;
+    margin: 18vh 0 0 10vh;
+    color: #111;
+}
+
+.contenedor-compo-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 700px;
+}
+
+.contenedor-lista-hero {
+    position: absolute;
+    color: #22272a;
+    top: -20px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.lista-items-hero {
+    position: relative;
+}
+
+.contenedor-buscador-hero {
+    position: relative;
+}
+
+.d-flex input {
+    position: relative;
+    width: 80%;
+    border-radius: 30px;
+    padding: 15px;
+}
+
+.btn-outline-success {
+    position: absolute;
+    left: 25px;
+    top: 33%;
+    background: transparent;
+    border: 0;
+}
+
+.btn-outline-success:hover {
+    cursor: pointer;
+}
+
+.d-flex input::placeholder {
+    padding-left: 40px;
+    font-size: 15px;
+}
+
+.fa-bars {
+    position: absolute;
+    top: 33%;
+    right: 165px;
+    font-size: 20px;
+    color: #111;
+}
+
+.article-comun>div {
+    width: 1300px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+/* RECETAS POPULARES INDEX */
+.contenedor-grid-recetas-populares {
+    height: 600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 30px 30px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "receta-mas-popular receta-mas-popular receta-2 receta-4"
+        "receta-mas-popular receta-mas-popular receta-3 receta-5";
+}
+
+.contenedor-grid-recetas-populares>div {
+    border-radius: 12px;
+    background-color: rgb(128, 8, 8);
+    height: 100%;
+    width: 100%;
+}
+
+.receta-mas-popular {
+    grid-area: receta-mas-popular;
+}
+
+.receta-2 {
+    grid-area: receta-2;
+}
+
+.receta-3 {
+    grid-area: receta-3;
+}
+
+.receta-4 {
+    grid-area: receta-4;
+}
+
+.receta-5 {
+    grid-area: receta-5;
+}
+
+/* CATEGORIAS DE COMIDAS */
+
+.contenedor-grid-categorias-cuadrado {
+    height: 310px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 32px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "categoria-1 categoria-2 categoria-3 categoria-4";
+    margin-bottom: 32px;
+}
+
+.categoria-1 {
+    grid-area: categoria-1;
+}
+
+.categoria-2 {
+    grid-area: categoria-2;
+}
+
+.categoria-3 {
+    grid-area: categoria-3;
+}
+
+.categoria-4 {
+    grid-area: categoria-4;
+}
+
+.contenedor-grid-categorias-circulos {
+    height: 200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 32px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "categoria-5 categoria-6 categoria-7 categoria-8 categoria-9 categoria-10";
+}
+
+.categoria-5 {
+    grid-area: categoria-5;
+}
+
+.categoria-6 {
+    grid-area: categoria-6;
+}
+
+.categoria-7 {
+    grid-area: categoria-7;
+}
+
+.categoria-8 {
+    grid-area: categoria-8;
+}
+
+.categoria-9 {
+    grid-area: categoria-9;
+}
+
+.categoria-10 {
+    grid-area: categoria-10;
+}
+
+.contenedor-grid-categorias-cuadrado > div, .contenedor-grid-categorias-circulos > div{
+    background-color: rgb(128, 8, 8);
+    border-radius: 12px;
+}
+
+.contenedor-grid-categorias-circulos > div {
+    border-radius: 50%;
+}
+
+
+.contenedor-newsletter {
+    display: flex;
+    justify-content: center;
+}
+
+.newsletter-index {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    width: 1000px;
+    height: 250px;
+    background-color: rgb(128, 8, 8);
+}
+
+/* FOOTER */
+footer {
+    margin-top: 150px;
+    height: 300px;
+    width: 100%;
+    background-color: rgb(128, 8, 8);
+}
