@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request
 app = Flask(__name__)
 app.config['encoding'] = 'UTF-8'
@@ -5,10 +6,6 @@ app.config['encoding'] = 'UTF-8'
 import mysql.connector
 import os, hashlib
 from datetime import datetime
-
-#  NOTAS DE CÓDIGO:
-# CREO QUE HAY QUE CAMBIAR, DENTRO DE LA BASE DE DATOS, "URL-IMAGEN" POR "IMAGEN"
-# Y QUE EL TIPO DE DATO DEJE DE SER UN STRING Y PASE A SER BLOB PARA QUE ACETPTE FOTOGRAFÍAS DE USUARIOS
 
 
 class Credenciales:
@@ -208,7 +205,7 @@ def reemplazosPagina(pagina):
 def inicial():
     data = request.args
     if data == {}:
-        direccion = 'RecetasWebCAC23/index.html'
+        direccion = 'RecetasWebCAC23/inicio.html'
     else:
         direccion = f'RecetasWebCAC23/{data[""]}'
 
