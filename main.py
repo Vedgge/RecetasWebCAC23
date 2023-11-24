@@ -7,6 +7,7 @@ import mysql.connector
 import os, hashlib
 from datetime import datetime
 
+# CREO QUE SE NECESITA ELIMINAR PARTE DE LA FUNCIÓN REEMPLAZO DE PÁGINA
 
 class Credenciales:
     # Obtiene credenciales para operar en la Base de Datos (BdD).
@@ -184,7 +185,7 @@ print("\033[32m","#"*60,"\033[0m")
 
 def reemplazosPagina(pagina):
     # Agregar esta función en cada @app.route que contenga un "return pagina"
-    # Creación de estilos
+    # Creación de estilos PROBABLEMENTE DEBA ELIMINARSE
     with open ('RecetasWebCAC23/formulariosweb/style.html', 'r') as archivo:
         pagina = pagina.replace("{{style}}",archivo.read())
         archivo.close()
@@ -276,7 +277,7 @@ def buscarUsuario():
     data = request.args
 
     columnas = "NombreUsuario, Nacimiento, correoElectronico, Genero"
-    usuario = Consulta(columnas,'usuarios', f"NombreUsuario LIKE '%{data['nombreUsuario']}%'")
+    usuario = Consulta(columnas,'usuarios', f"NombreUsuario LIKE '*{data['nombreUsuario']}*'")
     usuario.consultar()
 
     pagina = f"{usuario.resultados}"
@@ -293,6 +294,18 @@ def buscarReceta():
 
     pagina = f"{receta.resultados}"
     
+    pagina = reemplazosPagina(pagina)
+    return pagina
+#
+@app.route("/buscar-receta-ingredientes", methods=['GET'])
+def buscarIngrediente():
+    data = request.args
+    ingredientes = data['Ingredientes'].replace(" ","%")
+    receta = Consulta('*','recetas', f"Ingredientes LIKE '%{ingredientes}%'")
+    receta.consultar()
+
+    pagina = f"{receta.resultados}"
+    # pagina = f"{ingredientes}"
     pagina = reemplazosPagina(pagina)
     return pagina
 #
