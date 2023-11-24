@@ -74,19 +74,25 @@ class Credenciales:
 # 
 class Consulta(Credenciales):
 
-    def __init__(self, seleccion, tabla,condicion):
+    def __init__(self, seleccion, tabla, condicion=False, orden=False, limit=8):
         super().__init__()
         self.seleccion = seleccion
         self.tabla = tabla
         self.condicion = condicion
+        self.orden = orden
+        self.limit = limit
     
     def consultar(self):
         self.conectar()
-
-        if not self.condicion:
-            self.cursor.execute ("SELECT %s FROM %s" % (self.seleccion,self.tabla,))
+        if not self.orden:
+            self.orden = ""
         else:
-            self.cursor.execute ("SELECT %s FROM %s WHERE %s" % (self.seleccion,self.tabla,self.condicion,))
+            self.orden = f" ORDER BY {self.orden} DESC limit {self.limit}"
+        
+        if not self.condicion:
+            self.cursor.execute ("SELECT %s FROM %s" % (self.seleccion,self.tabla,)+self.orden)
+        else:
+            self.cursor.execute ("SELECT %s FROM %s WHERE %s" % (self.seleccion,self.tabla,self.condicion,)+self.orden)
         
         self.resultados = self.cursor.fetchall()
 
@@ -191,14 +197,22 @@ def reemplazosPagina(pagina):
         archivo.close()
     
     # Carga de categorias en forma de lista
-    categorias = Consulta('Categoria','categorias', False)
+    categorias = Consulta('Categoria','categorias')
     categorias.consultar()
     seleccion = ""
     for item in categorias.resultados:
         seleccion += f'''<option value="{item['Categoria']}">{item['Categoria']}</option>'''
     
     pagina = pagina.replace("{{opciones}}",seleccion)
-        
+
+    # Carrusel página principal
+
+    seleccion = ""
+    recetasNuevas = Consulta('*','recetas',False,"fechaCreacion")
+    recetasNuevas.consultar()
+    for item in recetasNuevas.resultados:
+            seleccion += f'''<div class="item"><a href="/recetaid?={item['idReceta']}"><img src="{item['urlImagen']}" alt="">{item['NombreReceta']}</div>'''
+    pagina = pagina.replace("{{carrusel}}",seleccion)
 
     return pagina
 #
@@ -232,7 +246,7 @@ def altaReceta():
     registroReceta = CargaDatos("recetas", columnas, receta)
     registroReceta.insertarDato()
     
-    cons = Consulta('*','recetas',False)
+    cons = Consulta('*','recetas')
     cons.consultar()
 
     pagina += f'{registroReceta.imprimir()}'
@@ -259,7 +273,7 @@ def altausuario():
     registroUsuario = CargaDatos("usuarios", columnas, usuario)
     registroUsuario.insertarDato()
     
-    cons = Consulta('*','usuarios',False)
+    cons = Consulta('*','usuarios')
     cons.consultar()
     
     pagina += f'{registroUsuario.imprimir()}'
@@ -277,9 +291,9 @@ def buscarUsuario():
     data = request.args
 
     columnas = "NombreUsuario, Nacimiento, correoElectronico, Genero"
-    usuario = Consulta(columnas,'usuarios', f"NombreUsuario LIKE '*{data['nombreUsuario']}*'")
+    usuario = Consulta(columnas,'usuarios', f"NombreUsuario LIKE '%{data['nombreUsuario']}%'")
     usuario.consultar()
-
+    usuario.imprimir()
     pagina = f"{usuario.resultados}"
     
     pagina = reemplazosPagina(pagina)
@@ -290,6 +304,18 @@ def buscarReceta():
     data = request.args
 
     receta = Consulta('*','recetas', f"NombreReceta LIKE '%{data['NombreReceta']}%'")
+    receta.consultar()
+
+    pagina = f"{receta.resultados}"
+    
+    pagina = reemplazosPagina(pagina)
+    return pagina
+#
+@app.route("/recetaid", methods=['GET'])
+def recetaId():
+    data = request.args
+
+    receta = Consulta('*','recetas', f"idReceta = '{data['']}'")
     receta.consultar()
 
     pagina = f"{receta.resultados}"
