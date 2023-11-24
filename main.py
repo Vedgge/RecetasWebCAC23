@@ -123,8 +123,8 @@ class ModificarDatos(Credenciales):
     def ModificarDato(self):
         self.conectar()
         if self.tabla == 'recetas':
-            self.cursor.execute("UPDATE recetas SET NombreReceta = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
-                % (self.valores["NombreReceta"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.id)) 
+            self.cursor.execute("UPDATE recetas SET NombreReceta = '%s', Ingredientes = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
+                % (self.valores["NombreReceta"], self.valores["Ingredientes"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.id)) 
             
         elif self.tabla == 'categorias':
             self.cursor.execute("UPDATE categorias SET Categoria = '%s' WHERE idCategoria = %s" % (self.valores["Categoria"], self.id))
@@ -141,8 +141,8 @@ class ModificarDatos(Credenciales):
     
     def imprimir(self): 
         if self.tabla == 'recetas':
-            print("UPDATE recetas SET NombreReceta = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
-                % (self.valores["NombreReceta"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.id)) 
+            print("UPDATE recetas SET NombreReceta = '%s', Ingredientes = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
+                % (self.valores["NombreReceta"], self.valores["Ingredientes"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.id)) 
             
         elif self.tabla == 'categorias':
             print("UPDATE categorias SET Categoria = '%s' WHERE idCategoria = %s" % (self.valores["Categoria"], self.id))
@@ -205,7 +205,7 @@ def reemplazosPagina(pagina):
 def inicial():
     data = request.args
     if data == {}:
-        direccion = 'RecetasWebCAC23/inicio.html'
+        direccion = 'RecetasWebCAC23/index.html'
     else:
         direccion = f'RecetasWebCAC23/{data[""]}'
 
