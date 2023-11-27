@@ -51,23 +51,21 @@
                                     <h4>Recetas por ingredientes</h4>
                                     <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Pollo</a>
                                     </li>
-                                    <li class="recetas-items-dropdown"><a href="#">Carne vacuna</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Carne de cerdo</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Mariscos</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Pastas y harinas</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Frutas y verduras</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Ver todos los ingredientes</a></li>
+                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Carne">Carne vacuna</a></li>
+                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Cerdo">Carne de cerdo</a></li>
+                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Vegetarianas">Vegetarianas</a></li>
+                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Pizzas+%2F+Tartas">Pastas y harinas</a></li>
+                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Helados">Helados</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">COMPILACION EN EL BACK Ver todos los ingredientes</a></li>
                                 </ul>
                                 <ul class="ul-navbar-menus">
                                     <h4>Celebraciones y eventos</h4>
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a
-                                            href="#">Navideñas</a></li>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Navideñas</a></li>
                                     <li class="recetas-items-dropdown"><a href="#">Pascúa</a></li>
                                 </ul>
                                 <ul class="ul-navbar-menus" style="border: 0;">
                                     <h4>Recetas subidas</h4>
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Recetas de
-                                            la comunidad</a></li>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Recetas de la comunidad</a></li>
                                     <li class="recetas-items-dropdown"><a href="#">Recetas oficiales</a></li>
                                 </ul>
                             </div>
@@ -189,9 +187,9 @@
                         officiis tenetur quis alias consequuntur deleniti eaque id excepturi, debitis fugiat unde ab!
                     </p>
                     <div class="contenedor-buscador-hero">
-                        <form class="d-flex" role="search">
+                        <form class="d-flex" role="search" method="get" action="/buscar-receta-ingredientes">
                             <input class="form-control me-2" type="search" placeholder="Buscar recetas en el sitio"
-                                aria-label="Buscar">
+                                aria-label="Buscar" name="Ingredientes" required>
                             <button class="btn btn-outline-success" type="submit"><i
                                     class="fa-solid fa-magnifying-glass"
                                     style="font-size: 18px !important;"></i></button>
