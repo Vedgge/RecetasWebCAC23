@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="/static/assets/style.css">
 
     <!-- Custom JS -->
-    <link rel="stylesheet" href="/static/assets/general-script.js" defer>
+    <script src="/static/assets/general-script.js" defer></script>
 
     <!-- Validación JS -->
-    <link rel="stylesheet" href="/static/assets/validacion-index.js">
+    <script src="/static/assets/validacion-index.js" defer></script>
 
     <!-- Owl JS -->
     <link rel="stylesheet" href="static/assets/owlcarousel/assets/owl.carousel.min.css">
@@ -51,48 +51,131 @@
                                     <h4>Recetas por ingredientes</h4>
                                     <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Pollo</a>
                                     </li>
-                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Carne">Carne vacuna</a></li>
-                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Cerdo">Carne de cerdo</a></li>
-                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Vegetarianas">Vegetarianas</a></li>
-                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Pizzas+%2F+Tartas">Pastas y harinas</a></li>
-                                    <li class="recetas-items-dropdown"><a href="/buscar-receta-categoria?categoria=Helados">Helados</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">COMPLICACIÓN EN EL BACK Ver todos los ingredientes</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Carne vacuna</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Carne de cerdo</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Mariscos</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Pastas y harinas</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Frutas y verduras</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Ver todos los ingredientes</a></li>
                                 </ul>
                                 <ul class="ul-navbar-menus">
                                     <h4>Celebraciones y eventos</h4>
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Navideñas</a></li>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a
+                                            href="#">Navideñas</a></li>
                                     <li class="recetas-items-dropdown"><a href="#">Pascúa</a></li>
                                 </ul>
-                                <ul class="ul-navbar-menus">
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Recetas de la comunidad</a></li>
+                                <ul class="ul-navbar-menus" style="border: 0;">
+                                    <h4>Recetas subidas</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Recetas de
+                                            la comunidad</a></li>
                                     <li class="recetas-items-dropdown"><a href="#">Recetas oficiales</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li class="navbar-menus"><a href="#">Subir receta</a></li>
-                        <a href="#"><i class="fa-solid fa-circle-user"></i></a>
+                        <li class="navbar-menus"><a href="#"><i class="fa-solid fa-circle-user"></i></a>
+                            <div class="contenedor-ul-navbar-dpdown-menus form-dropdown">
+                                <ul class="ul-navbar-menus">
+                                    <li><button id="mostrar-modal-login">Iniciar sesión</button></li>
+                                    <li><button id="mostrar-modal-signup">Registrarse</button></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
+                </div>
+            </div>
+            <!-- <div class="overlay"></div> -->
+
+            <div class="contenedor-modal-popup login-popup">
+                <div class="cerrar-btn">&times;</div>
+                <div class="modal-popup">
+                    <div class="modal-title-main">
+                        <img src="/static/assets/img/icono-cookingology.png" alt="">
+                        <span style="display: flex; flex-direction: column; align-items: center;">
+                            <h1 style="font-size: 2em;">Inicio de sesión</h1>
+                            <div class="social-container">
+                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </span>
+                        <span style="font-size: 14px;">o usa tu cuenta creada</span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="js-loginFormModal" style="width: 100%;">
+                            <div>
+                                <input type="text" id="username-modal" name="username" maxlength="50"
+                                    placeholder="Ingrese su nombre de usuario o mail">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-modal" name="password"
+                                    placeholder="Ingrese su contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div class="login-acceso-recordarme">
+                                <input type="checkbox" name="remember-me" id="checkRememberMe" checked />
+                                <label for="remember-me" class="remember-me-text" style="font-size: 14px;">Recórdarme en este equipo</label>
+                            </div>
+                            <div class="modal-body-down">
+                                <input type="submit" value="Iniciar sesión" class="btn-submit">
+                                <span style="font-size: 14px;">¿Nuevo en el sitio? <a href="#" id="registrar">Crea
+                                        una cuenta</a></span>
+                                <div class="elementos-form">
+                                    <span style="font-size: 14px;"><a href="#">¿Olvido su nombre de usuario o contraseña?</a></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor-modal-popup signup-popup">
+                <div class="cerrar-btn">&times;</div>
+                <div class="modal-popup">
+                    <div class="modal-title-main">
+                        <img src="/static/assets/img/icono-cookingology.png" alt="">
+                        <span style="display: flex; flex-direction: column; align-items: center;">
+                            <h1 style="font-size: 2em;">Crea una cuenta</h1>
+                            <div class="social-container">
+                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </span>
+                        <span style="font-size: 14px;">o utiliza tu email para el registro</span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="js-loginFormModal" style="width: 100%;">
+                            <div>
+                                <input type="text" id="username-modal" name="username" maxlength="50"
+                                    placeholder="Ingresa tu email">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-modal" name="password"
+                                    placeholder="Crea tu contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-confirmn" name="password-confirmn" placeholder="Confirma tu contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div class="modal-body-down">
+                                <input type="submit" value="Iniciar sesión" class="btn-submit">
+                                <span style="font-size: 14px;">¿Ya tenes una cuenta en el sitio? <a href="#" id="registrar"> Inicia sesión</a></span>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
     <main>
-        <section style="position: relative;">
-            <!-- <img src="/static/assets/img/bg-index-hero.png" alt="" width="100%" height="974px"> -->
-            <!-- <div class="custom-shape-divider-bottom-1700522759">
-                <svg viewBox="0 0 1903 500" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <path fill="rgba(235, 65, 74, 1)" d="M 0 500 C 340 500 340 501 680 501 L 680 501 L 680 0 L 0 0 Z"
-                        stroke-width="0"></path>
-                    <path fill="rgba(235, 65, 74, 1)"
-                        d="M 679 501 C 1068.5 501 1068.5 12 1458 12 L 1458 12 L 1458 0 L 679 0 Z" stroke-width="0">
-                    </path>
-                    <path fill="rgba(235, 65, 74, 1)"
-                        d="M 1457 12 C 1680 12 1680 92 1903 92 L 1903 92 L 1903 0 L 1457 0 Z" stroke-width="0"></path>
-                </svg>
-            </div> -->
-            <article class="hero-article">
+
+        <section style="position: relative; background: #F9F5F2; padding-bottom: 30px;">
+            <article class="hero-article" style="padding: 30px 0px;">
                 <div class="contenedor-compo-hero">
                     <ul class="contenedor-lista-hero">
                         <li class="lista-items-hero"><a href="#">Nuestos Chefs</a></li>
@@ -106,9 +189,9 @@
                         officiis tenetur quis alias consequuntur deleniti eaque id excepturi, debitis fugiat unde ab!
                     </p>
                     <div class="contenedor-buscador-hero">
-                        <form class="d-flex" role="search" method="get" action="/buscar-receta-ingredientes">
+                        <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Buscar recetas en el sitio"
-                                aria-label="Buscar" name="Ingredientes" required>
+                                aria-label="Buscar">
                             <button class="btn btn-outline-success" type="submit"><i
                                     class="fa-solid fa-magnifying-glass"
                                     style="font-size: 18px !important;"></i></button>
@@ -119,19 +202,33 @@
 
             </article>
         </section>
-        <section style="margin-top: 50px;">
-            <article>
-                <h3></h3>
+        <section>
+            <article style="padding: 30px 0px;">
+                <div class="container container-title">
+                    <div class="row">
+                        <div class="cookandmeal-block-title">
+                            <h3>Recetas más populares esta semana</h3>
+                            <h4>Recetas exclusivas de nuestros usuarios</h4>
+                        </div>
+                    </div>
+                </div>
                 <div class="owl-container">
                     <div class="owl-carousel owl-theme">
                         {{carrusel}}
-                        
+                    </div>
                 </div>
             </article>
 
-            <article class="article-comun">
+            <article class="article-comun" style="background: #F9F5F2; padding: 30px 0px;">
                 <div>
-                    <h3>Recetas más populares esta semana</h3>
+                    <div class="container container-title">
+                        <div class="row">
+                            <div class="cookandmeal-block-title">
+                                <h3>Recetas más populares esta semana</h3>
+                                <h4>Recetas exclusivas de nuestros usuarios</h4>
+                            </div>
+                        </div>
+                    </div>
                     <div class="contenedor-grid-recetas-populares">
                         <div class="receta-mas-popular"></div>
                         <div class="receta-2"></div>
@@ -142,9 +239,17 @@
                 </div>
             </article>
 
-            <article class="article-comun">
+            <article class="article-comun" style="padding: 30px 0;">
                 <div>
-                    <h3>Categorías más populares</h3>
+                    <div class="container container-title">
+                        <div class="row">
+                            <div class="cookandmeal-block-title">
+                                <h3>Categorías más populares</h3>
+                                <h4>Recetas exclusivas de nuestros usuarios</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <h3></h3>
                     <div class="contenedor-grid-categorias-cuadrado">
                         <div class="categoria-1"></div>
                         <div class="categoria-2"></div>
@@ -163,9 +268,19 @@
             </article>
         </section>
         <section>
-            <article class="article-comun">
+            <article class="article-comun" style="background: #F9F5F2; padding: 30px 0px;">
+                <div class="container container-title" style="padding: 0;">
+                    <div class="row">
+                        <div class="cookandmeal-block-title">
+                            <h3>Recetas más populares esta semana</h3>
+                            <h4>Recetas exclusivas de nuestros usuarios</h4>
+                        </div>
+                    </div>
+                </div>
                 <div class="contenedor-newsletter">
-                    <div class="newsletter-index"><h2 style="color: white; font-size: 50px;">NEWSLETTER</h2></div>
+                    <div class="newsletter-index">
+                        <h2 style="color: white; font-size: 50px;">NEWSLETTER<h2>
+                    </div>
                 </div>
             </article>
         </section>
@@ -182,23 +297,6 @@
     <script src="https://kit.fontawesome.com/4e89c87464.js" crossorigin="anonymous"></script>
     <script src="static/assets/jquery.min.js"></script>
     <script src="static/assets/owlcarousel/owl.carousel.min.js"></script>
-    <script>
-        var owl = $('.owl-carousel');
-        owl.owlCarousel({
-            items: 4,
-            loop: true,
-            margin: 0,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: true
-        });
-        $('.play').on('click', function () {
-            owl.trigger('play.owl.autoplay', [1000])
-        })
-        $('.stop').on('click', function () {
-            owl.trigger('stop.owl.autoplay')
-        })
-    </script>
 </body>
 
 </html>
