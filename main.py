@@ -236,13 +236,20 @@ def inicial():
 def altaReceta():
     form = request.form
     pagina = ""
-
     cc = Credenciales()
     cc.conectar()
+
+    text = f"""NombreUsuario = '{form["NombreUsuario"]}'"""
+    cons = Consulta("idUsuario","usuarios",text)
+    cons.consultar()
+
+    categoria = Consulta('idCategoria','categorias', f"Categoria = '{form['categoria']}'")
+    categoria.consultar()
+
     fecha_actual = datetime.now()
     fecha = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
-    columnas = "NombreReceta, Receta, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
-    receta = f"""'{form["NombreReceta"]}','{form["Receta"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{form["idUsuario"]},{form["idCategoria"]},'{form["dificultad"]}','{fecha}'"""
+    columnas = "NombreReceta, Receta, Ingredientes, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
+    receta = f"""'{form["NombreReceta"]}','{form["Receta"]}','{form["Ingredientes"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{cons.resultados[0]['idUsuario']},{categoria.resultados[0]['idCategoria']},'{form["dificultad"]}','{fecha}'"""
     registroReceta = CargaDatos("recetas", columnas, receta)
     registroReceta.insertarDato()
     
