@@ -121,27 +121,27 @@ class CargaDatos(Credenciales):
         print("INSERT INTO %s (%s) VALUES (%s)" % (self.tabla, self.columnas, self.valores,))
 #
 class ModificarDatos(Credenciales):
-    def __init__(self,tabla, valores,id):
+    def __init__(self,tabla, valores):
         super().__init__()
         self.tabla = tabla
         self.valores = valores
-        self.id = id
+
     
-    def ModificarDato(self):
+    def modificarDato(self):
         self.conectar()
         if self.tabla == 'recetas':
             self.cursor.execute("UPDATE recetas SET NombreReceta = '%s', Ingredientes = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
-                % (self.valores["NombreReceta"], self.valores["Ingredientes"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.id)) 
+                % (self.valores["NombreReceta"], self.valores["Ingredientes"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.valores["id"])) 
             
         elif self.tabla == 'categorias':
-            self.cursor.execute("UPDATE categorias SET Categoria = '%s' WHERE idCategoria = %s" % (self.valores["Categoria"], self.id))
+            self.cursor.execute("UPDATE categorias SET Categoria = '%s' WHERE idCategoria = %s" % (self.valores["Categoria"], self.valores["id"]))
 
         elif self.tabla == 'favoritos':
-            self.cursor.execute("UPDATE favoritos SET idReceta = %s, idUsuario = %s WHERE idFavorito = %s" % (self.valores["idReceta"], self.valores["idUsuario"], self.id))
+            self.cursor.execute("UPDATE favoritos SET idReceta = %s, idUsuario = %s WHERE idFavorito = %s" % (self.valores["idReceta"], self.valores["idUsuario"], self.valores["id"]))
 
         elif self.tabla == 'usuarios':
             self.cursor.execute("UPDATE usuarios SET Nombre = '%s', Apellido = '%s',  Nacimiento = %s, correoElectronico = '%s', Hash = %s, Genero = '%s' WHERE idUsuario = %s" 
-                % (self.valores["Nombre"], self.valores["Apellido"], self.valores["Nacimiento"], self.valores["correoElectronico"], self.valores["Hash"], self.valores["Genero"], self.id)) 
+                % (self.valores["Nombre"], self.valores["Apellido"], self.valores["Nacimiento"], self.valores["correoElectronico"], self.valores["Hash"], self.valores["Genero"], self.valores["id"])) 
         else:
             print("Error, tabla ingresada, no válida")
         Credenciales.comitear(self)
@@ -149,17 +149,17 @@ class ModificarDatos(Credenciales):
     def imprimir(self): 
         if self.tabla == 'recetas':
             print("UPDATE recetas SET NombreReceta = '%s', Ingredientes = '%s', Receta = '%s',  Porciones = %s, urlImagen = '%s', TiempoMin = %s,idUsuario = %s, idCategoria = %s, dificultad = '%s' WHERE idReceta = %s" 
-                % (self.valores["NombreReceta"], self.valores["Ingredientes"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.id)) 
+                % (self.valores["NombreReceta"], self.valores["Ingredientes"], self.valores["Receta"], self.valores["Porciones"], self.valores["urlImagen"], self.valores["TiempoMin"], self.valores["idUsuario"], self.valores["idCategoria"], self.valores["dificultad"], self.valores["id"])) 
             
         elif self.tabla == 'categorias':
-            print("UPDATE categorias SET Categoria = '%s' WHERE idCategoria = %s" % (self.valores["Categoria"], self.id))
+            print("UPDATE categorias SET Categoria = '%s' WHERE idCategoria = %s" % (self.valores["Categoria"], self.valores["id"]))
 
         elif self.tabla == 'favoritos':
-            print("UPDATE favoritos SET idReceta = %s, idUsuario = %s WHERE idFavorito = %s" % (self.valores["idReceta"], self.valores["idUsuario"], self.id))
+            print("UPDATE favoritos SET idReceta = %s, idUsuario = %s WHERE idFavorito = %s" % (self.valores["idReceta"], self.valores["idUsuario"], self.valores["id"]))
 
         elif self.tabla == 'usuarios':
             print("UPDATE usuarios SET Nombre = '%s', Apellido = '%s',  Nacimiento = %s, correoElectronico = '%s', Hash = %s, Genero = '%s' WHERE idUsuario = %s" 
-                % (self.valores["Nombre"], self.valores["Apellido"], self.valores["Nacimiento"], self.valores["correoElectronico"], self.valores["Hash"], self.valores["Genero"], self.id)) 
+                % (self.valores["Nombre"], self.valores["Apellido"], self.valores["Nacimiento"], self.valores["correoElectronico"], self.valores["Hash"], self.valores["Genero"], self.valores["id"])) 
         else:
             print("Error, tabla ingresada, no válida")
 #
@@ -214,6 +214,19 @@ def reemplazosPagina(pagina):
             seleccion += f'''<div class="item"><a href="/recetaid?={item['idReceta']}"><img src="{item['urlImagen']}" alt="">{item['NombreReceta']}</div>'''
     pagina = pagina.replace("{{carrusel}}",seleccion)
 
+    # Mostrar editar receta
+    pagina = pagina.replace("{{receta}}","")
+    pagina = pagina.replace("{{idReceta}}","")
+    return pagina
+#
+def reemplazosReceta(pagina,idReceta):
+    with open ('RecetasWebCAC23/formulariosweb/mostrarReceta.html', 'r') as archivo:
+        pagina = pagina.replace("{{receta}}",archivo.read())
+        archivo.close()
+    pagina = pagina.replace("{{idReceta}}",idReceta)
+    elementos =("{{NombreReceta}}","{{Receta}}","{{Porciones}}","{{urlImagen}}","{{TiempoMin}}","{{idUsuario}}","{{idCategoria}}","{{dificultad}}")
+    for elemento in elementos:
+        pagina = pagina.replace(elemento,"reemplazado")
     return pagina
 #
 @app.route('/', methods=["GET"])
@@ -230,7 +243,7 @@ def inicial():
     f.close()
     pagina = reemplazosPagina(pagina)
     return pagina
-
+#
 # Sección métodos POST
 @app.route("/registro-receta", methods=["POST"])
 def altaReceta():
@@ -318,6 +331,7 @@ def buscarReceta():
     pagina = reemplazosPagina(pagina)
     return pagina
 #
+#Sección métods GET
 @app.route("/recetaid", methods=['GET'])
 def recetaId():
     data = request.args
@@ -357,6 +371,46 @@ def buscarRecetaCategoria():
     pagina = reemplazosPagina(pagina)
     return pagina
 #
+@app.route("/editar-receta", methods=['GET'])
+def editarReceta():
+    data = request.args
+
+    receta = Consulta('*','recetas', f"idReceta = {data['idReceta']}")
+    receta.consultar()
+    receta.imprimir()
+
+    direccion = f'RecetasWebCAC23/formulariosWeb/modificarElementos.html'
+    f = open(direccion, 'r')
+    pagina = f.read()
+    
+    if data['idReceta']:
+        pagina = reemplazosReceta(pagina,data['idReceta'])
+
+    pagina = reemplazosPagina(pagina)
+    f.close()
+    return pagina
+#
+@app.route("/edicion-receta", methods=['POST'])
+def edicionReceta():
+
+    pagina="llegué"
+    form = request.form
+    cc = Credenciales()
+    cc.conectar()
+    for elemento in form:
+        print(elemento)
+
+
+    recetamod = ModificarDatos('recetas',form)
+    recetamod.modificarDato()
+    
+
+    # columnas = "NombreReceta, Receta, Ingredientes, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
+    # receta = f"""'{form["NombreReceta"]}','{form["Receta"]}','{form["Ingredientes"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{form["idUsuario"]},{form['categoria']},'{form["dificultad"]}','{fecha}'"""
+    # registroReceta = CargaDatos("recetas", columnas, receta)
+    # registroReceta.insertarDato()
+
+    return pagina
 
 app.run(host='0.0.0.0', port=81) 
 
