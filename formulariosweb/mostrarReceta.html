@@ -1,4 +1,4 @@
-<h1>Nueva receta</h1>
+<h1>Receta Encontrada</h1>
     <div class="formulario">
         <form method="post" action="/edicion-receta">
             
@@ -7,7 +7,7 @@
             <p>Instrucciones<input type="text" name="Receta" required value="{{Receta}}"></p>
             <p>Porciones<input type="number" name="Porciones" required value="{{Porciones}}"></p>
             <p class="tareafutura">es neceario que se verifique que el número sea entero</p>
-            <p>Ingredientes<input type="text" name="Ingredientes" required></p>
+            <p>Ingredientes<input type="text" name="Ingredientes" required value="{{Ingredientes}}"></p>
             <p>url de la imágen<input type="text" name="urlImagen" required value="{{urlImagen}}"></p>
             <p>Es probable que este campo se deba eliminar</p>
             <p>Tiempo de cocción<input type="number" name="TiempoMin" required value="{{TiempoMin}}"></p>
@@ -21,5 +21,7 @@
             <p class="tareafutura">traer los datos de dificultad en una lista desplegable</p>
 
             <button type="submit">Dale</button>
+            <button type="submit" formaction="/eliminar-receta">Eliminar</button>
         </form>
+
     </div>

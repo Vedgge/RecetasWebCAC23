@@ -165,26 +165,25 @@ class ModificarDatos(Credenciales):
 #
 class EliminarDatos(Credenciales):
 
-    def __init__(self, seleccion, tabla,condicion):
+    def __init__(self, tabla,condicion):
         super().__init__()
-        self.seleccion = seleccion
         self.tabla = tabla
         self.condicion = condicion
     
     def borrar(self):
         self.conectar()
 
-        if not self.condicion:
-            self.cursor.execute ("DELETE FROM %s" % (self.tabla,))
-        else:
-            self.cursor.execute ("DELETE FROM %s WHERE %s" % (self.tabla,self.condicion,))
+        # if not self.condicion:
+        #     self.cursor.execute ("DELETE FROM %s" % (self.tabla,))
+        # else:
+        self.cursor.execute ("DELETE FROM %s WHERE %s" % (self.tabla,self.condicion,))
         Credenciales.comitear(self)
 
     def imprimir(self):
-        if not self.condicion:
-            print("DELETE FROM %s" % (self.tabla,))
-        else:
-            print("DELETE FROM %s WHERE %s" % (self.tabla,self.condicion,))       
+        # if not self.condicion:
+        #     print("DELETE FROM %s" % (self.tabla,))
+        # else:
+        print("DELETE FROM %s WHERE %s" % (self.tabla,self.condicion,))       
 #
 
 print("\033[32m","#"*60,"\033[0m")
@@ -224,9 +223,14 @@ def reemplazosReceta(pagina,idReceta):
         pagina = pagina.replace("{{receta}}",archivo.read())
         archivo.close()
     pagina = pagina.replace("{{idReceta}}",idReceta)
-    elementos =("{{NombreReceta}}","{{Receta}}","{{Porciones}}","{{urlImagen}}","{{TiempoMin}}","{{idUsuario}}","{{idCategoria}}","{{dificultad}}")
+    elementos =("NombreReceta","Receta","Porciones","Ingredientes","urlImagen","TiempoMin","idUsuario","idCategoria","dificultad")
+
+    receta = Consulta('*','recetas', f"idReceta = '{idReceta}'")
+    receta.consultar()
+
     for elemento in elementos:
-        pagina = pagina.replace(elemento,"reemplazado")
+        reemplazo = "{{"+elemento+"}}"
+        pagina = pagina.replace(reemplazo,str(receta.resultados[0][elemento]))
     return pagina
 #
 @app.route('/', methods=["GET"])
@@ -313,7 +317,7 @@ def buscarUsuario():
     columnas = "NombreUsuario, Nacimiento, correoElectronico, Genero"
     usuario = Consulta(columnas,'usuarios', f"NombreUsuario LIKE '%{data['nombreUsuario']}%'")
     usuario.consultar()
-    usuario.imprimir()
+    # usuario.imprimir()
     pagina = f"{usuario.resultados}"
     
     pagina = reemplazosPagina(pagina)
@@ -377,7 +381,7 @@ def editarReceta():
 
     receta = Consulta('*','recetas', f"idReceta = {data['idReceta']}")
     receta.consultar()
-    receta.imprimir()
+    # receta.imprimir()
 
     direccion = f'RecetasWebCAC23/formulariosWeb/modificarElementos.html'
     f = open(direccion, 'r')
@@ -392,24 +396,22 @@ def editarReceta():
 #
 @app.route("/edicion-receta", methods=['POST'])
 def edicionReceta():
-
-    pagina="llegué"
     form = request.form
-    cc = Credenciales()
-    cc.conectar()
-    for elemento in form:
-        print(elemento)
-
 
     recetamod = ModificarDatos('recetas',form)
     recetamod.modificarDato()
-    
+    pagina="Receta modificada con éxito"
+    return pagina
+#
+@app.route("/eliminar-receta", methods=['POST'])
+def eliminarReceta():
+    form = request.form
 
-    # columnas = "NombreReceta, Receta, Ingredientes, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
-    # receta = f"""'{form["NombreReceta"]}','{form["Receta"]}','{form["Ingredientes"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{form["idUsuario"]},{form['categoria']},'{form["dificultad"]}','{fecha}'"""
-    # registroReceta = CargaDatos("recetas", columnas, receta)
-    # registroReceta.insertarDato()
 
+    recetamod = EliminarDatos('recetas',f"idReceta = '{form['id']}'")
+    recetamod.imprimir()
+    recetamod.borrar()
+    pagina="Receta eliminada con éxito"
     return pagina
 
 app.run(host='0.0.0.0', port=81) 
