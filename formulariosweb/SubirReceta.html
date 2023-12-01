@@ -5,10 +5,461 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultas Carga de Datos</title>
-    {{style}}
+    <!-- {{style}} -->
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/favicon.png" type="image/x-icon">
+
+    <!-- CUSTOM STYLE DE LA PÁGINA -->
+    <link rel="stylesheet" href="estilos.css">
+
+    <!-- ESTILOS GENERALES -->
+    <link rel="stylesheet" href="/static/assets/style.css">
+
+    <!-- JS SCRIPT GENERALES -->
+    <script src="/static/assets/general-script.js"></script>
+
+    <!-- CUSTOM JS SCRIPTS -->
+    <script src="subirReceta.js" defer></script>
 </head>
 
 <body>
+    <header class="sticky">
+        <nav>
+            <div class="navheader">
+                <div class="contenedor-items-menu">
+                    <div class="icono-cookingology">
+                        <a href="/inicio.html"><img src="/static/assets/img/icono-cookingology.png" alt=""
+                                style="height: 80px;"></a>
+                    </div>
+                    <ul class="lista-navbar-menu-btns">
+                        <li class="navbar-menus"><a href="#">Inicio</a></li>
+                        <li class="navbar-menus"><a href="/tienda.html">Tienda</a></li>
+                        <li class="navbar-menus"><a href="/tips-consejos.html">Tips & consejos</a></li>
+                        <li class="navbar-menus"><a href="/recetas.html">Recetas</a>
+                            <div class="contenedor-ul-navbar-dpdown-menus">
+                                <ul class="ul-navbar-menus">
+                                    <h4>Comidas del día</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Almuerzo</a>
+                                    </li>
+                                    <li class="recetas-items-dropdown"><a href="#">Cena</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Postres</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Bebidas y cocteles</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Desayuno y merienda</a></li>
+                                    <li class="recetas-items-dropdown"><a href="/recetas.html">Ver todas las
+                                            categorías</a></li>
+                                </ul>
+                                <ul class="ul-navbar-menus">
+                                    <h4>Recetas por ingredientes</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Pollo</a>
+                                    </li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Carne">Carne vacuna</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Cerdo">Carne de cerdo</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Vegetarianas">Vegetarianas</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Pizzas+%2F+Tartas">Pastas y
+                                            harinas</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Helados">Helados</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">COMPILACION EN EL BACK Ver todos los
+                                            ingredientes</a></li>
+                                </ul>
+                                <ul class="ul-navbar-menus">
+                                    <h4>Celebraciones y eventos</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a
+                                            href="#">Navideñas</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Pascúa</a></li>
+                                </ul>
+                                <ul class="ul-navbar-menus" style="border: 0;">
+                                    <h4>Recetas subidas</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Recetas de
+                                            la comunidad</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Recetas oficiales</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="navbar-menus"><a href="/subir-receta.html">Subir receta</a></li>
+                        <li class="navbar-menus"><a href="#"><i class="fa-solid fa-circle-user"></i></a>
+                            <div class="contenedor-ul-navbar-dpdown-menus form-dropdown">
+                                <ul class="ul-navbar-menus">
+                                    <li><button id="mostrar-modal-login">Iniciar sesión</button></li>
+                                    <li><button id="mostrar-modal-signup">Registrarse</button></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="overlay"></div>
+
+            <div class="contenedor-modal-popup login-popup">
+                <div class="cerrar-btn">&times;</div>
+                <div class="modal-popup">
+                    <div class="modal-title-main">
+                        <img src="/static/assets/img/icono-cookingology.png" alt="">
+                        <span style="display: flex; flex-direction: column; align-items: center;">
+                            <h1 style="font-size: 2em;">Inicio de sesión</h1>
+                            <div class="social-container">
+                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </span>
+                        <span style="font-size: 14px;">o usa tu cuenta creada</span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="js-loginFormModal" style="width: 100%;">
+                            <div>
+                                <input type="text" id="username-modal" name="username" maxlength="50"
+                                    placeholder="Ingrese su nombre de usuario o mail">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-modal" name="password"
+                                    placeholder="Ingrese su contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div class="login-acceso-recordarme">
+                                <input type="checkbox" name="remember-me" id="checkRememberMe" checked />
+                                <label for="remember-me" class="remember-me-text" style="font-size: 14px;">Recórdarme en
+                                    este equipo</label>
+                            </div>
+                            <div class="modal-body-down">
+                                <input type="submit" value="Iniciar sesión" class="btn-submit">
+                                <span style="font-size: 14px;">¿Nuevo en el sitio? <a href="#" id="registrar">Crea una
+                                        cuenta</a></span>
+                                <div class="elementos-form">
+                                    <span style="font-size: 14px;"><a href="#">¿Olvido su nombre de usuario o
+                                            contraseña?</a></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor-modal-popup signup-popup">
+                <div class="cerrar-btn">&times;</div>
+                <div class="modal-popup">
+                    <div class="modal-title-main">
+                        <img src="/static/assets/img/icono-cookingology.png" alt="">
+                        <span style="display: flex; flex-direction: column; align-items: center;">
+                            <h1 style="font-size: 2em;">Crea una cuenta</h1>
+                            <div class="social-container">
+                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </span>
+                        <span style="font-size: 14px;">o utiliza tu email para el registro</span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="js-loginFormModal" style="width: 100%;">
+                            <div>
+                                <input type="text" id="username-modal" name="username" maxlength="50"
+                                    placeholder="Ingresa tu email">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-modal" name="password"
+                                    placeholder="Crea tu contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-confirmn" name="password-confirmn"
+                                    placeholder="Confirma tu contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div class="modal-body-down">
+                                <input type="submit" value="Iniciar sesión" class="btn-submit">
+                                <span style="font-size: 14px;">¿Ya tenes una cuenta en el sitio? <a href="#"
+                                        id="registrar"> Inicia sesión</a></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- <section>
+            <article>
+                <div class="contenedor-agregar-receta">
+                    <div class="banner">
+                        <div class="wrapper-title">
+                            <h1>Agrega una receta</h1>
+                        </div>
+                        <div class="wrapper-sub">
+                            <p>Uploading personal recipes is easy! Add yours to your favorites, share with friends, family, or the Allrecipes community.</p>
+                        </div>
+                    </div>
+                    <form action="">
+                        <div class="wrapper-titulo-descripcion-tiempo wrapper-form-section">
+                            <fieldset>
+                                <div class="parte-sup-header">
+                                    <div class="columna-1">
+                                        <div class="titulo-receta">
+                                            <label for="titulo">Titulo de la receta</label>
+                                            <input type="text" id="titulo" name="titulo" placeholder="Dale un titulo a tu receta" required>
+                                        </div>
+                                        <div class="descripcion-receta">
+                                            <label for="descripcion">Descripción</label>
+                                            <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Comparte la historia detras de tu receta, que la hace especial y direcciones extra!" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="columna-2">
+                                        <div class="agregar-img-receta">
+                                            <label for="" id="imgFile">Imagen (opcional)</label>
+                                            <input type="file" id="imgFile" accept="">
+                                            <p>Usa formato JPEG o PNG. Debe ser al menos 960 x 960. Tamaño max: 30MB</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="parte-inf-header">
+                                    <div class="porciones-info">
+                                        <label for="porciones">Porciones</label>
+                                        <input type="number" id="porciones-info" placeholder="0" min="1" required>
+                                    </div>
+                                    <div class="tiempo-info">
+                                        <label for="prep-time">Tiempo de preparación</label>
+                                        <input type="number" id="prep-time" placeholder="0" min="0" required>
+                                        <select name="prep-time-unidad" id="prep-timeMHD">
+                                            <option value="min">minutos</option>
+                                            <option value="horas">horas</option>
+                                            <option value="días">días</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="wrapper-ingredientes wrapper-form-section">
+                            <fieldset>
+                                <legend>Ingredientes</legend>
+                                <p>Enter one ingredient per line. Include the quantity (i.e. cups, tablespoons) and any
+                                    special preparation (i.e. sifted, softened, chopped). Use optional headers to
+                                    organize the different parts of the recipe (i.e. Cake, Frosting, Dressing).</p>
+                                <div>
+                                    <span>Enter ingredients below or Add several at once</span>
+                                    <span><a href="#">Reordenar</a></span>
+                                </div>
+                                <div class="contenedor-ingredientes">
+                                    <div class="ingredientes">
+                                        <input type="text" name="ingrediente[1]" required>
+                                        <button type="button">X</button>
+                                    </div>
+                                    <div class="ingredientes">
+                                        <input type="text" name="ingrediente[2]" required>
+                                        <button type="button">X</button>
+                                    </div>
+                                    <div class="ingredientes">
+                                        <input type="text" name="ingrediente[3]" required>
+                                        <button type="button">X</button>
+                                    </div>
+                                </div>
+                                <div class="boton-add-ingredient">
+                                    <button type="button"><span>Agrega un ingrediente</span></button>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="wrapper-pasos-a-seguir wrapper-form-section">
+                            <fieldset>
+                                <legend>Pasos a seguir</legend>
+                                <p>Explain how to make your recipe, including oven temperatures, baking or cooking
+                                    times, and pan sizes, etc. Use optional headers to organize the different parts of
+                                    the recipe (i.e. Prep, Bake, Decorate).</p>
+                                <div>
+                                    <span>Enter ingredients below or Add several at once</span>
+                                    <span><a href="#">Reordenar</a></span>
+                                </div>
+                                <div class="contenedor-direcciones-pasos">
+                                    <div class="pasos">
+                                        <span>Paso 1</span>
+                                        <div class="pasos-textarea"><textarea name="paso[1]" id="" cols="30" rows="10" placeholder="Ej.: Precalentar el horno a 360 grados F..."></textarea>
+                                            <button type="button">X</button>
+                                        </div>
+                                    </div>
+                                    <div class="pasos">
+                                        <span>Paso 2</span>
+                                        <div class="pasos-textarea"><textarea name="paso[2]" id="" cols="30" rows="10" placeholder="Ej.: Combinar todos los ingredientes secos en un bowl grande..."></textarea>
+                                            <button type="button">X</button>
+                                        </div>
+                                    </div>
+                                    <div class="pasos">
+                                        <span>Paso 2</span>
+                                        <div class="pasos-textarea"><textarea name="paso[3]" id="" cols="30" rows="10" placeholder="Ej.: Verter en un contenedor engrasado y calentar por 15-20 minutos..."></textarea>
+                                            <button type="button">X</button>
+                                        </div>
+                                    </div>
+                                    <div class="boton-add-pasos">
+                                        <button type="button"><span>Agrega un paso</span></button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </section> -->
+        <section>
+            <article>
+                <div class="contenedor-agregar-receta">
+                    <div class="banner">
+                        <div class="wrapper-title">
+                            <h1>Añadir una receta</h1>
+                        </div>
+                        <div class="wrapper-sub">
+                            <p>¡Subir recetas personales es fácil! Agrega el tuyo a tus favoritos, compartilo con amigos, familiares o toda la comunidad de Cookingology.</p>
+                        </div>
+                    </div>
+                    <div class="formulario">
+                        <form method="post" action="/registro-receta">
+                            <div class="wrapper-titulo-descripcion-tiempo wrapper-form-section">
+                                <fieldset>
+                                    <div class="parte-sup-header">
+                                        <div class="columna-1">
+                                            <div class="titulo-receta">
+                                                <label for="NombreReceta">Titulo de la receta</label>
+                                                <input type="text" id="NombreReceta" name="NombreReceta"
+                                                    placeholder="Dale un titulo a tu receta" required
+                                                    class="form-text-input">
+                                            </div>
+                                            <div class="descripcion-receta">
+                                                <label for="descripcion">Descripción</label>
+                                                <textarea class="form-text-input" name="descripcion" id="descripcion"
+                                                    cols="30" rows="10"
+                                                    placeholder="Comparte la historia detras de tu receta, que la hace especial y direcciones extra!"
+                                                    required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="columna-2">
+                                            <div class="agregar-img-receta">
+                                                <label for="" id="imgFile">Imagen (opcional)</label>
+                                                <div class="subir-img-layout">
+                                                    <input type="file" id="imgFile" name="imgFile" accept="">
+                                                </div>
+                                                <input type="text" name="urlImagen" required>
+                                                <p>Usa formato JPEG o PNG. Debe ser al menos 960 x 960. Tamaño max: 30MB
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="parte-inf-header">
+                                        <div class="porciones-info" style="display: flex; flex-direction: row; gap: 30px; margin: 32px 0;">
+                                            <label for="porciones">Porciones</label>
+                                            <div class="input-contenedor">
+                                                <input class="form-option-input" type="number" id="porciones" name="Porciones" placeholder="P. ej.: 8" min="1"
+                                                required>
+                                            </div>
+                                        </div>
+                                        <div class="tiempo-info">
+                                            <label for="prep-time">Tiempo de preparación</label>
+                                            <div class="input-contenedor">
+                                                <input class="form-element-input" type="number" id="prep-time"
+                                                    placeholder="0" min="0" required>
+                                                <select class="form-option-input" name="prep-time-unidad"
+                                                    id="prep-timeMHD">
+                                                    <option value="min">minutos</option>
+                                                    <option value="horas">horas</option>
+                                                    <option value="días">días</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="categoria-info">
+                                            <label for="categoría">Categoría</label>
+                                            <select class="form-option-input" name="categoria" id="categoria">
+                                                <!-- {{opciones}} -->
+                                                <option value="desayuno merienda">Desayuno & Merienda</option>
+                                                <option value="almuerzo">Almuerzo</option>
+                                                <option value="cena">Cena</option>
+                                                <option value="bebidas">Bebidas</option>
+                                                <option value="vegetarianas">Vegetarianas</option>
+                                                <option value="postres y dulces">Postres & Dulces</option>
+                                            </select>
+                                        </div>
+                                        <div class="dificultad-info">
+                                            <label for="dificultad">Dificultad</label>
+                                            <select class="form-option-input" name="dificultad" id="dificultad">
+                                                <option value="principiante">Fácil</option>
+                                                <option value="intermedio">Intermedio</option>
+                                                <option value="Avanzado">Difícil</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="wrapper-ingredientes wrapper-form-section">
+                                <fieldset>
+                                    <legend>Ingredientes</legend>
+                                    <p>Ingrese los ingredientes en el cuadro inferior. Incluya la cantidad (es decir, tazas, cucharadas) y cualquier preparación especial (es decir, tamizada, ablandada, picada). Trate de organizarlos para que sean legibles.</p>
+                                    <textarea class="form-text-input" name="Ingredientes" id="" cols="30" rows="10"
+                                        placeholder="Por ejemplo, 2 tazas de harina tamizada, 1 taza de azúcar..."
+                                        required></textarea>
+                                </fieldset>
+                            </div>
+                            <div class="wrapper-pasos-a-seguir wrapper-form-section">
+                                <fieldset>
+                                    <legend>Pasos a seguir</legend>
+                                    <p>Explique cómo hacer su receta, incluidas las temperaturas del horno, los tiempos de cocción o cocción, los tamaños de la sartén, etc. Trate de organizarlos para que sean legibles..</p>
+                                    <textarea name="Receta" id="" cols="30" rows="10"
+                                        placeholder="p. ej.: Precalentar el horno a 350 grados F, verter en bandejas engrasadas..."
+                                        required></textarea>
+                                </fieldset>
+                            </div>
+                            <div class="form-layout-btn">
+                                <div class="contenedor-btns-form">
+                                    <a href="#" class="cancelar-btn" id="#mostrar-modal-cancelar"
+                                        role="button">CANCELAR</a>
+                                    <input type="submit" class="btn-submit" value="Enviar Receta">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div class="contenedor-modal-popup cancelar-popup">
+        <div class="cerrar-btn">&times;</div>
+        <div class="modal-popup">
+            <div class="modal-title-main">
+                <h2 style="font-size: 25px; font-weight: 700;">Confirmación de salida</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text">
+                    <p>¿Estás seguro de que quieres abandonar esta página? Sus cambios se perderán si regresa.</p>
+                </div>
+                <div class="contenedor-modal-footer">
+                    <div class="modal-footer">
+                        <button type="button"
+                            style="font-size: 16px; background: none; border: none; outline: none; cursor: pointer;">Cancelar</button>
+                        <a href="/inicio.html" type="button" class="btn-submit"
+                            style="border-radius: 6px; padding: 12px 25px;">Salir de la página</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay-cancelar"></div>
+
+    <footer>
+        <div class="contenedor-columnas-footer">
+            <div class="columna-1"></div>
+        </div>
+    </footer>
+    <!-- Bootstrap bundle JS & Font Awesome & JQuery & Owl-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/4e89c87464.js" crossorigin="anonymous"></script>
+    <script src="static/assets/jquery.min.js"></script>
+    <script src="static/assets/owlcarousel/owl.carousel.min.js"></script>
+</body>
+
+<!-- <body>
     <h1>Nueva receta</h1>
     <div class="formulario">
         <form method="post" action="/registro-receta">
@@ -38,6 +489,6 @@
             <button type="submit">Dale</button>
         </form>
     </div>
-</body>
+</body> -->
 
 </html>
