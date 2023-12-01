@@ -8,99 +8,19 @@
 } */
 
 /*--------------------CSS RESET Y TIPOGRAFÍA-------------------*/
-@font-face {
-    font-family: SpiritNeutralRegular;
-    src: url(./fonts/spirits-neutral-regular.otf);
-}
 
-@font-face {
-    font-family: SpiritSharpRegular;
-    src: url(./fonts/spirits-sharp-regular.otf);
-}
-
-@font-face {
-    font-family: SpiritSoftRegular;
-    src: url(./fonts/spirits-soft-regular.otf);
-}
-
-@font-face {
-    font-family: SpiritNeutralMedium;
-    src: url(./fonts/spirits-neutral-medium.otf);
-}
-
-@font-face {
-    font-family: SpiritSharpMedium;
-    src: url(./fonts/spirits-neutral-medium.otf);
-}
-
-@font-face {
-    font-family: SpiritNeutralMedium;
-    src: url(./fonts/spirits-neutral-medium.otf);
-}
-
-@font-face {
-    font-family: SpiritNeutralLight;
-    src: url(./fonts/spirits-neutral-light.otf);
-}
-
-@font-face {
-    font-family: SpiritNeutralBlack;
-    src: url(./fonts/spirits-neutral-black.otf);
-}
-
-@font-face {
-    font-family: SpiritSharpBlack;
-    src: url(./fonts/spirits-sharp-black.otf);
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-    font-family: 'Lato', sans-serif;
-    /* font-family: 'Raleway', sans-serif; */
-}
 fieldset {
     border: 0;
 }
 
-body {
-    margin: 0;
-    background: #fffdf9;
-}
-
-header {
-    position: relative;
-    z-index: 11;
-    width: 100%;
-}
-
-main {
-    position: relative;
-}
-
-ol,
-ul,
-dl {
-    margin-top: 0;
-    margin-bottom: 0rem !important;
-}
-
-section {
-    padding: 10px 0;
-    position: relative;
-}
-
-h1 {
+.title-agregar-receta {
     font-size: 36px !important;
     font-family: "SpiritSharpBlack";
 }
 
 /* RECETA CONTENEDOR */
 
-article {
+.article-agregar-receta {
     display: flex;
     justify-content: center;
     margin-top: 80px;
@@ -109,7 +29,6 @@ article {
     background-position: top center;
     background-size: 100% auto; /* Hace que la imagen de fondo ocupe todo el ancho y mantenga su altura original */
 }
-
 
 .contenedor-agregar-receta{
     display: flex;
@@ -125,7 +44,6 @@ article {
     position: relative;
     margin-bottom: 16px;
 }
-
 
 .wrapper-title h1 {
     width: 263.4px;
