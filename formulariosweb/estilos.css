@@ -1,8 +1,293 @@
-.formulario {
+/* .formulario {
     border-style: solid;
     background-color: bisque;
 }
 
 .tareafutura {
     color: red
+} */
+
+/*--------------------CSS RESET Y TIPOGRAFÍA-------------------*/
+@font-face {
+    font-family: SpiritNeutralRegular;
+    src: url(./fonts/spirits-neutral-regular.otf);
 }
+
+@font-face {
+    font-family: SpiritSharpRegular;
+    src: url(./fonts/spirits-sharp-regular.otf);
+}
+
+@font-face {
+    font-family: SpiritSoftRegular;
+    src: url(./fonts/spirits-soft-regular.otf);
+}
+
+@font-face {
+    font-family: SpiritNeutralMedium;
+    src: url(./fonts/spirits-neutral-medium.otf);
+}
+
+@font-face {
+    font-family: SpiritSharpMedium;
+    src: url(./fonts/spirits-neutral-medium.otf);
+}
+
+@font-face {
+    font-family: SpiritNeutralMedium;
+    src: url(./fonts/spirits-neutral-medium.otf);
+}
+
+@font-face {
+    font-family: SpiritNeutralLight;
+    src: url(./fonts/spirits-neutral-light.otf);
+}
+
+@font-face {
+    font-family: SpiritNeutralBlack;
+    src: url(./fonts/spirits-neutral-black.otf);
+}
+
+@font-face {
+    font-family: SpiritSharpBlack;
+    src: url(./fonts/spirits-sharp-black.otf);
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    /* font-family: 'Raleway', sans-serif; */
+}
+fieldset {
+    border: 0;
+}
+
+body {
+    margin: 0;
+    background: #fffdf9;
+}
+
+header {
+    position: relative;
+    z-index: 11;
+    width: 100%;
+}
+
+main {
+    position: relative;
+}
+
+ol,
+ul,
+dl {
+    margin-top: 0;
+    margin-bottom: 0rem !important;
+}
+
+section {
+    padding: 10px 0;
+    position: relative;
+}
+
+h1 {
+    font-size: 36px !important;
+    font-family: "SpiritSharpBlack";
+}
+
+/* RECETA CONTENEDOR */
+
+article {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    background: url(/static/imagenes/agregar-receta-header.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto; /* Hace que la imagen de fondo ocupe todo el ancho y mantenga su altura original */
+}
+
+
+.contenedor-agregar-receta{
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+    margin: 32px 0;
+    padding: 32px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+    background-color: #FFF;
+}
+
+.wrapper-title{
+    position: relative;
+    margin-bottom: 16px;
+}
+
+
+.wrapper-title h1 {
+    width: 263.4px;
+    margin-left: 25px;
+    box-shadow: inset 0 -20px 0 0 #e7ab46;
+    padding-bottom: 10px;
+    line-height: 44px;
+}
+
+.wrapper-title:before {
+    background: linear-gradient(to bottom, transparent 35%, #d54215 35%, #d54215 65%, transparent 65%),linear-gradient(to right, transparent 35%, #d54215 35%, #d54215 65%, transparent 65%);
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+}
+
+.wrapper-sub{
+    margin-bottom: 32px;
+}
+
+.columna-1 > div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0 !important;
+    margin-bottom: 32px !important;
+}
+
+.columna-1{
+    width: 100%;
+}
+
+.formulario label, .formulario legend {
+    font-weight: 700;
+}
+
+.parte-inf-header {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.parte-inf-header > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 40px;
+    margin-bottom: 32px;
+}
+
+.parte-inf-header > div > label {
+    width: 196px;
+    min-width: 196px;
+}
+
+.form-text-input, .form-element-input, .form-option-input {
+    min-height: 48px;
+    padding: 0 16px;
+    border: 1px solid rgba(0,0,0,.65);
+    font-size: 16px;
+}
+
+.form-element-input {
+    width: 32px !important;
+}
+
+.form-option-input {
+    width: 280px !important;
+    margin-left: 16px;
+}
+
+textarea {
+    padding: 0 !important;
+    font-size: 16px;
+    max-height: 80px;
+    width: 100%;
+}
+
+textarea::placeholder {
+    padding: 16px;
+}
+
+.agregar-img-receta{
+    margin: 0 0 32px 32px;
+}
+
+.subir-img-layout {
+    background: url(/static/imagenes/receta-agregar-foto.png);
+    background-size: cover;
+    width: 224px;
+    height: 224px;
+}
+
+.subir-img-layout input {
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    width: 224px;
+    height: 224px;
+}
+
+.agregar-img-receta p{
+    color: rgba(0,0,0,.65);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* INGREDIENTES */
+.wrapper-form-section {
+    border-top: 1px solid rgba(0,0,0,.15);
+    padding: 16px 0 32px;
+}
+
+.parte-sup-header {
+    display: flex;
+}
+
+.pasos {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-layout-btn{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* CANCELAR POPUP */
+.cancelar-btn {
+    margin: 14px 24px;
+}
+.cancelar-popup {
+    display: none;
+    padding: 30px 20px !important;
+}
+
+.overlay-cancelar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1001; 
+}
+
+.modal-text {
+    margin: 25px 0 35px 0;
+}
+
+.modal-title-main, .modal-body, .modal-popup {
+    display: block !important;
+}
+
+
+.contenedor-modal-footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-footer button {
+    margin: 12px;
+}
+

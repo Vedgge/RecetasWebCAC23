@@ -113,8 +113,11 @@ header.sticky {
     position: relative;
 }
 
-.contenedor-items-menu li a::after,
-.contenedor-lista-hero li a::after {
+.contenedor-items-menu li a {
+    position: relative;
+}
+
+.contenedor-items-menu li a::after, .contenedor-lista-hero li a::after {
     content: '';
     display: block;
     position: absolute;
@@ -125,8 +128,7 @@ header.sticky {
     transition: .3s;
 }
 
-.contenedor-items-menu li a:hover::after,
-.contenedor-lista-hero li a:hover::after {
+.contenedor-items-menu li a:hover::after, .contenedor-lista-hero li a:hover::after {
     width: 100%;
 }
 
@@ -207,22 +209,58 @@ header.sticky {
     border: 0;
 }
 
+.form-dropdown button {
+    position: relative;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.form-dropdown button::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: #22272a;
+    transition: .3s;
+}
+
+.form-dropdown button:hover::after {
+    width: 100%;
+}
+
 
 /* POPUP LOGIN & SINGUP */
 
 .contenedor-modal-popup {
-	position: fixed;
+    position: fixed;
     top: 30%;
     left: 39%;
     width: 350px;
     padding: 50px 30px;
-    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, .15); 
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, .15);
     border-radius: 10px;
     background-color: #FFFFFF;
-	transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+    z-index: 1002;
 }
 
-.login-popup, .signup-popup {
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.login-popup,
+.signup-popup {
     display: none;
 }
 
@@ -231,6 +269,7 @@ header.sticky {
     flex-direction: column;
     gap: 5px;
 }
+
 .cerrar-btn {
     position: absolute;
     top: 10px;
@@ -253,17 +292,18 @@ header.sticky {
     color: #333333;
 }
 
-.cerrar-btn:active{
+.cerrar-btn:active {
     transform: scale(0.95);
 }
 
-.modal-title-main, .modal-body{
+.modal-title-main,
+.modal-body {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.modal-title-main img{
+.modal-title-main img {
     width: 210px;
     margin-bottom: 10px;
 }
@@ -280,14 +320,14 @@ header.sticky {
     color: #333;
     font-size: 14px;
     text-decoration: none;
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
+    border: 1px solid #DDDDDD;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
     transition: transform 80ms ease-in;
 }
 
@@ -295,7 +335,9 @@ header.sticky {
     transform: scale(0.95);
 }
 
-#username-modal, #password-modal, #password-confirmn {
+#username-modal,
+#password-modal,
+#password-confirmn {
     width: 100%;
     padding: 10px 0;
     border-radius: 8px;
@@ -339,53 +381,10 @@ header.sticky {
 }
 
 .btn-submit:active {
-	transform: scale(0.95);
+    transform: scale(0.95);
 }
-
-/* .signup-popup {
-    position: relative;
-    top: 0;
-	left: 0;
-	width: 50%;
-	opacity: 1;
-	z-index: 1;
-}
-
-.container.right-panel-active .signup-popup {
-	transform: translateX(100%);
-	opacity: 1;
-	z-index: 5;
-	animation: show 0.6s;
-}
-
-@keyframes show {
-	0%, 49.99% {
-		opacity: 0;
-		z-index: 1;
-	}
-	
-	50%, 100% {
-		opacity: 1;
-		z-index: 5;
-	}
-} */
 
 /*-------------------- MAIN -------------------*/
-/* .custom-shape-divider-bottom-1700522759 {
-    display: block;
-    position: relative;
-    top: -2px;
-    height: 500px;
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1903 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(235, 65, 74, 1)" d="M 0 500 C 340 500 340 501 680 501 L 680 501 L 680 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(235, 65, 74, 1)" d="M 679 501 C 1068.5 501 1068.5 12 1458 12 L 1458 12 L 1458 0 L 679 0 Z" stroke-width="0"></path> <path fill="rgba(235, 65, 74, 1)" d="M 1457 12 C 1680 12 1680 92 1903 92 L 1903 92 L 1903 0 L 1457 0 Z" stroke-width="0"></path></svg>');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-@media (max-width:1886px) {
-    .custom-shape-divider-bottom-1700522759 {
-        background-size: contain;
-    }
-} */
 
 .hero-article {
     position: relative;
@@ -459,6 +458,107 @@ header.sticky {
     padding-bottom: 30px;
 }
 
+/* RECETAS ELEGIDAS POR CHEFS - CARRUSEL OWL */
+
+#carrusel-1 .owl-item {
+    height: 347px;
+}
+
+#carrusel-1 .item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#carrusel-1 .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-receta {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    transition: all 0.45s ease;
+}
+
+.receta-item {
+    position: absolute;
+    text-align: center;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.45s ease;
+}
+
+.a-hover:hover .overlay-receta {
+    background-color: transparent;
+}
+
+.a-hover:hover+.receta-item,
+.receta-item:hover {
+    transform: translate(-50%, -70%);
+}
+
+.etiqueta-categoria a {
+    font-size: 12px;
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 6px 16px;
+    text-transform: uppercase;
+    transition: 0.25s;
+}
+
+.slide:hover,
+.slide:focus {
+    box-shadow: inset 8em 0 0 0 #48494b;
+}
+
+.slide-large:hover,
+.slide-large:focus {
+    box-shadow: inset 11.5em 0 0 0 #48494b;
+}
+
+
+.etiqueta-categoria a:hover,
+.etiqueta-categoria a:focus {
+    border-color: #48494b;
+    color: #fff;
+}
+
+.etiqueta-categoria,
+.titulo-receta {
+    margin: 15px 0;
+}
+
+.titulo-receta h3 a {
+    color: #FFF;
+}
+
+.fecha-tiempo {
+    color: #FFF;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal !important;
+    font-style: italic;
+}
+
+.separador-dot {
+    display: inline-block;
+    margin-left: 7px;
+    margin-right: 7px;
+    border-radius: 5px;
+    width: 10px;
+    height: 1px;
+    border-top: 1px solid #e0dede;
+    top: -4px;
+    position: relative;
+}
+
 /* RECETAS POPULARES INDEX */
 .contenedor-grid-recetas-populares {
     height: 600px;
@@ -499,29 +599,29 @@ header.sticky {
     grid-area: receta-5;
 }
 
-.cookandmeal-block-title {
+.section-block-title {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.cookandmeal-block-title {
+.section-block-title {
     text-align: left;
     padding-bottom: 30px;
 }
 
-.cookandmeal-block-title h3 {
+.section-block-title h3 {
     font-size: 22px;
 }
 
-.cookandmeal-block-title h4 {
+.section-block-title h4 {
     color: #9F9F9F;
     font-size: 17px;
 }
 
-.cookandmeal-block-title h3::before,
-.cookandmeal-block-title h3::after {
+.section-block-title h3::before,
+.section-block-title h3::after {
     content: " ";
     display: inline-block;
     width: 60px;
@@ -532,7 +632,7 @@ header.sticky {
     margin-right: 30px;
 }
 
-.cookandmeal-block-title h3::after {
+.section-block-title h3::after {
     margin-right: 0;
     margin-left: 30px;
 }
@@ -615,7 +715,86 @@ header.sticky {
     border-radius: 50%;
 }
 
+/* Carrusel tienda */
+/* .owl-buttons {
+    display: none;
+}
 
+#carrusel-2:hover .owl-buttons {
+    display: block;
+}
+
+.owl-item {
+    text-align: center;
+}
+
+.owl-controls .owl-buttons div {
+    background: transparent;
+    color: #869791;
+    font-size: 40px;
+    line-height: 300px;
+    margin: 0;
+    padding: 0 60px;
+    position: absolute;
+    top: 0;
+}
+
+.owl-controls .owl-buttons .owl-prev {
+    left: 0;
+    padding-left: 20px;
+}
+
+.owl-controls .owl-buttons .owl-next {
+    right: 0;
+    padding-right: 20px;
+} */
+
+.item-tienda {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.contenedor-tienda-item-desc {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    padding: 15px;
+    box-sizing: border-box;
+    color: #FFF;
+}
+
+.item-tienda:hover .contenedor-tienda-item-desc {
+    transform: translateY(0);
+}
+
+.titulo-item-tienda,
+.precio-item-tienda {
+    margin: 0;
+}
+
+/* Estilo adicional para mejorar la apariencia */
+.item-tienda img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.titulo-item-tienda {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.precio-item-tienda span {
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+/* DIARIO */
 .contenedor-newsletter {
     display: flex;
     justify-content: center;
@@ -626,16 +805,49 @@ header.sticky {
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    width: 1000px;
-    height: 250px;
-    background-color: rgb(128, 8, 8);
+    width: 1300px;
+    height: 200px;
+    background: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/07/image-from-rawpixel-id-2409368-png.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: cover;
+    background-attachment: scroll;
+}
+
+.row-newsletter {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    width: 100%;
+}
+
+.suscribirse-newsletter h4 {
+    font-size: 26px;
+    line-height: 1.25;
+}
+
+.suscribirse-newsletter p {
+    color: #7e7d7d
+}
+
+.col-1 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.col-2 input {
+    border-radius: 30px;
+    padding: 15px;
+    width: 300px;
+    border: 1px solid #e0dede;
 }
 
 /* FOOTER */
 footer {
     height: 300px;
     width: 100%;
-    background-color: rgb(128, 8, 8);
+    background-color: #eee6e6;
 }
 
 
