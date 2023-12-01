@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/static/assets/favicon.png" type="image/x-icon">
 
     <!-- CUSTOM STYLE DE LA PÁGINA -->
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="/formulariosweb/estilos.css">
 
     <!-- ESTILOS GENERALES -->
     <link rel="stylesheet" href="/static/assets/style.css">
@@ -20,7 +20,7 @@
     <script src="/static/assets/general-script.js"></script>
 
     <!-- CUSTOM JS SCRIPTS -->
-    <script src="subirReceta.js" defer></script>
+    <script src="/formulariosweb/subirReceta.js" defer></script>
 </head>
 
 <body>
@@ -29,8 +29,7 @@
             <div class="navheader">
                 <div class="contenedor-items-menu">
                     <div class="icono-cookingology">
-                        <a href="/inicio.html"><img src="/static/assets/img/icono-cookingology.png" alt=""
-                                style="height: 80px;"></a>
+                        <a href="/inicio.html"><img src="/static/assets/img/icono-cookingology.png" alt="" style="height: 80px;"></a>
                     </div>
                     <ul class="lista-navbar-menu-btns">
                         <li class="navbar-menus"><a href="#">Inicio</a></li>
@@ -186,130 +185,12 @@
     </header>
 
     <main>
-        <!-- <section>
-            <article>
-                <div class="contenedor-agregar-receta">
-                    <div class="banner">
-                        <div class="wrapper-title">
-                            <h1>Agrega una receta</h1>
-                        </div>
-                        <div class="wrapper-sub">
-                            <p>Uploading personal recipes is easy! Add yours to your favorites, share with friends, family, or the Allrecipes community.</p>
-                        </div>
-                    </div>
-                    <form action="">
-                        <div class="wrapper-titulo-descripcion-tiempo wrapper-form-section">
-                            <fieldset>
-                                <div class="parte-sup-header">
-                                    <div class="columna-1">
-                                        <div class="titulo-receta">
-                                            <label for="titulo">Titulo de la receta</label>
-                                            <input type="text" id="titulo" name="titulo" placeholder="Dale un titulo a tu receta" required>
-                                        </div>
-                                        <div class="descripcion-receta">
-                                            <label for="descripcion">Descripción</label>
-                                            <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Comparte la historia detras de tu receta, que la hace especial y direcciones extra!" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="columna-2">
-                                        <div class="agregar-img-receta">
-                                            <label for="" id="imgFile">Imagen (opcional)</label>
-                                            <input type="file" id="imgFile" accept="">
-                                            <p>Usa formato JPEG o PNG. Debe ser al menos 960 x 960. Tamaño max: 30MB</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="parte-inf-header">
-                                    <div class="porciones-info">
-                                        <label for="porciones">Porciones</label>
-                                        <input type="number" id="porciones-info" placeholder="0" min="1" required>
-                                    </div>
-                                    <div class="tiempo-info">
-                                        <label for="prep-time">Tiempo de preparación</label>
-                                        <input type="number" id="prep-time" placeholder="0" min="0" required>
-                                        <select name="prep-time-unidad" id="prep-timeMHD">
-                                            <option value="min">minutos</option>
-                                            <option value="horas">horas</option>
-                                            <option value="días">días</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="wrapper-ingredientes wrapper-form-section">
-                            <fieldset>
-                                <legend>Ingredientes</legend>
-                                <p>Enter one ingredient per line. Include the quantity (i.e. cups, tablespoons) and any
-                                    special preparation (i.e. sifted, softened, chopped). Use optional headers to
-                                    organize the different parts of the recipe (i.e. Cake, Frosting, Dressing).</p>
-                                <div>
-                                    <span>Enter ingredients below or Add several at once</span>
-                                    <span><a href="#">Reordenar</a></span>
-                                </div>
-                                <div class="contenedor-ingredientes">
-                                    <div class="ingredientes">
-                                        <input type="text" name="ingrediente[1]" required>
-                                        <button type="button">X</button>
-                                    </div>
-                                    <div class="ingredientes">
-                                        <input type="text" name="ingrediente[2]" required>
-                                        <button type="button">X</button>
-                                    </div>
-                                    <div class="ingredientes">
-                                        <input type="text" name="ingrediente[3]" required>
-                                        <button type="button">X</button>
-                                    </div>
-                                </div>
-                                <div class="boton-add-ingredient">
-                                    <button type="button"><span>Agrega un ingrediente</span></button>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="wrapper-pasos-a-seguir wrapper-form-section">
-                            <fieldset>
-                                <legend>Pasos a seguir</legend>
-                                <p>Explain how to make your recipe, including oven temperatures, baking or cooking
-                                    times, and pan sizes, etc. Use optional headers to organize the different parts of
-                                    the recipe (i.e. Prep, Bake, Decorate).</p>
-                                <div>
-                                    <span>Enter ingredients below or Add several at once</span>
-                                    <span><a href="#">Reordenar</a></span>
-                                </div>
-                                <div class="contenedor-direcciones-pasos">
-                                    <div class="pasos">
-                                        <span>Paso 1</span>
-                                        <div class="pasos-textarea"><textarea name="paso[1]" id="" cols="30" rows="10" placeholder="Ej.: Precalentar el horno a 360 grados F..."></textarea>
-                                            <button type="button">X</button>
-                                        </div>
-                                    </div>
-                                    <div class="pasos">
-                                        <span>Paso 2</span>
-                                        <div class="pasos-textarea"><textarea name="paso[2]" id="" cols="30" rows="10" placeholder="Ej.: Combinar todos los ingredientes secos en un bowl grande..."></textarea>
-                                            <button type="button">X</button>
-                                        </div>
-                                    </div>
-                                    <div class="pasos">
-                                        <span>Paso 2</span>
-                                        <div class="pasos-textarea"><textarea name="paso[3]" id="" cols="30" rows="10" placeholder="Ej.: Verter en un contenedor engrasado y calentar por 15-20 minutos..."></textarea>
-                                            <button type="button">X</button>
-                                        </div>
-                                    </div>
-                                    <div class="boton-add-pasos">
-                                        <button type="button"><span>Agrega un paso</span></button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </form>
-                </div>
-            </article>
-        </section> -->
         <section>
-            <article>
+            <article class="article-agregar-receta">
                 <div class="contenedor-agregar-receta">
                     <div class="banner">
                         <div class="wrapper-title">
-                            <h1>Añadir una receta</h1>
+                            <h1 class="title-agregar-receta">Añadir una receta</h1>
                         </div>
                         <div class="wrapper-sub">
                             <p>¡Subir recetas personales es fácil! Agrega el tuyo a tus favoritos, compartilo con amigos, familiares o toda la comunidad de Cookingology.</p>
@@ -481,7 +362,6 @@
             <select name="categoria" id="categoria">
                 {{opciones}}
             </select>
-
 
             <p>dificultad<input type="" name="dificultad" required></p>
             <p class="tareafutura">traer los datos de dificultad en una lista desplegable</p>
