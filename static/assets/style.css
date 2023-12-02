@@ -93,11 +93,16 @@ header.sticky {
     left: 0;
     width: 100%;
     z-index: 1000;
+    box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,.15);
 }
 
 .navheader {
     background-color: #fffdf9;
     border-bottom: 1px solid #e0e0e0;
+}
+
+.icono-cookingology a img {
+    height: 60px !important;
 }
 
 .contenedor-items-menu {
@@ -124,7 +129,7 @@ header.sticky {
     bottom: -3px;
     width: 0;
     height: 2px;
-    background: #22272a;
+    background: #d54215;
     transition: .3s;
 }
 
@@ -185,7 +190,7 @@ header.sticky {
     bottom: -3px;
     width: 100%;
     height: 2px;
-    background: #22272a;
+    background: #d54215;
 }
 
 .lista-navbar-menu-btns i {
@@ -224,7 +229,7 @@ header.sticky {
     bottom: -3px;
     width: 0;
     height: 2px;
-    background: #22272a;
+    background: #d54215;
     transition: .3s;
 }
 
@@ -246,6 +251,16 @@ header.sticky {
     background-color: #FFFFFF;
     transition: all 0.6s ease-in-out;
     z-index: 1002;
+    opacity: 0; /* Inicialmente establece la opacidad a 0 para ocultar el popup */
+    transform: translateY(-50px); /* Desplaza el popup hacia arriba para que aparezca desde arriba */
+    animation: showPopup 0.6s ease forwards; 
+}
+
+@keyframes showPopup {
+    to {
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 .overlay {
@@ -423,8 +438,8 @@ header.sticky {
 .d-flex input {
     position: relative;
     width: 80%;
-    border-radius: 30px;
-    padding: 15px;
+    border-radius: 15px;
+    padding: 15px 55px;
 }
 
 .btn-outline-success {
@@ -440,16 +455,128 @@ header.sticky {
 }
 
 .d-flex input::placeholder {
-    padding-left: 40px;
     font-size: 15px;
 }
 
-.fa-bars {
+.filtros-busqueda-btn {
     position: absolute;
-    top: 33%;
+    top: 14px;
     right: 165px;
     font-size: 20px;
+    background: transparent;
+    border: 0;
     color: #111;
+    cursor: pointer;
+}
+
+.contenedor-popup-busqueda{
+    background: #fff;
+    box-shadow: 0 15px 16px rgba(0,0,0,.16);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+    left: 0;
+    max-height: 1500px;
+    padding: 27px 24px;
+    overflow: hidden;
+    position: absolute;
+    top: 50px;
+    transition: all .3s;
+    width: 100%;
+    z-index: 999;
+}
+
+.busqueda-categorias, .busqueda-tiempo-preparacion, .busqueda-ingredientes {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.contenedor-popup-busqueda > div label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.select-busqueda {
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+    height: auto;
+    min-height: 55px;
+    overflow: visible;
+    padding: 8px 30px 8px 8px;
+    width: 100%;
+}
+
+.tiempos-contenedor {
+    display: flex;
+    gap: 20px;
+}
+
+.tiempos-contenedor > div{
+    position: relative;
+    border: 1px solid #d9d9d9;
+    padding: 8px 8px;
+    transition: 0.3s ease;
+}
+
+.minutos-tiempo:hover {
+    background-color: #FF4B2B;
+    border: 1px solid #FF4B2B;
+    cursor: pointer;
+}
+
+.minutos-tiempo.checked {
+    background-color: #FF4B2B;
+    border: 1px solid #FF4B2B;
+    cursor: pointer;
+}
+
+.tiempos-contenedor > div label{
+    padding: 0 !important;
+}
+
+.tiempos-contenedor > div input[type=checkbox] {
+    appearance: none;
+    background: transparent;
+    border-radius: 0;
+    cursor: pointer;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.botones-busqueda {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.botones-busqueda button {
+    background-color: transparent;
+    border: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.aplicar-busqueda-btn {
+    margin-left: 20px;
+    width: 200px !important;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 2px solid #FF4B2B;
+    background-color: #FF4B2B;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.aplicar-busqueda-btn:hover {
+    color: #222;
+    background-color: transparent;
 }
 
 .article-comun>div {
@@ -530,6 +657,62 @@ header.sticky {
     color: #fff;
 }
 
+/* .etiqueta-categoria a {
+    font-size: 12px;
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 6px 16px;
+    text-transform: uppercase;
+    /* transition: 0.25s; 
+
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 6px 16px;
+    color: #fff;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    word-break: break-word;
+    min-height: 28px;
+    line-height: 15px
+}
+
+.etiqueta-categoria a:last-child {
+    margin-right: 0
+}
+
+.etiqueta-categoria a{
+    position: relative;
+    overflow: hidden;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+}
+
+.etiqueta-categoria a::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: gray;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+}
+
+.etiqueta-categoria a:hover::before, .etiqueta-categoria a:focus::before, .etiqueta-categoria a:active::before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+    transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66)
+} */
+
 .etiqueta-categoria,
 .titulo-receta {
     margin: 15px 0;
@@ -574,7 +757,7 @@ header.sticky {
 
 .contenedor-grid-recetas-populares>div {
     border-radius: 12px;
-    background-color: rgb(128, 8, 8);
+    background-color: #FF4B2B;
     height: 100%;
     width: 100%;
 }
@@ -651,7 +834,7 @@ header.sticky {
     grid-auto-flow: row;
     grid-template-areas:
         "categoria-1 categoria-2 categoria-3 categoria-4";
-    margin-bottom: 32px;
+    margin-bottom: 62px;
 }
 
 .categoria-1 {
@@ -705,14 +888,67 @@ header.sticky {
     grid-area: categoria-10;
 }
 
-.contenedor-grid-categorias-cuadrado>div,
-.contenedor-grid-categorias-circulos>div {
-    background-color: rgb(128, 8, 8);
+.contenedor-grid-categorias-cuadrado>div img,
+.contenedor-grid-categorias-circulos>div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 12px;
+    transition: transform 0.3s ease; 
 }
 
-.contenedor-grid-categorias-circulos>div {
+
+.contenedor-grid-categorias-circulos>div img {
     border-radius: 50%;
+}
+
+
+.contenedor-grid-categorias-cuadrado>div,
+.contenedor-grid-categorias-circulos>div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor-title-categoria {
+    position: absolute;
+    bottom: -45px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+.contenedor-grid-categorias-cuadrado>div a,
+.contenedor-grid-categorias-circulos>div a {
+    color: #222;
+    transition: text-decoration 0.3s ease;
+}
+
+.contenedor-grid-categorias-cuadrado>div a h5:after,
+.contenedor-grid-categorias-circulos>div a h5:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: #d54215;
+    transition: .3s;
+}
+
+.contenedor-grid-categorias-cuadrado>div a:hover h5:after,
+.contenedor-grid-categorias-circulos>div a:hover h5:after{
+    width: 100%;
+}
+
+
+.contenedor-grid-categorias-cuadrado>div a:hover img,
+.contenedor-grid-categorias-circulos>div a:hover img {
+    /* opacity: .7; */
+    transform: scale(1.05);
 }
 
 /* Carrusel tienda */
@@ -762,7 +998,7 @@ header.sticky {
     width: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
     transform: translateY(100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
     padding: 15px;
     box-sizing: border-box;
     color: #FFF;
@@ -777,7 +1013,6 @@ header.sticky {
     margin: 0;
 }
 
-/* Estilo adicional para mejorar la apariencia */
 .item-tienda img {
     width: 100%;
     height: auto;
@@ -807,11 +1042,6 @@ header.sticky {
     border-radius: 12px;
     width: 1300px;
     height: 200px;
-    background: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-6/wp-content/uploads/2021/07/image-from-rawpixel-id-2409368-png.png);
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    background-size: cover;
-    background-attachment: scroll;
 }
 
 .row-newsletter {
@@ -847,9 +1077,82 @@ header.sticky {
 footer {
     height: 300px;
     width: 100%;
-    background-color: #eee6e6;
+    background-color: rgba(0,0,0,.05);
 }
 
+.contenedor-columnas-footer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 0 10%;
+    padding: 30px 0;
+    border-bottom: 1px solid #ffffffa9;
+}
+
+.columnas-text-redes {
+    display: flex;
+    gap: 15px;
+}
+
+.contenedor-columnas-footer h5 {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.columna-1, .columna-2, .columna-3, .columna-4, .columna-5 {
+    display: flex;
+    flex-direction: column;
+}
+
+.columna-1 {
+    gap: 5px;
+}
+
+.columna-1 a {
+    color: #222;
+    display: inline-block;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.columna-1 a i {
+    margin-right: 5px;
+}
+
+.columna-1 a:hover{
+    color: #FF4B2B;
+}
+
+.contenedor-redes-sociales {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.contenedor-redes-sociales a {
+    text-decoration: none;
+    font-size: 20px;
+    border: 0.125rem solid #222;
+    border-radius: 50%;
+    width: 3.25rem;
+    height: 3.25rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: #222;
+    transition: 0.3s ease-in-out;
+}
+
+.contenedor-redes-sociales a:hover {
+    background-color: #FF4B2B;
+    color: #FFF;
+    border: 0.125rem solid #FF4B2B;
+}
 
 /* Modal random */
 @keyframes sketchIn {
