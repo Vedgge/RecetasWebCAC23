@@ -206,13 +206,13 @@
                                                     placeholder="Dale un titulo a tu receta" required
                                                     class="form-text-input">
                                             </div>
-                                            <div class="descripcion-receta">
+                                            <!-- <div class="descripcion-receta">
                                                 <label for="descripcion">Descripción</label>
                                                 <textarea class="form-text-input" name="descripcion" id="descripcion"
                                                     cols="30" rows="10"
                                                     placeholder="Comparte la historia detras de tu receta, que la hace especial y direcciones extra!"
                                                     required></textarea>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="columna-2">
                                             <div class="agregar-img-receta">
@@ -235,28 +235,23 @@
                                             </div>
                                         </div>
                                         <div class="tiempo-info">
-                                            <label for="prep-time">Tiempo de preparación</label>
+                                            <label for="prep-time">Tiempo de preparación en minutos</label>
                                             <div class="input-contenedor">
                                                 <input class="form-element-input" type="number" id="prep-time"
                                                     placeholder="0" min="0" required>
-                                                <select class="form-option-input" name="prep-time-unidad"
-                                                    id="prep-timeMHD">
-                                                    <option value="min">minutos</option>
-                                                    <option value="horas">horas</option>
-                                                    <option value="días">días</option>
-                                                </select>
+
                                             </div>
                                         </div>
                                         <div class="categoria-info">
                                             <label for="categoría">Categoría</label>
                                             <select class="form-option-input" name="categoria" id="categoria">
-                                                <!-- {{opciones}} -->
-                                                <option value="desayuno merienda">Desayuno & Merienda</option>
+                                                {{opciones}}
+                                                <!-- <option value="desayuno merienda">Desayuno & Merienda</option>
                                                 <option value="almuerzo">Almuerzo</option>
                                                 <option value="cena">Cena</option>
                                                 <option value="bebidas">Bebidas</option>
                                                 <option value="vegetarianas">Vegetarianas</option>
-                                                <option value="postres y dulces">Postres & Dulces</option>
+                                                <option value="postres y dulces">Postres & Dulces</option> -->
                                             </select>
                                         </div>
                                         <div class="dificultad-info">
