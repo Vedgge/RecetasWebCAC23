@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
     minutosTiempoItems.forEach(function (item) {
         const checkbox = item.querySelector('input[type="checkbox"]');
 
+
         checkbox.addEventListener('change', function () {
             // Si el checkbox está marcado, agrega la clase "checked", de lo contrario, quítala
             if (checkbox.checked) {
@@ -101,6 +102,15 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 item.classList.remove('checked');
             }
+        });
+    });
+    
+    const btnLimpiarFiltros = document.querySelector(".clean-form-filters");
+    // Al hacer click en el botón limpiar filtros, desmarca todos los checkbox
+
+    btnLimpiarFiltros.addEventListener("click", function(){
+        minutosTiempoItems.forEach(item => {
+            item.classList.remove('checked');
         });
     });
 
