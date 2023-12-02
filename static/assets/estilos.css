@@ -1,17 +1,15 @@
-<style>
-    p {
-        color: green
-    }
-    .formulario {
-        border-style: solid;
-        background-color: bisque;
-    }
-    .tareafutura {
-        color: red
-    }
-    
+/* .formulario {
+    border-style: solid;
+    background-color: bisque;
+}
 
-    fieldset {
+.tareafutura {
+    color: red
+} */
+
+/*--------------------CSS RESET Y TIPOGRAFÍA-------------------*/
+
+fieldset {
     border: 0;
 }
 
@@ -211,5 +209,3 @@ textarea::placeholder {
     margin: 12px;
 }
 
-
-</style>
