@@ -63,8 +63,8 @@
                                             harinas</a></li>
                                     <li class="recetas-items-dropdown"><a
                                             href="/buscar-receta-categoria?categoria=Helados">Helados</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">COMPLICACION EN EL BACK Ver todos los
-                                            ingredientes</a></li>
+                                    <!-- <li class="recetas-items-dropdown"><a href="#">COMPLICACION EN EL BACK Ver todos los
+                                            ingredientes</a></li> -->
                                 </ul>
                                 <ul class="ul-navbar-menus">
                                     <h4>Celebraciones y eventos</h4>
@@ -97,7 +97,7 @@
                 <div class="cerrar-btn">&times;</div>
                 <div class="modal-popup">
                     <div class="modal-title-main">
-                        <img src="/static/assets/img/icono-cookingology.png" alt="">
+                        <img src="/static/assets/img/icono-cookingology-black.png" alt="">
                         <span style="display: flex; flex-direction: column; align-items: center;">
                             <h1 style="font-size: 2em;">Inicio de sesión</h1>
                             <div class="social-container">
@@ -143,7 +143,7 @@
                 <div class="cerrar-btn">&times;</div>
                 <div class="modal-popup">
                     <div class="modal-title-main">
-                        <img src="/static/assets/img/icono-cookingology.png" alt="">
+                        <img src="/static/assets/img/icono-cookingology-black.png" alt="">
                         <span style="display: flex; flex-direction: column; align-items: center;">
                             <h1 style="font-size: 2em;">Crea una cuenta</h1>
                             <div class="social-container">
@@ -172,7 +172,7 @@
                                 <span class="error-text-modal"></span>
                             </div>
                             <div class="modal-body-down">
-                                <input type="submit" value="Iniciar sesión" class="btn-submit">
+                                <input type="submit" value="Registrarme" class="btn-submit">
                                 <span style="font-size: 14px;">¿Ya tenes una cuenta en el sitio? <a href="#"
                                         id="iniciar-sesion"> Inicia sesión</a></span>
                             </div>
@@ -185,7 +185,8 @@
 
     <main>
 
-        <section style="position: relative; padding-bottom: 30px;">
+        <section
+            style="position: relative; padding-bottom: 30px; background: linear-gradient(to right, #fd6d36, #ff8c62);">
             <article class="hero-article" style="padding: 30px 0px;">
                 <div class="contenedor-compo-hero">
                     <ul class="contenedor-lista-hero">
@@ -199,6 +200,9 @@
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat beatae provident consequatur
                         officiis tenetur quis alias consequuntur deleniti eaque id excepturi, debitis fugiat unde ab!
                     </p>
+                    <div class="contenedor-svg-hero">
+                        <img src="/static/imagenes/happy-person-cooking-while-looking-at-a-recipe-on-.png" alt="">
+                    </div>
                     <div class="contenedor-buscador-hero">
                         <form class="d-flex" role="search" method="get" action="/buscar-receta-ingredientes">
                             <input class="form-control me-2" type="search" placeholder="Buscar recetas en el sitio"
@@ -214,8 +218,11 @@
                                 </svg>
                             </button>
                             <div class="contenedor-popup-busqueda" style="display: none;">
+                                <div class="titulo-filtros">
+                                    <h2 style="font-size: 1.5em;">Filtros de busqueda</h2>
+                                </div>
                                 <div class="cerrar-btn cerrar-busqueda-filtros">&times;</div>
-                                <div class="busqueda-categorias">
+                                <div class="busqueda-categorias" style="margin-top: 25px;">
                                     <label for="">Categorias de la receta</label>
                                     <select class="select-busqueda" name="" id="">
                                         <option value="carne">Carne</option>
@@ -300,8 +307,49 @@
             </article>
         </section>
 
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="width: 100%; background:transparent !important; margin:0;display:block;z-index:1;position:relative;"
+            width="1920" height="auto" preserveAspectRatio="xMidYMid" viewBox="0 0 1920 210">
+            <g transform="translate(960,105) scale(1,1) translate(-960,-105)">
+                <linearGradient id="lg-0.29782674753220917" x1="0" x2="1" y1="0" y2="0">
+                    <stop stop-color="#fd6d36" offset="0"></stop>
+                    <stop stop-color="#ff9066" offset="1"></stop>
+                </linearGradient>
+                <path d="" fill="url(#lg-0.29782674753220917)" opacity="1">
+                    <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1"
+                        calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="0s"
+                        values="M0 0L 0 96.6681008386968Q 320 103.8402781304178  640 69.41730083759353T 1280 128.82447704450476T 1920 77.01889128655009L 1920 0 Z;M0 0L 0 103.51828708632665Q 320 130.41181030169457  640 97.6378440341168T 1280 81.40119971829253T 1920 109.13847378115284L 1920 0 Z;M0 0L 0 68.0326572057607Q 320 125.43417465049902  640 79.10786284736706T 1280 101.56413814960278T 1920 75.90385391636917L 1920 0 Z;M0 0L 0 96.6681008386968Q 320 103.8402781304178  640 69.41730083759353T 1280 128.82447704450476T 1920 77.01889128655009L 1920 0 Z">
+                    </animate>
+                </path>
+                <path d="" fill="url(#lg-0.29782674753220917)" opacity="0.4">
+                    <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1"
+                        calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-2s"
+                        values="M0 0L 0 112.1610588184414Q 320 126.670180134958  640 112.60256264098348T 1280 124.3473896989314T 1920 109.21263019712354L 1920 0 Z;M0 0L 0 100.0301682904231Q 320 113.4248631957238  640 72.16775944095085T 1280 68.8689088825807T 1920 110.20174654763633L 1920 0 Z;M0 0L 0 122.11300349942957Q 320 123.4203664920529  640 108.03429432847867T 1280 112.03583081703275T 1920 90.55735207825475L 1920 0 Z;M0 0L 0 112.1610588184414Q 320 126.670180134958  640 112.60256264098348T 1280 124.3473896989314T 1920 109.21263019712354L 1920 0 Z">
+                    </animate>
+                </path>
+                <path d="" fill="url(#lg-0.29782674753220917)" opacity="0.4">
+                    <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1"
+                        calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-4s"
+                        values="M0 0L 0 100.17973447186378Q 320 102.23311394411047  640 78.78604399889156T 1280 118.85890948967227T 1920 122.53697289936892L 1920 0 Z;M0 0L 0 125.78805435339623Q 320 124.09589796157226  640 106.3438217697639T 1280 118.81389809467561T 1920 93.17984521969305L 1920 0 Z;M0 0L 0 78.39195779720819Q 320 100.5140255966354  640 73.03133014620805T 1280 70.5425836285004T 1920 120.30229346026604L 1920 0 Z;M0 0L 0 100.17973447186378Q 320 102.23311394411047  640 78.78604399889156T 1280 118.85890948967227T 1920 122.53697289936892L 1920 0 Z">
+                    </animate>
+                </path>
+                <path d="" fill="url(#lg-0.29782674753220917)" opacity="0.4">
+                    <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1"
+                        calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-6s"
+                        values="M0 0L 0 69.03257111240099Q 320 136.9001962284711  640 118.08657785815127T 1280 76.8952238244618T 1920 92.65433598687669L 1920 0 Z;M0 0L 0 117.8302587576373Q 320 143.72272514217582  640 124.57035393247331T 1280 92.07463543748987T 1920 122.23621755023996L 1920 0 Z;M0 0L 0 74.93596015889408Q 320 91.70637964326988  640 63.014990520523696T 1280 100.27928045966917T 1920 85.1940544537089L 1920 0 Z;M0 0L 0 69.03257111240099Q 320 136.9001962284711  640 118.08657785815127T 1280 76.8952238244618T 1920 92.65433598687669L 1920 0 Z">
+                    </animate>
+                </path>
+                <path d="" fill="url(#lg-0.29782674753220917)" opacity="0.4">
+                    <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1"
+                        calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-8s"
+                        values="M0 0L 0 58.535846524944304Q 320 139.15261409478728  640 119.39970128328731T 1280 123.95055471191371T 1920 70.52764729630886L 1920 0 Z;M0 0L 0 128.13258240794028Q 320 151.91918615607878  640 126.60115027236156T 1280 96.990764353467T 1920 116.61713556478387L 1920 0 Z;M0 0L 0 109.74110903155736Q 320 94.1783462610934  640 75.65895651840898T 1280 84.21010728824928T 1920 83.35284368990615L 1920 0 Z;M0 0L 0 58.535846524944304Q 320 139.15261409478728  640 119.39970128328731T 1280 123.95055471191371T 1920 70.52764729630886L 1920 0 Z">
+                    </animate>
+                </path>
+            </g>
+        </svg>
+
         <section>
-            <article style="padding: 30px 0px;">
+            <article style="padding-bottom: 30px;">
                 <div class="container container-title">
                     <div class="row">
                         <div class="section-block-title">
@@ -312,8 +360,8 @@
                 </div>
                 <div class="owl-container">
                     <div class="owl-carousel owl-theme" id="carrusel-1">
-                        <!-- {{carrusel}} -->
-                        <div class="item">
+                        {{carrusel}}
+                        <!-- <div class="item">
                             <a href="#" class="a-hover">
                                 <div class="overlay-receta overlay-hover"></div>
                                 <div class="receta-item">
@@ -336,7 +384,6 @@
                                 <img src="static/imagenes/image10.jpg" alt="">
                             </a>
                         </div>
-
                         <div class="item"><a href="#" class="a-hover">
                                 <div class="overlay-receta"></div>
                                 <div class="receta-item">
@@ -479,7 +526,7 @@
                                     </div>
                                 </div>
                                 <img src="static/imagenes/image3.jpg" alt="">
-                            </a></div>
+                            </a></div> -->
                     </div>
                 </div>
             </article>
@@ -729,42 +776,55 @@
         </section>
     </main>
 
-    <footer>
-        <div class="contenedor-columnas-footer">
-            <div class="columna-1">
-                <a href="#"><img src="/static/assets/img/icono-cookingology.png" style="max-height: 60px;" alt=""></a>
-                <a href="#"><i class="fa-solid fa-envelope"></i><span>support@cookingology.com</span></a>
-                <a href="#"><i class="fa-solid fa-phone"></i><span>(0358) 470-1207</span></a>
-                <a href="#"><i class="fa-solid fa-location-dot"></i><span>Av. Sta. Fe 1860, C1123 CABA</span></a>
-            </div>
-            <div class="columnas-text-redes">
-                <div class="columna-2">
-                    <h5>Navegación de la página</h5>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit sed quasi hic vero
-                        numquam soluta exercitationem modi. Obcaecati nostrum odit recusandae voluptatem ut minima, nisi
-                        hic, explicabo ducimus asperiores eos.</p>
+    <footer style="position: relative;">
+        <div class="contenido-footer">
+            <div class="contenedor-columnas-footer">
+                <div class="columna-1">
+                    <a href="#"><img src="/static/assets/img/icono-cookingology-black.png" style="max-height: 60px;"
+                            alt=""></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i><span>support@cookingology.com</span></a>
+                    <a href="#"><i class="fa-solid fa-phone"></i><span>(0358) 470-1207</span></a>
+                    <a href="#"><i class="fa-solid fa-location-dot"></i><span>Av. Sta. Fe 1860, C1123 CABA</span></a>
                 </div>
-                <div class="columna-3">
-                    <h5>Lorem</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id iste esse amet delectus labore ullam
-                        incidunt odio sit eaque, earum magni perferendis dolores? Corrupti iure quod, cumque voluptas ea
-                        aspernatur.</p>
-                </div>
-                <div class="columna-4">
-                    <h5>Lorem</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id iste esse amet delectus labore ullam
-                        incidunt odio sit eaque, earum magni perferendis dolores? Corrupti iure quod, cumque voluptas ea
-                        aspernatur.</p>
-                </div>
-                <div class="columna-5">
-                    <h5>Encontrános en nuestras redes sociales</h5>
-                    <div class="contenedor-redes-sociales">
-                        <a href="#"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <div class="columnas-text-redes">
+                    <div class="columna-2">
+                        <h5>Navegación de la página</h5>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit sed quasi hic vero
+                            numquam soluta exercitationem modi. Obcaecati nostrum odit recusandae voluptatem ut minima,
+                            nisi
+                            hic, explicabo ducimus asperiores eos.</p>
+                    </div>
+                    <div class="columna-3">
+                        <h5>Acerca de nosotros</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id iste esse amet delectus labore
+                            ullam
+                            incidunt odio sit eaque, earum magni perferendis dolores? Corrupti iure quod, cumque
+                            voluptas ea
+                            aspernatur.</p>
+                    </div>
+                    <div class="columna-4">
+                        <h5>Lorem</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id iste esse amet delectus labore
+                            ullam
+                            incidunt odio sit eaque, earum magni perferendis dolores? Corrupti iure quod, cumque
+                            voluptas ea
+                            aspernatur.</p>
+                    </div>
+                    <div class="columna-5">
+                        <h5>Encontrános en nuestras redes sociales</h5>
+                        <div class="contenedor-redes-sociales">
+                            <a href="#"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <p style="margin-bottom: 0 !important; margin: 0 10%; padding-bottom: 10px; color: #222; font-size: 12px;">
+            Copyright © 2023 Cookingology</p>
+        <div class="volver-inicio"><a href="#top"><span>Volver al inicio </span><i class="fa-solid fa-arrow-up"></i></a>
         </div>
     </footer>
 
