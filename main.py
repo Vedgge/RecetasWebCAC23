@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 from flask import Flask, request
 app = Flask(__name__)
 app.config['encoding'] = 'UTF-8'
@@ -191,7 +191,7 @@ print("\033[32m","#"*60,"\033[0m")
 def reemplazosPagina(pagina):
     # Agregar esta función en cada @app.route que contenga un "return pagina"
     # Creación de estilos PROBABLEMENTE DEBA ELIMINARSE
-    with open ('RecetasWebCAC23/formulariosweb/style.html', 'r') as archivo:
+    with open ('RecetasWebCAC23/formulariosweb/style.html', 'r', encoding='utf-8') as archivo:
         pagina = pagina.replace("{{style}}",archivo.read())
         archivo.close()
     
@@ -219,7 +219,7 @@ def reemplazosPagina(pagina):
     return pagina
 #
 def reemplazosReceta(pagina,idReceta):
-    with open ('RecetasWebCAC23/formulariosweb/mostrarReceta.html', 'r') as archivo:
+    with open ('RecetasWebCAC23/formulariosweb/mostrarReceta.html', 'r', encoding='utf-8') as archivo:
         pagina = pagina.replace("{{receta}}",archivo.read())
         archivo.close()
     pagina = pagina.replace("{{idReceta}}",idReceta)
@@ -241,7 +241,7 @@ def inicial():
     else:
         direccion = f'RecetasWebCAC23/{data[""]}'
 
-    f = open(direccion, 'r')
+    f = open(direccion, 'r', encoding='utf-8')
     pagina = f.read()
     
     f.close()
@@ -266,6 +266,11 @@ def altaReceta():
     fecha_actual = datetime.now()
     fecha = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
     columnas = "NombreReceta, Receta, Ingredientes, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
+    for elemento in form:
+        print(elemento, form[elemento])
+    print(cons.resultados[0]['idUsuario'])
+    print(categoria.resultados[0]['idCategoria'])
+    
     receta = f"""'{form["NombreReceta"]}','{form["Receta"]}','{form["Ingredientes"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{cons.resultados[0]['idUsuario']},{categoria.resultados[0]['idCategoria']},'{form["dificultad"]}','{fecha}'"""
     registroReceta = CargaDatos("recetas", columnas, receta)
     registroReceta.insertarDato()
@@ -384,7 +389,7 @@ def editarReceta():
     # receta.imprimir()
 
     direccion = f'RecetasWebCAC23/formulariosWeb/modificarElementos.html'
-    f = open(direccion, 'r')
+    f = open(direccion, 'r', encoding='utf-8')
     pagina = f.read()
     
     if data['idReceta']:
