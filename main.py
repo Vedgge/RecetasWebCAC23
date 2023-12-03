@@ -219,7 +219,7 @@ def reemplazosPagina(pagina):
                     categ = el['Categoria']
                     break
         
-            seleccion += f'''<div class="item"><a href="" class="a-hover"><div class="overlay-receta overlay-hover"></div><div class="receta-item"><div class="etiqueta-categoria"><a href="#" style="background-color: #8b84e5;" class="btn-etiqueta slide"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span class="etiqueta-titulo">{categ}</span></a></div><div class="titulo-receta"><h3><a href="">{item['Receta']}</a></h3></div><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div><img src="{item['urlImagen']}" alt=""></a></div>'''
+            seleccion += f'''<div class="item"><a href="/recetaid?={item['idReceta']}" class="a-hover"><div class="overlay-receta overlay-hover"></div><div class="receta-item"><div class="etiqueta-categoria"><a href="/recetaid?={item['idReceta']}" style="background-color: #8b84e5;" class="btn-etiqueta slide"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span class="etiqueta-titulo">{categ}</span></a></div><div class="titulo-receta"><h3><a href="/buscar-receta-categoria?categoria={categ}">{item['Receta']}</a></h3></div><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div><img src="{item['urlImagen']}" alt=""></a></div>'''
     pagina = pagina.replace("{{carrusel}}",seleccion)
 
     # Mostrar editar receta
