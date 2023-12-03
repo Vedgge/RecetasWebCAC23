@@ -18,8 +18,35 @@ fieldset {
     font-family: "SpiritSharpBlack";
 }
 
-/* RECETA CONTENEDOR */
+.form-search-navheader {
+    position: relative;
+}
 
+.search-navheader{
+    width: 500px;
+    position: relative;
+    border-radius: 15px;
+    padding: 15px 55px;
+}
+
+.search-navheader::placeholder {
+    font-size: 15px;
+}
+
+.btn-outline-success {
+    position: absolute;
+    left: 25px;
+    top: 33%;
+    background: transparent;
+    border: 0;
+}
+
+.fa-bars {
+    top: 32% !important;
+    right: 4% !important;
+}
+
+/* RECETA CONTENEDOR */
 .article-agregar-receta {
     display: flex;
     justify-content: center;
@@ -197,7 +224,6 @@ textarea::placeholder {
 .modal-title-main, .modal-body, .modal-popup {
     display: block !important;
 }
-
 
 .contenedor-modal-footer {
     width: 100%;

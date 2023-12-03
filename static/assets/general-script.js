@@ -12,27 +12,32 @@ document.addEventListener('DOMContentLoaded', function () {
         overlay.style.display = 'none';
     }
 
-/**
- * Oculta todos los modales, excepto el modal actual.
- * @param {HTMLElement} actualModal - El modal actual que no se debe ocultar.
- */
-function esconderOtroModal(actualModal) {
-    // Itera sobre todos los modals
-    modals.forEach(modal => {
-        // Verifica si el modal no es el actual y está visible
-        if (modal !== actualModal && modal.style.display === 'block') {
-            // Oculta el modal
-            esconderModal(modal);
-        }
-    });
-}
+    /**
+     * Oculta todos los modals, excepto el modal actual.
+     * @param {HTMLElement} actualModal - El modal actual que no se debe ocultar.
+     */
+    function esconderOtroModal(actualModal) {
+        // Itera sobre todos los modals
+        modals.forEach(modal => {
+            // Verifica si el modal no es el actual y está visible
+            if (modal !== actualModal && modal.style.display === 'block') {
+                // Oculta el modal
+                esconderModal(modal);
+            }
+        });
+    }
 
     // Manejo de eventos para clics en el body
     document.body.addEventListener('click', function (evento) {
         // Obtiene el elemento que fue clickeado
         const target = evento.target;
 
-        // Cierra todos los modales al hacer clic en el botón de cerrar
+        // Prevenir que los enlaces "registrar" e "iniciar-sesion" redirijan al principio de la página
+        if (target.id === 'registrar' || target.id === 'iniciar-sesion') {
+            evento.preventDefault();
+        }
+
+        // Cierra todos los modals al hacer clic en el botón de cerrar
         if (target.classList.contains('cerrar-btn')) {
             modals.forEach(modal => {
                 esconderModal(modal);
@@ -54,6 +59,7 @@ function esconderOtroModal(actualModal) {
         else if (target.id === 'registrar') {
             const loginModal = document.querySelector('.login-popup');
             const signupModal = document.querySelector('.signup-popup');
+
             esconderModal(loginModal);
             mostrarModal(signupModal);
         }
@@ -64,6 +70,48 @@ function esconderOtroModal(actualModal) {
             esconderModal(signupModal);
             mostrarModal(loginModal);
         }
+    });
+
+    //Popup filtros de busqueda
+    const mostrarPopupBusqBtn = document.querySelector(".filtros-busqueda-btn");
+    const contenedorPopupBusqueda = document.querySelector(".contenedor-popup-busqueda");
+    const cerrarPopupBusqueda = document.querySelector(".cerrar-busqueda-filtros");
+
+    mostrarPopupBusqBtn.addEventListener("click", function (event) {
+        event.preventDefault(); // Evitar que el formulario se envíe
+        // Mostrar u ocultar el contenedor según su estado actual
+        contenedorPopupBusqueda.style.display = (contenedorPopupBusqueda.style.display === "none") ? "block" : "none";
+    });
+
+    cerrarPopupBusqueda.addEventListener("click", function () {
+        contenedorPopupBusqueda.style.display = "none";
+    });
+
+    // Obtén todos los elementos con la clase "minutos-tiempo"
+    const minutosTiempoItems = document.querySelectorAll('.minutos-tiempo');
+
+    // Itera sobre cada elemento y agrega un evento de cambio al checkbox
+    minutosTiempoItems.forEach(function (item) {
+        const checkbox = item.querySelector('input[type="checkbox"]');
+
+
+        checkbox.addEventListener('change', function () {
+            // Si el checkbox está marcado, agrega la clase "checked", de lo contrario, quítala
+            if (checkbox.checked) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
+            }
+        });
+    });
+    
+    const btnLimpiarFiltros = document.querySelector(".clean-form-filters");
+    // Al hacer click en el botón limpiar filtros, desmarca todos los checkbox
+
+    btnLimpiarFiltros.addEventListener("click", function(){
+        minutosTiempoItems.forEach(item => {
+            item.classList.remove('checked');
+        });
     });
 
     //Owl carrusel
