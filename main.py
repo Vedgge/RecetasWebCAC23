@@ -196,9 +196,11 @@ def reemplazosPagina(pagina):
         archivo.close()
     
     # Carga de categorias en forma de lista
-    categorias = Consulta('Categoria','categorias')
+    categorias = Consulta('*','categorias')
     categorias.consultar()
     seleccion = ""
+    
+    
     for item in categorias.resultados:
         seleccion += f'''<option value="{item['Categoria']}">{item['Categoria']}</option>'''
     
@@ -209,8 +211,15 @@ def reemplazosPagina(pagina):
     seleccion = ""
     recetasNuevas = Consulta('*','recetas',False,"fechaCreacion")
     recetasNuevas.consultar()
+
+    
     for item in recetasNuevas.resultados:
-            seleccion += f'''<div class="item"><a href="/recetaid?={item['idReceta']}"><img src="{item['urlImagen']}" alt="">{item['NombreReceta']}</div>'''
+            for el in categorias.resultados:
+                if el['idCategoria'] == item['idCategoria']:
+                    categ = el['Categoria']
+                    break
+        
+            seleccion += f'''<div class="item"><a href="/recetaid?={item['idReceta']}" class="a-hover"><div class="overlay-receta overlay-hover"></div><div class="receta-item"><div class="etiqueta-categoria"><a href="/recetaid?={item['idReceta']}" style="background-color: #8b84e5;" class="btn-etiqueta slide"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span class="etiqueta-titulo">{categ}</span></a></div><div class="titulo-receta"><h3><a href="/buscar-receta-categoria?categoria={categ}">{item['Receta']}</a></h3></div><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div><img src="{item['urlImagen']}" alt=""></a></div>'''
     pagina = pagina.replace("{{carrusel}}",seleccion)
 
     # Mostrar editar receta
@@ -266,10 +275,10 @@ def altaReceta():
     fecha_actual = datetime.now()
     fecha = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
     columnas = "NombreReceta, Receta, Ingredientes, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
-    for elemento in form:
-        print(elemento, form[elemento])
-    print(cons.resultados[0]['idUsuario'])
-    print(categoria.resultados[0]['idCategoria'])
+    # for elemento in form:
+    #     print(elemento, form[elemento])
+    # print(cons.resultados[0]['idUsuario'])
+    # print(categoria.resultados[0]['idCategoria'])
     
     receta = f"""'{form["NombreReceta"]}','{form["Receta"]}','{form["Ingredientes"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{cons.resultados[0]['idUsuario']},{categoria.resultados[0]['idCategoria']},'{form["dificultad"]}','{fecha}'"""
     registroReceta = CargaDatos("recetas", columnas, receta)
