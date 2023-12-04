@@ -99,6 +99,8 @@ header.sticky {
 .navheader {
     background: linear-gradient(to right, #fd6d36, #ff8c62);
     /* border-bottom: 1px solid #e0e0e0; */
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .icono-cookingology a img {
@@ -151,6 +153,8 @@ header.sticky {
 }
 
 .contenedor-ul-navbar-dpdown-menus a{
+    text-transform: capitalize;
+    font-weight: normal;
     color: #222;
 }
 
@@ -279,7 +283,7 @@ header.sticky {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 11;
 }
 
 .login-popup,
@@ -422,6 +426,10 @@ header.sticky {
     max-width: 700px;
 }
 
+.contenedor-compo-hero h1 {
+    /* animation: floatAnimation 3s infinite ease-in-out; */
+}
+
 .contenedor-lista-hero {
     position: absolute;
     color: #22272a;
@@ -453,7 +461,7 @@ header.sticky {
     width: 600px;
     height: 600px;
     top: -80px;
-    right: 100px;
+    right: 130px;
     z-index: 999;
     animation: floatAnimation 3s infinite ease-in-out; 
 }
@@ -559,6 +567,10 @@ header.sticky {
     transition: 0.3s ease;
 }
 
+.minutos-tiempo label svg {
+    margin-right: 5px;
+}
+
 .minutos-tiempo:hover {
     background-color: #FF4B2B;
     border: 1px solid #FF4B2B;
@@ -576,6 +588,7 @@ header.sticky {
 }
 
 .tiempos-contenedor > div input[type=checkbox] {
+    padding: 0 !important;
     appearance: none;
     background: transparent;
     border-radius: 0;
@@ -693,62 +706,6 @@ header.sticky {
     border-color: #48494b;
     color: #fff;
 }
-
-/* .etiqueta-categoria a {
-    font-size: 12px;
-    color: #FFF;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 12px;
-    padding: 6px 16px;
-    text-transform: uppercase;
-    /* transition: 0.25s; 
-
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 6px 16px;
-    color: #fff;
-    margin-bottom: 5px;
-    margin-right: 10px;
-    word-break: break-word;
-    min-height: 28px;
-    line-height: 15px
-}
-
-.etiqueta-categoria a:last-child {
-    margin-right: 0
-}
-
-.etiqueta-categoria a{
-    position: relative;
-    overflow: hidden;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-}
-
-.etiqueta-categoria a::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: gray;
-    -webkit-transform: scaleX(0);
-    transform: scaleX(0);
-    -webkit-transform-origin: 0 50%;
-    transform-origin: 0 50%;
-}
-
-.etiqueta-categoria a:hover::before, .etiqueta-categoria a:focus::before, .etiqueta-categoria a:active::before {
-    -webkit-transform: scaleX(1);
-    transform: scaleX(1);
-    -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
-    transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66)
-} */
 
 .etiqueta-categoria,
 .titulo-receta {
@@ -1197,11 +1154,12 @@ footer {
     position: absolute;
     right: 30px;
     bottom: 50px;
+    padding: 12px 0;
     background: rgb(251, 75, 20);
-    padding: 12px;
     border-radius: 12px;
 }
 
 .volver-inicio a {
     color: #FFF;
+    padding: 12px;
 }
