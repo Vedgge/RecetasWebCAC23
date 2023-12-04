@@ -1,4 +1,454 @@
-<h1>Receta Encontrada</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver receta</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/favicon.png" type="image/x-icon">
+
+    <!-- CSS GENERAL -->
+    <link rel="stylesheet" href="/static/assets/style.css">
+
+    <!-- JS GENERAL -->
+    <script src="/static/assets/general-script.js" defer></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/formulariosweb/estilos-mostrarReceta.css">
+
+    <!-- Custom JS -->
+    <script src="/formulariosweb/mostrarReceta.js" defer></script>
+
+    <!-- Owl JS -->
+    <link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.theme.default.min.css">
+</head>
+
+<body>
+    <header class="sticky">
+        <nav>
+            <div class="navheader">
+                <div class="contenedor-items-menu">
+                    <div class="icono-cookingology">
+                        <a href="inicio.html"><img src="/static/assets/img/icono-cookingology.png" alt=""
+                                style="height: 80px;"></a>
+                    </div>
+                    <ul class="lista-navbar-menu-btns">
+                        <li class="navbar-menus"><a href="#">Inicio</a></li>
+                        <li class="navbar-menus"><a href="#">Tienda</a></li>
+                        <li class="navbar-menus"><a href="#">Tips & consejos</a></li>
+                        <li class="navbar-menus"><a href="#">Recetas</a>
+                            <div class="contenedor-ul-navbar-dpdown-menus">
+                                <ul class="ul-navbar-menus">
+                                    <h4>Comidas del día</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Almuerzo</a>
+                                    </li>
+                                    <li class="recetas-items-dropdown"><a href="#">Cena</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Postres</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Bebidas y cocteles</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Desayuno y merienda</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Ver todas las categorías</a></li>
+                                </ul>
+                                <ul class="ul-navbar-menus">
+                                    <h4>Recetas por ingredientes</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Pollo</a>
+                                    </li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Carne">Carne vacuna</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Cerdo">Carne de cerdo</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Vegetarianas">Vegetarianas</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Pizzas+%2F+Tartas">Pastas y
+                                            harinas</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Helados">Helados</a></li>
+                                    <!-- <li class="recetas-items-dropdown"><a href="#">COMPLICACION EN EL BACK Ver todos los
+                                            ingredientes</a></li> -->
+                                </ul>
+                                <ul class="ul-navbar-menus">
+                                    <h4>Celebraciones y eventos</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a
+                                            href="#">Navideñas</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Pascúa</a></li>
+                                </ul>
+                                <ul class="ul-navbar-menus" style="border: 0;">
+                                    <h4>Recetas subidas</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Recetas de
+                                            la comunidad</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Recetas oficiales</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="navbar-menus"><a href="?=formulariosweb/SubirReceta.html">Subir receta</a></li>
+                        <li class="navbar-menus"><a href="#"><i class="fa-solid fa-circle-user"></i></a>
+                            <div class="contenedor-ul-navbar-dpdown-menus form-dropdown">
+                                <ul class="ul-navbar-menus">
+                                    <li><button id="mostrar-modal-login">Iniciar sesión</button></li>
+                                    <li><button id="mostrar-modal-signup">Registrarse</button></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="overlay"></div>
+            <div class="contenedor-modal-popup login-popup">
+                <div class="cerrar-btn">&times;</div>
+                <div class="modal-popup">
+                    <div class="modal-title-main">
+                        <img src="/static/assets/img/icono-cookingology-black.png" alt="">
+                        <span style="display: flex; flex-direction: column; align-items: center;">
+                            <h1 style="font-size: 2em;">Inicio de sesión</h1>
+                            <div class="social-container">
+                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </span>
+                        <span style="font-size: 14px;">o usa tu cuenta creada</span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="js-loginFormModal" style="width: 100%;">
+                            <div>
+                                <input type="text" id="username-modal" name="username" maxlength="50"
+                                    placeholder="Ingrese su nombre de usuario o mail">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-modal" name="password"
+                                    placeholder="Ingrese su contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div class="login-acceso-recordarme">
+                                <input type="checkbox" name="remember-me" id="checkRememberMe" checked />
+                                <label for="remember-me" class="remember-me-text" style="font-size: 14px;">Recórdarme en
+                                    este equipo</label>
+                            </div>
+                            <div class="modal-body-down">
+                                <input type="submit" value="Iniciar sesión" class="btn-submit">
+                                <span style="font-size: 14px;">¿Nuevo en el sitio? <a href="#" id="registrar">Crea
+                                        una cuenta</a></span>
+                                <div class="elementos-form">
+                                    <span style="font-size: 14px;"><a href="#">¿Olvido su nombre de usuario o
+                                            contraseña?</a></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor-modal-popup signup-popup">
+                <div class="cerrar-btn">&times;</div>
+                <div class="modal-popup">
+                    <div class="modal-title-main">
+                        <img src="/static/assets/img/icono-cookingology-black.png" alt="">
+                        <span style="display: flex; flex-direction: column; align-items: center;">
+                            <h1 style="font-size: 2em;">Crea una cuenta</h1>
+                            <div class="social-container">
+                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </span>
+                        <span style="font-size: 14px;">o utiliza tu email para el registro</span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="js-loginFormModal" style="width: 100%;">
+                            <div>
+                                <input type="text" id="username-modal" name="username" maxlength="50"
+                                    placeholder="Ingresa tu email">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-modal" name="password"
+                                    placeholder="Crea tu contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="password" id="password-confirmn" name="password-confirmn"
+                                    placeholder="Confirma tu contraseña (más de 6 caracteres)">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div class="modal-body-down">
+                                <input type="submit" value="Registrarme" class="btn-submit">
+                                <span style="font-size: 14px;">¿Ya tenes una cuenta en el sitio? <a href="#"
+                                        id="iniciar-sesion"> Inicia sesión</a></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="site-inner">
+        <main>
+            <div class="ruta-contenedor">
+                <span><a href="/inicio.html">Inicio</a></span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span><a href="#">Recetas</a></span>
+                <!-- Acá iría la categoría de la receta que se muestra -->
+                <i class="fa-solid fa-chevron-right"></i>
+                <span><a href="#">Categorías</a></span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <!-- Acá iría el titulo de la receta que se muestra -->
+                <span><a href="">Titulo receta</a></span>
+            </div>
+
+            <section>
+                <article class="article-mostrar-receta">
+                    <h1>Titulo receta del backend</h1>
+                    <div class="contenedor-rating-reviews-img">
+                        <div class="estrellas-receta-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="rating-medio"><span>5 (2)</span></div>
+                        <div class="reviews-receta"><span>2 reseñas</span></div>
+                        <div class="varias-img-receta"><span>5 imagenes</span></div>
+                    </div>
+                    <div class="contenedor-img-mostrar-receta">
+                        <img src="/static/imagenes/mostrarReceta-img-ejemplo.jpg" alt="">
+                        <p>Receta de <span><a href="#" id="usuario-receta-name">USUARIO</a></span>Actualizado el
+                            <span>FECHA</span>
+                        </p>
+                    </div>
+                    <div class="contenedor-btn-share-save">
+                        <div class="guardar-cont">
+                            <div class="guardar"><button>Guardar<i class="fa-regular fa-heart"></i></button></div>
+                        </div>
+                        <div class="rating-cont">
+                            <div class="rating"><button>Reseñar<i class="fa-regular fa-star"></i></button></div>
+                        </div>
+                        <div class="imprimir-cont">
+                            <div class="imprimir"><button>Imprimir<i class="fa-solid fa-print"></i></button></div>
+                        </div>
+                        <div class="compartir-cont">
+                            <div class="compartir"><button>Compartir<i class="fa-solid fa-share"></i></button></div>
+                        </div>
+                    </div>
+                    <div class="cuerpo-mostrar-receta" style="margin-bottom: 2rem;">
+                        <h3>Descripción:</h3>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed a quibusdam iusto
+                            atque? Eaque, pariatur laborum vero deserunt soluta nobis animi quisquam ipsa a perferendis
+                            fuga laudantium, architecto minima perspiciatis.</p>
+                    </div>
+
+                    <div class="detalles-receta" style="margin-bottom: 2rem;">
+                        <div class="grid-detalles-receta">
+                            <div class="porciones">
+                                <div class="label-detalles-receta"><span>Porciones:</span></div>
+                                <div class="porciones-num"><span><i class="fa-solid fa-users"></i>CANT PORC</span></div>
+                            </div>
+                            <div class="tiempo-prep">
+                                <div class="label-detalles-receta"><span>Tiempo preparación:</span></div>
+                                <div class="tiempo-prep-num"><span><i class="fa-regular fa-clock"></i>TIEMPO</span>
+                                </div>
+                            </div>
+                            <div class="dificultad">
+                                <div class="label-detalles-receta"><span>Dificultad:</span></div>
+                                <div class="tiempo-prep-num"><span><i
+                                            class="fa-solid fa-temperature-low"></i>DIFICULTAD</span></div>
+                            </div>
+                            <div class="categoria">
+                                <div class="label-detalles-receta"><span>Categoría:</span></div>
+                                <div class="cateogria-especifica-receta"><span><i
+                                            class="fa-solid fa-list"></i>CATEGORIA</span></div>
+                            </div>
+                        </div>
+                        <div class="footer-detalles-receta">
+                            <span>Ir a los datos nutricionales</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredientes-receta-mostrar-receta" style="margin-bottom: 2rem;">
+                        <h3>Ingredientes:</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ratione perspiciatis fugiat
+                            asperiores soluta! Esse voluptatibus vel minima libero sint, labore vero quos inventore ab
+                            repudiandae. Architecto dicta excepturi explicabo?</p>
+                    </div>
+
+                    <div class="pasos-receta-mostrar-receta" style="margin-bottom: 2rem;">
+                        <h3>Pasos de preparación:</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, doloremque voluptatum
+                            delectus deserunt assumenda sed deleniti. Possimus ea, et praesentium exercitationem
+                            cupiditate laborum magni! Necessitatibus voluptates nobis veritatis provident rerum?</p>
+                    </div>
+                    <div class="contenedor-btn-mostrar-receta" style="margin-bottom: 2rem;">
+                        <button class="btn-submit">La hice<i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btn-submit">Imprimir<i class="fa-solid fa-print" aria-hidden="true"></i></button>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="contenedor-carrusel-otras-recetas">
+                        <div class="owl-carousel">
+                            <div><img src="https://via.placeholder.com/300x300/936/c69/?text=1" alt=""></div>
+                            <div><img src="https://via.placeholder.com/300x300/693/9c6/?text=2" alt=""></div>
+                            <div><img src="https://via.placeholder.com/300x300/369/69c/?text=3" alt=""></div>
+                            <div><img src="https://via.placeholder.com/300x300/c33/f66/?text=4" alt=""></div>
+                            <div><img src="https://via.placeholder.com/300x300/099/3cc/?text=5" alt=""></div>
+                            <div><img src="https://via.placeholder.com/300x300/f93/fc6/?text=6" alt=""></div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <aside>
+            <!-- Perfil del usuario que la publico -->
+            <div class="contenedor-perfil-usuario">
+                <img src="/static/imagenes/img-usuario-ejemplo.png" alt="imagen usuario">
+                <h4>USUARIO NAME</h4>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident atque deserunt doloremque soluta
+                    ex possimus unde ad quis similique. Distinctio assumenda, mollitia ipsum quae quisquam veritatis
+                    laudantium quas similique culpa.</p>
+                <a href=""><button class="btn-submit">Ver perfil</button></a>
+            </div>
+
+            <!-- Categorias recetas -->
+            <div class="categorias-receta-mostrar-receta contenedor-template-aside">
+                <h4>Categorías</h4>
+                <div class="template-categoria-receta">
+                    <div class="etiqueta-categoria-mostrar-receta">
+                        <a href="#" style="background-color: #8b84e5;" class="slide-large">
+                            <i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
+                            <span>Almuerzo</span>
+                        </a>
+                    </div>
+                    <a href="#">
+                        <img src="/static/imagenes/categoria-almuerzo.jpg" alt="categoria almuerzo"></a>
+                </div>
+                <div class="template-categoria-receta">
+                    <div class="etiqueta-categoria-mostrar-receta">
+                        <a href="#" style="background-color: rgb(132, 229, 229);" class="slide-large">
+                            <i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
+                            <span>Aperitivos</span>
+                        </a>
+                    </div><a href="#"><img src="/static/imagenes/categoria-aperitivo.jpg" alt="cateogoria apertivo"></a>
+                </div>
+                <div class="template-categoria-receta">
+                    <div class="etiqueta-categoria-mostrar-receta">
+                        <a href="#" style="background-color: #e584b9;" class="slide-large">
+                            <i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
+                            <span>Bebidas</span>
+                        </a>
+                    </div><a href="#"><img src="/static/imagenes/categoria-bebidas.jpg" alt="categoria bebidas"></a>
+                </div>
+                <div class="template-categoria-receta">
+                    <div class="etiqueta-categoria-mostrar-receta">
+                        <a href="#" style="background-color: rgb(190, 137, 38);" class="slide">
+                            <i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
+                            <span>Cena</span>
+                        </a>
+                    </div><a href="#"><img src="/static/imagenes/categoria-cena.jpg" alt="categoria cena"></a>
+                </div>
+                <div class="template-categoria-receta">
+                    <div class="etiqueta-categoria-mostrar-receta">
+                        <a href="#" style="background-color: rgb(229, 132, 132);" class="slide-large">
+                            <i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
+                            <span>Navideñas</span>
+                        </a>
+                    </div><a href="#"><img src="/static/imagenes/categoria-christmas.jpg" alt="categoria Navideña"></a>
+                </div>
+                <div class="template-categoria-receta">
+                    <div class="etiqueta-categoria-mostrar-receta">
+                        <a href="#" style="background-color: #5b8559;" class="slide-large">
+                            <i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
+                            <span>Ensaldas</span>
+                        </a>
+                    </div><a href="#"><img src="/static/imagenes/categoria-ensaladas.jpg" alt="cateogria ensaladas"></a>
+                </div>
+            </div>
+            <!-- Recetas relacionadas -->
+            <!-- <div class="recetas-relacionadas-mostrar-receta contenedor-template-aside">
+                <h4>Recetas relacionadas</h4>
+            </div> -->
+            <!-- Diario -->
+            <div class="diario-mostrar-receta-aside contenedor-template-aside">
+                <h4>Diario</h4>
+                <p>Ingresa tu email debajo para subscribirte a nuestro diario y recibir recetas semanales</p>
+                <div class="contenedor-mail-diario">
+                    <form action="#">
+                        <input type="email" name="email" placeholder="Por favor ingresa tu e-mail" required>
+                        <button class="btn-submit">Suscríbete</button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer style="position: relative;">
+        <div class="contenido-footer">
+            <div class="contenedor-columnas-footer">
+                <div class="columna-1">
+                    <a href="#"><img src="/static/assets/img/icono-cookingology-black.png" style="max-height: 60px;"
+                            alt=""></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i><span>support@cookingology.com</span></a>
+                    <a href="#"><i class="fa-solid fa-phone"></i><span>(0358) 470-1207</span></a>
+                    <a href="#"><i class="fa-solid fa-location-dot"></i><span>Av. Sta. Fe 1860, C1123 CABA</span></a>
+                </div>
+                <div class="columnas-text-redes">
+                    <div class="columna-2">
+                        <h5>Navegación de la página</h5>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit sed quasi hic vero
+                            numquam soluta exercitationem modi. Obcaecati nostrum odit recusandae voluptatem ut minima,
+                            nisi
+                            hic, explicabo ducimus asperiores eos.</p>
+                    </div>
+                    <div class="columna-3">
+                        <h5>Acerca de nosotros</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id iste esse amet delectus labore
+                            ullam
+                            incidunt odio sit eaque, earum magni perferendis dolores? Corrupti iure quod, cumque
+                            voluptas ea
+                            aspernatur.</p>
+                    </div>
+                    <div class="columna-4">
+                        <h5>Lorem</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id iste esse amet delectus labore
+                            ullam
+                            incidunt odio sit eaque, earum magni perferendis dolores? Corrupti iure quod, cumque
+                            voluptas ea
+                            aspernatur.</p>
+                    </div>
+                    <div class="columna-5">
+                        <h5>Encontrános en nuestras redes sociales</h5>
+                        <div class="contenedor-redes-sociales">
+                            <a href="#"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="margin-bottom: 0 !important; margin: 0 10%; padding-bottom: 10px; color: #222; font-size: 12px;">
+            Copyright © 2023 Cookingology</p>
+        <div class="volver-inicio"><a href="#top"><span>Volver al inicio </span><i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap bundle JS & Font Awesome & JQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/4e89c87464.js" crossorigin="anonymous"></script>
+    <script src="/static/assets/jquery.min.js"></script>
+    <script src="/static/assets/owlcarousel/owl.carousel.min.js"></script>
+</body>
+
+</html>
+
+
+
+<!-- <h1>Receta Encontrada</h1>
     <div class="formulario">
         <form method="post" action="/edicion-receta">
             
@@ -24,4 +474,4 @@
             <button type="submit" formaction="/eliminar-receta">Eliminar</button>
         </form>
 
-    </div>
+    </div> -->
