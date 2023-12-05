@@ -116,7 +116,7 @@ class CargaDatos(Credenciales):
         self.conectar()
         self.cursor.execute("INSERT INTO %s (%s) VALUES (%s)" % (self.tabla, self.columnas, self.valores,))
         Credenciales.comitear(self)
-    
+
     def imprimir(self):
         print("INSERT INTO %s (%s) VALUES (%s)" % (self.tabla, self.columnas, self.valores,))
 #
@@ -207,26 +207,26 @@ def reemplazosPagina(pagina):
     pagina = pagina.replace("{{opciones}}",seleccion)
 
     # Carrusel página principal
-
     seleccion = ""
     recetasNuevas = Consulta('*','recetas',False,"fechaCreacion")
     recetasNuevas.consultar()
 
-    
     for item in recetasNuevas.resultados:
             for el in categorias.resultados:
                 if el['idCategoria'] == item['idCategoria']:
                     categ = el['Categoria']
                     break
         
-            seleccion += f'''<div class="item"><a href="/recetaid?={item['idReceta']}" class="a-hover"><div class="overlay-receta overlay-hover"></div><div class="receta-item"><div class="etiqueta-categoria"><a href="/recetaid?={item['idReceta']}" style="background-color: #8b84e5;" class="btn-etiqueta slide"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span class="etiqueta-titulo">{categ}</span></a></div><div class="titulo-receta"><h3><a href="/buscar-receta-categoria?categoria={categ}">{item['Receta']}</a></h3></div><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div><img src="{item['urlImagen']}" alt=""></a></div>'''
+            seleccion += f'''<div class="item"><a href="/recetaid?={item['idReceta']}" class="a-hover"><div class="overlay-receta overlay-hover"></div><div class="receta-item"><div class="etiqueta-categoria"><a href="/buscar-receta-categoria?categoria={categ}" style="background-color: #8b84e5;" class="btn-etiqueta slide"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span class="etiqueta-titulo">{categ}</span></a></div><div class="titulo-receta"><h3><a href="/recetaid?={item['idReceta']}">{item['Receta']}</a></h3></div><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div><img src="{item['urlImagen']}" alt=""></a></div>'''
     pagina = pagina.replace("{{carrusel}}",seleccion)
 
     # Mostrar editar receta
     pagina = pagina.replace("{{receta}}","")
     pagina = pagina.replace("{{idReceta}}","")
+
     return pagina
 #
+
 def reemplazosReceta(pagina,idReceta):
     with open ('RecetasWebCAC23/formulariosweb/mostrarReceta.html', 'r', encoding='utf-8') as archivo:
         pagina = pagina.replace("{{receta}}",archivo.read())
@@ -242,6 +242,38 @@ def reemplazosReceta(pagina,idReceta):
         pagina = pagina.replace(reemplazo,str(receta.resultados[0][elemento]))
     return pagina
 #
+def reemplazosVariasRecetas(resultados,busqueda=True):
+    with open ('RecetasWebCAC23/formulariosweb/mostrarVariasRecetas.html', 'r', encoding='utf-8') as archivo:
+        pagina = archivo.read()
+        archivo.close()
+
+    categorias = Consulta('*','categorias')
+    categorias.consultar()
+    seleccion = ""
+    usuarios = Consulta('*','usuarios')    
+    usuarios.consultar()
+    # Plantila Búsqueda Recetas
+
+    if busqueda:
+        pagina = pagina.replace('{{Busqueda}}','Resultado de la Búsqueda')
+    else:
+        pagina = pagina.replace('{{Busqueda}}','Tu receta ha sido creada con éxito')
+    
+    for item in resultados:
+            for el in categorias.resultados:
+                if el['idCategoria'] == item['idCategoria']:
+                    categ = el['Categoria']
+                    break
+            for el in usuarios.resultados:
+                if el['idUsuario'] == item['idUsuario']:
+                    user = el['NombreUsuario']
+                    break
+        
+            seleccion += f'''<div class="receta-varias-1"><div class="contenedor-img-receta-varias-elemento"><img src="{item['urlImagen']}" alt=""></div><div class="contenedor-footer-recetas-varias-elemento"><div class="header-categoria-title"><div class="etiqueta-receta-varias"><a href="#" style="background-color: rgb(177, 86, 33);" class="slide-large"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span>{categ}</span></a></div><a href="#"><h3>{item['NombreReceta']}</h3></a><div class="usuario-receta-varias"><!-- <img src="/static/imagenes/img-usuario-ejemplo.png" alt="" style="width: 25px; height: auto;" /> --><a href="#">{user} </a></div><div class="post-date-elemento"><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div></div><div class="footer-descrip-receta"><p>{item['Porciones']} Porciones <b>{item['dificultad']}</b></p><p>{item['Ingredientes']}</p><h4>Ingredientes</h4><p>{item['Ingredientes']}</p><h4>Preparación</h4><p>{item['Receta']}</p></div></div></div>'''
+    pagina = pagina.replace("{{Busqueda-Recetas-Ingredientes}}",seleccion)
+    return pagina
+# 
+
 @app.route('/', methods=["GET"])
 def inicial():
     data = request.args
@@ -275,26 +307,18 @@ def altaReceta():
     fecha_actual = datetime.now()
     fecha = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
     columnas = "NombreReceta, Receta, Ingredientes, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
-    # for elemento in form:
-    #     print(elemento, form[elemento])
-    # print(cons.resultados[0]['idUsuario'])
-    # print(categoria.resultados[0]['idCategoria'])
     
     receta = f"""'{form["NombreReceta"]}','{form["Receta"]}','{form["Ingredientes"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{cons.resultados[0]['idUsuario']},{categoria.resultados[0]['idCategoria']},'{form["dificultad"]}','{fecha}'"""
     registroReceta = CargaDatos("recetas", columnas, receta)
     registroReceta.insertarDato()
     
-    cons = Consulta('*','recetas')
+    cons = Consulta('*','recetas', f"NombreReceta = '{form['NombreReceta']}'",'fechaCreacion',1)
     cons.consultar()
 
-    pagina += f'{registroReceta.imprimir()}'
-    pagina += "<br>"
-    pagina += "<hr>"
-    pagina += receta
-    pagina += f"{cons.resultados}"
 
-    cc.desconectar()
+    pagina = reemplazosVariasRecetas(cons.resultados,False)
     pagina = reemplazosPagina(pagina)
+    cc.desconectar()
     return pagina
 #
 @app.route("/registro-usuario", methods=["POST"])
@@ -357,8 +381,7 @@ def recetaId():
     receta = Consulta('*','recetas', f"idReceta = '{data['']}'")
     receta.consultar()
 
-    pagina = f"{receta.resultados}"
-    
+    pagina = reemplazosVariasRecetas(receta.resultados)    
     pagina = reemplazosPagina(pagina)
     return pagina
 #
@@ -368,12 +391,12 @@ def buscarIngrediente():
     ingredientes = data['Ingredientes'].replace(" ","%")
     receta = Consulta('*','recetas', f"Ingredientes LIKE '%{ingredientes}%'")
     receta.consultar()
-
-    pagina = f"{receta.resultados}"
-    # pagina = f"{ingredientes}"
+    
+    pagina = reemplazosVariasRecetas(receta.resultados)
     pagina = reemplazosPagina(pagina)
     return pagina
 #
+
 @app.route("/buscar-receta-categoria", methods=['GET'])
 def buscarRecetaCategoria():
     data = request.args
@@ -384,8 +407,7 @@ def buscarRecetaCategoria():
     receta = Consulta('*','recetas', f"idCategoria= '{categoria.resultados[0]['idCategoria']}'")
     receta.consultar()
 
-    pagina = f"{receta.resultados}"
-    
+    pagina = reemplazosVariasRecetas(receta.resultados)    
     pagina = reemplazosPagina(pagina)
     return pagina
 #
