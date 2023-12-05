@@ -45,7 +45,7 @@
                                     <li class="recetas-items-dropdown"><a href="#">Postres</a></li>
                                     <li class="recetas-items-dropdown"><a href="#">Bebidas y cocteles</a></li>
                                     <li class="recetas-items-dropdown"><a href="#">Desayuno y merienda</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Ver todas las categorías</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Ver todas las categorías<i class="fa-solid fa-chevron-right ver-mas-flecha "></i></a></li>
                                 </ul>
                                 <ul class="ul-navbar-menus">
                                     <h4>Recetas por ingredientes</h4>
@@ -61,15 +61,18 @@
                                             href="/buscar-receta-categoria?categoria=Pizzas+%2F+Tartas">Pastas y
                                             harinas</a></li>
                                     <li class="recetas-items-dropdown"><a
-                                            href="/buscar-receta-categoria?categoria=Helados">Helados</a></li>
+                                            href="/buscar-receta-categoria?categoria=Helados">Ver más recetas por ingredientes<i class="fa-solid fa-chevron-right ver-mas-flecha "></i></a></li>
                                     <!-- <li class="recetas-items-dropdown"><a href="#">COMPLICACION EN EL BACK Ver todos los
                                             ingredientes</a></li> -->
                                 </ul>
                                 <ul class="ul-navbar-menus">
                                     <h4>Celebraciones y eventos</h4>
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a
-                                            href="#">Navideñas</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Pascúa</a></li>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Aniversarios</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Casamientos</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Cumpleaños</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Navidad</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Pascúas</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Ver más recetas para eventos<i class="fa-solid fa-chevron-right ver-mas-flecha"></i></a></li>                                    
                                 </ul>
                                 <ul class="ul-navbar-menus" style="border: 0;">
                                     <h4>Recetas subidas</h4>
@@ -209,15 +212,20 @@
                             <li class="item-categoria-ul"><a href="#"><span>Aperitivos</span></a></li>
                             <li class="item-categoria-ul"><a href="#"><span>Bebidas</span></a></li>
                             <li class="item-categoria-ul"><a href="#"><span>Desayuno y merienda</span></a></li>
-                            <li class="item-categoria-ul"><a href="#"><span>Veganms</span></a></li>
-                            <li class="item-categoria-ul"><a href="#"><span>Fácil</span></a></li>
-                            <li class="item-categoria-ul"><a href="#"><span>Intermedio</span></a></li>
-                            <li class="item-categoria-ul"><a href="#"><span>Difíciles</span></a></li>
-                            <li class="item-categoria-ul"><a href="#"><span>Pollo</span></a></li>
-                            <li class="item-categoria-ul"><a href="#"><span>Sushi</span></a></li>
-                            <li class="item-categoria-ul"><a href="#"><span>Argentina</span></a></li>
-                            <li class="item-categoria-ul"><a href="#"><span>Cerdo</span></a></li>
+                            <li class="item-categoria-ul"><a href="#"><span>Veganas</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Fácil</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Intermedio</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Difíciles</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Pollo</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Sushi</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Recetas argentinas</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Helados</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Navidad</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Pascúa</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Eventos</span></a></li>
+                            <li class="item-categoria-ul hidden-categoria"><a href="#"><span>Oficiales</span></a></li>
                         </ul>
+
                         <button id="ver-todas-categorias">Ver todas las categorias<i class="fa-solid fa-chevron-down"></i></button> -->
                     </div>
                     <div class="contenedor-footer-varias-recetas">
@@ -230,6 +238,7 @@
                             <!-- <div class="receta-varias-1">
                                 <div class="contenedor-img-receta-varias-elemento"><img src="{item['urlImagen']}"
                                         alt=""></div>
+
                                 <div class="contenedor-footer-recetas-varias-elemento">
                                     <div class="header-categoria-title">
                                         <div class="etiqueta-receta-varias"><a href="#"
@@ -239,6 +248,7 @@
                                             href="#">
                                             <h3>{item['NombreReceta']}</h3>
                                         </a>
+
                                         <div class="usuario-receta-varias"> -->
 
                                             <!-- ESTA PARTE DEBE QUEDAR COMENTADA EN TODO MOMENTO, EL BACK NO LO SOPORTA ACTUALMENTE -->
@@ -248,6 +258,7 @@
 
 
                                             <!-- <a href="#">{user} </a>
+
                                         </div>
                                         <div class="post-date-elemento">
                                             <div class="fecha-tiempo"><span>{item['fechaCreacion']}</span>
@@ -258,12 +269,14 @@
                                         </div>
                                     </div>
                                     <div class="footer-descrip-receta">
+
                                         <p>{item['Porciones']} Porciones <b>{item['dificultad']}</b></p>
                                         <p>{item['Ingredientes']}</p>
                                         <h4>Ingredientes</h4>
                                         <p>{item['Ingredientes']}</p>
                                         <h4>Preparación</h4>
                                         <p>{item['Receta']}</p>
+
                                     </div>
                                 </div>
                             </div> -->

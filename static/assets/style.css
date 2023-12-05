@@ -153,7 +153,7 @@ header.sticky {
 }
 
 .contenedor-ul-navbar-dpdown-menus a{
-    text-transform: capitalize;
+    text-transform:initial;
     font-weight: normal;
     color: #222;
 }
@@ -214,6 +214,12 @@ header.sticky {
 
 .lista-navbar-menu-btns i:hover {
     transform: scale(1.1);
+}
+
+.ver-mas-flecha {
+    color: #222 !important;
+    font-size: 16px !important;
+    margin-left: 5px !important;
 }
 
 .form-dropdown {
@@ -1074,7 +1080,7 @@ footer {
 }
 
 .contenido-footer{
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #3131317e;
 }
 
 .contenedor-columnas-footer {
