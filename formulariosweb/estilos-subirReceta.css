@@ -41,11 +41,9 @@ fieldset {
     border: 0;
 }
 
-.fa-bars {
-    top: 32% !important;
-    right: 4% !important;
+.filtros-busqueda-btn {
+    right: 5% !important;
 }
-
 /* RECETA CONTENEDOR */
 .article-agregar-receta {
     display: flex;
@@ -177,6 +175,13 @@ textarea::placeholder {
 }
 
 /* INGREDIENTES */
+.wrapper-ingredientes p, .wrapper-pasos-a-seguir p{
+    margin-bottom: 15px;
+}
+
+.wrapper-ingredientes legend, .wrapper-pasos-a-seguir legend {
+    margin-bottom: 5px;
+}
 .wrapper-form-section {
     border-top: 1px solid rgba(0,0,0,.15);
     padding: 16px 0 32px;

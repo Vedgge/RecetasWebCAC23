@@ -1,17 +1,16 @@
 <style>
-    p {
-        color: green
-    }
-    .formulario {
-        border-style: solid;
-        background-color: bisque;
-    }
-    .tareafutura {
-        color: red
-    }
-    
+    /* .formulario {
+    border-style: solid;
+    background-color: bisque;
+}
 
-    fieldset {
+.tareafutura {
+    color: red
+} */
+
+/*--------------------CSS RESET Y TIPOGRAFÍA-------------------*/
+
+fieldset {
     border: 0;
 }
 
@@ -20,8 +19,33 @@
     font-family: "SpiritSharpBlack";
 }
 
-/* RECETA CONTENEDOR */
+.form-search-navheader {
+    position: relative;
+}
 
+.search-navheader{
+    width: 500px;
+    position: relative;
+    border-radius: 15px;
+    padding: 15px 55px;
+}
+
+.search-navheader::placeholder {
+    font-size: 15px;
+}
+
+.btn-outline-success {
+    position: absolute;
+    left: 25px;
+    top: 33%;
+    background: transparent;
+    border: 0;
+}
+
+.filtros-busqueda-btn {
+    right: 5% !important;
+}
+/* RECETA CONTENEDOR */
 .article-agregar-receta {
     display: flex;
     justify-content: center;
@@ -152,6 +176,13 @@ textarea::placeholder {
 }
 
 /* INGREDIENTES */
+.wrapper-ingredientes p, .wrapper-pasos-a-seguir p{
+    margin-bottom: 15px;
+}
+
+.wrapper-ingredientes legend, .wrapper-pasos-a-seguir legend {
+    margin-bottom: 5px;
+}
 .wrapper-form-section {
     border-top: 1px solid rgba(0,0,0,.15);
     padding: 16px 0 32px;
@@ -199,7 +230,6 @@ textarea::placeholder {
 .modal-title-main, .modal-body, .modal-popup {
     display: block !important;
 }
-
 
 .contenedor-modal-footer {
     width: 100%;
