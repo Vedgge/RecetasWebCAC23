@@ -116,7 +116,7 @@ class CargaDatos(Credenciales):
         self.conectar()
         self.cursor.execute("INSERT INTO %s (%s) VALUES (%s)" % (self.tabla, self.columnas, self.valores,))
         Credenciales.comitear(self)
-    
+
     def imprimir(self):
         print("INSERT INTO %s (%s) VALUES (%s)" % (self.tabla, self.columnas, self.valores,))
 #
@@ -242,7 +242,7 @@ def reemplazosReceta(pagina,idReceta):
         pagina = pagina.replace(reemplazo,str(receta.resultados[0][elemento]))
     return pagina
 #
-def reemplazosVariasRecetas(resultados):
+def reemplazosVariasRecetas(resultados,busqueda=True):
     with open ('RecetasWebCAC23/formulariosweb/mostrarVariasRecetas.html', 'r', encoding='utf-8') as archivo:
         pagina = archivo.read()
         archivo.close()
@@ -254,7 +254,11 @@ def reemplazosVariasRecetas(resultados):
     usuarios.consultar()
     # Plantila Búsqueda Recetas
 
-
+    if busqueda:
+        pagina = pagina.replace('{{Busqueda}}','Resultado de la Búsqueda')
+    else:
+        pagina = pagina.replace('{{Busqueda}}','Tu receta ha sido creada con éxito')
+    
     for item in resultados:
             for el in categorias.resultados:
                 if el['idCategoria'] == item['idCategoria']:
@@ -303,26 +307,18 @@ def altaReceta():
     fecha_actual = datetime.now()
     fecha = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
     columnas = "NombreReceta, Receta, Ingredientes, Porciones, urlImagen, TiempoMin, idUsuario, idCategoria, dificultad, fechaCreacion"
-    # for elemento in form:
-    #     print(elemento, form[elemento])
-    # print(cons.resultados[0]['idUsuario'])
-    # print(categoria.resultados[0]['idCategoria'])
     
     receta = f"""'{form["NombreReceta"]}','{form["Receta"]}','{form["Ingredientes"]}',{form["Porciones"]},'{form["urlImagen"]}',{form["TiempoMin"]},{cons.resultados[0]['idUsuario']},{categoria.resultados[0]['idCategoria']},'{form["dificultad"]}','{fecha}'"""
     registroReceta = CargaDatos("recetas", columnas, receta)
     registroReceta.insertarDato()
     
-    cons = Consulta('*','recetas')
+    cons = Consulta('*','recetas', f"NombreReceta = '{form['NombreReceta']}'",'fechaCreacion',1)
     cons.consultar()
 
-    pagina += f'{registroReceta.imprimir()}'
-    pagina += "<br>"
-    pagina += "<hr>"
-    pagina += receta
-    pagina += f"{cons.resultados}"
 
-    cc.desconectar()
+    pagina = reemplazosVariasRecetas(cons.resultados,False)
     pagina = reemplazosPagina(pagina)
+    cc.desconectar()
     return pagina
 #
 @app.route("/registro-usuario", methods=["POST"])
@@ -385,8 +381,7 @@ def recetaId():
     receta = Consulta('*','recetas', f"idReceta = '{data['']}'")
     receta.consultar()
 
-    pagina = f"{receta.resultados}"
-    
+    pagina = reemplazosVariasRecetas(receta.resultados)    
     pagina = reemplazosPagina(pagina)
     return pagina
 #
@@ -396,8 +391,6 @@ def buscarIngrediente():
     ingredientes = data['Ingredientes'].replace(" ","%")
     receta = Consulta('*','recetas', f"Ingredientes LIKE '%{ingredientes}%'")
     receta.consultar()
-
-    # pagina = f"{receta.resultados}"
     
     pagina = reemplazosVariasRecetas(receta.resultados)
     pagina = reemplazosPagina(pagina)
@@ -414,8 +407,7 @@ def buscarRecetaCategoria():
     receta = Consulta('*','recetas', f"idCategoria= '{categoria.resultados[0]['idCategoria']}'")
     receta.consultar()
 
-    pagina = f"{receta.resultados}"
-    
+    pagina = reemplazosVariasRecetas(receta.resultados)    
     pagina = reemplazosPagina(pagina)
     return pagina
 #
