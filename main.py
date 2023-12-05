@@ -242,7 +242,7 @@ def reemplazosReceta(pagina,idReceta):
         pagina = pagina.replace(reemplazo,str(receta.resultados[0][elemento]))
     return pagina
 #
-def reemplazosVariasRecetas(resultados,busqueda=True):
+def reemplazosVariasRecetas(resultados,busqueda=False):
     with open ('RecetasWebCAC23/formulariosweb/mostrarVariasRecetas.html', 'r', encoding='utf-8') as archivo:
         pagina = archivo.read()
         archivo.close()
@@ -254,10 +254,12 @@ def reemplazosVariasRecetas(resultados,busqueda=True):
     usuarios.consultar()
     # Plantila Búsqueda Recetas
 
-    if busqueda:
+    if not busqueda:
         pagina = pagina.replace('{{Busqueda}}','Resultado de la Búsqueda')
-    else:
+    elif busqueda=='crear':
         pagina = pagina.replace('{{Busqueda}}','Tu receta ha sido creada con éxito')
+    elif busqueda=='modificar':
+        pagina = pagina.replace('{{Busqueda}}','Tu receta ha sido modificada con éxito')
     
     for item in resultados:
             for el in categorias.resultados:
@@ -316,7 +318,7 @@ def altaReceta():
     cons.consultar()
 
 
-    pagina = reemplazosVariasRecetas(cons.resultados,False)
+    pagina = reemplazosVariasRecetas(cons.resultados,'crear')
     pagina = reemplazosPagina(pagina)
     cc.desconectar()
     return pagina
@@ -432,11 +434,28 @@ def editarReceta():
 #
 @app.route("/edicion-receta", methods=['POST'])
 def edicionReceta():
-    form = request.form
+    formulario = request.form
+    form = formulario.copy()
+
+    categorias = Consulta('*','categorias')
+    categorias.consultar()
+    for el in categorias.resultados:
+        if el['Categoria'] == form['idCategoria']:
+            form['idCategoria'] = el['idCategoria']
+            break
+
+
 
     recetamod = ModificarDatos('recetas',form)
+    
     recetamod.modificarDato()
     pagina="Receta modificada con éxito"
+
+
+    cons = Consulta('*','recetas', f"idReceta = {form['id']}")
+    cons.consultar()
+    pagina = reemplazosVariasRecetas(cons.resultados,'modificar')
+    pagina = reemplazosPagina(pagina)
     return pagina
 #
 @app.route("/eliminar-receta", methods=['POST'])
