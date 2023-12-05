@@ -315,10 +315,10 @@ aside {
     background-attachment: scroll;
 }
 
-.contenedor-mail-diario {
+.contenedor-mail-diario form{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
 .diario-mostrar-receta-aside p {
