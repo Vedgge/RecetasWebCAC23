@@ -191,9 +191,9 @@ print("\033[32m","#"*60,"\033[0m")
 def reemplazosPagina(pagina): #Modificadas
     # Agregar esta función en cada @app.route que contenga un "return pagina"        
     # Creación de estilos PROBABLEMENTE DEBA ELIMINARSE
-    # with open ('RecetasWebCAC23/formulariosweb/style.html', 'r', encoding='utf-8') as archivo:
-    #     pagina = pagina.replace("{{style}}",archivo.read())
-    #     archivo.close()
+    with open ('RecetasWebCAC23/formulariosweb/style.html', 'r', encoding='utf-8') as archivo:
+        pagina = pagina.replace("{{style}}",archivo.read())
+        archivo.close()
 
     # Estilo 'subirReceta'
     with open('RecetasWebCAC23/formulariosweb/estilos-subirReceta.html', 'r', encoding='utf-8') as archivo_estilo_subir_receta:
@@ -277,7 +277,9 @@ def reemplazosVariasRecetas(resultados,busqueda=False):
         pagina = pagina.replace('{{Busqueda}}','Tu receta ha sido modificada con éxito')
     i=0
     for item in resultados:
-        i+=1   
+        i+=1 
+        if i > 12:
+            break  
         for el in categorias.resultados:
             if el['idCategoria'] == item['idCategoria']:
                 categ = el['Categoria']
@@ -460,13 +462,10 @@ def edicionReceta():
             form['idCategoria'] = el['idCategoria']
             break
 
-
-
     recetamod = ModificarDatos('recetas',form)
     
     recetamod.modificarDato()
     pagina="Receta modificada con éxito"
-
 
     cons = Consulta('*','recetas', f"idReceta = {form['id']}")
     cons.consultar()
