@@ -188,7 +188,13 @@ class EliminarDatos(Credenciales):
 
 print("\033[32m","#"*60,"\033[0m")
 
-def reemplazosPagina(pagina):
+def reemplazosPagina(pagina): #Modificadas
+    # Agregar esta función en cada @app.route que contenga un "return pagina"        
+    # Creación de estilos PROBABLEMENTE DEBA ELIMINARSE
+    # with open ('RecetasWebCAC23/formulariosweb/style.html', 'r', encoding='utf-8') as archivo:
+    #     pagina = pagina.replace("{{style}}",archivo.read())
+    #     archivo.close()
+
     # Estilo 'subirReceta'
     with open('RecetasWebCAC23/formulariosweb/estilos-subirReceta.html', 'r', encoding='utf-8') as archivo_estilo_subir_receta:
         pagina = pagina.replace("{{estilos-subirReceta}}", archivo_estilo_subir_receta.read())
@@ -269,18 +275,19 @@ def reemplazosVariasRecetas(resultados,busqueda=False):
         pagina = pagina.replace('{{Busqueda}}','Tu receta ha sido creada con éxito')
     elif busqueda=='modificar':
         pagina = pagina.replace('{{Busqueda}}','Tu receta ha sido modificada con éxito')
-    
+    i=0
     for item in resultados:
-            for el in categorias.resultados:
-                if el['idCategoria'] == item['idCategoria']:
-                    categ = el['Categoria']
-                    break
-            for el in usuarios.resultados:
-                if el['idUsuario'] == item['idUsuario']:
-                    user = el['NombreUsuario']
-                    break
-        
-            seleccion += f'''<div class="receta-varias-1"><div class="contenedor-img-receta-varias-elemento"><img src="{item['urlImagen']}" alt=""></div><div class="contenedor-footer-recetas-varias-elemento"><div class="header-categoria-title"><div class="etiqueta-receta-varias"><a href="#" style="background-color: rgb(177, 86, 33);" class="slide-large"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span>{categ}</span></a></div><a href="#"><h3>{item['NombreReceta']}</h3></a><div class="usuario-receta-varias"><!-- <img src="/static/imagenes/img-usuario-ejemplo.png" alt="" style="width: 25px; height: auto;" /> --><a href="#">{user} </a></div><div class="post-date-elemento"><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div></div><div class="footer-descrip-receta"><p>{item['Porciones']} Porciones <b>{item['dificultad']}</b></p><p>{item['Ingredientes']}</p><h4>Ingredientes</h4><p>{item['Ingredientes']}</p><h4>Preparación</h4><p>{item['Receta']}</p></div></div></div>'''
+        i+=1   
+        for el in categorias.resultados:
+            if el['idCategoria'] == item['idCategoria']:
+                categ = el['Categoria']
+                break
+        for el in usuarios.resultados:
+            if el['idUsuario'] == item['idUsuario']:
+                user = el['NombreUsuario']
+                break
+    
+        seleccion += f'''<div class="receta-varias-{i}"><div class="contenedor-img-receta-varias-elemento"><img src="{item['urlImagen']}" alt=""></div><div class="contenedor-footer-recetas-varias-elemento"><div class="header-categoria-title"><div class="etiqueta-receta-varias"><a href="#" style="background-color: rgb(177, 86, 33);" class="slide-large"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span>{categ}</span></a></div><a href="#"><h3>{item['NombreReceta']}</h3></a><div class="usuario-receta-varias"><!-- <img src="/static/imagenes/img-usuario-ejemplo.png" alt="" style="width: 25px; height: auto;" /> --><a href="#">{user} </a></div><div class="post-date-elemento"><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div></div><div class="footer-descrip-receta"><p>{item['Porciones']} Porciones <b>{item['dificultad']}</b></p><p>{item['Ingredientes']}</p><h4>Ingredientes</h4><p>{item['Ingredientes']}</p><h4>Preparación</h4><p>{item['Receta']}</p></div></div></div>'''
     pagina = pagina.replace("{{Busqueda-Recetas-Ingredientes}}",seleccion)
     return pagina
 # 
