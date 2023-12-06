@@ -29,14 +29,14 @@
             <div class="navheader">
                 <div class="contenedor-items-menu">
                     <div class="icono-cookingology">
-                        <a href="inicio.html"><img src="/static/assets/img/icono-cookingology.png" alt=""
+                        <a href="?=inicio.html"><img src="/static/assets/img/icono-cookingology.png" alt=""
                                 style="height: 80px;"></a>
                     </div>
                     <ul class="lista-navbar-menu-btns">
-                        <li class="navbar-menus"><a href="/">Inicio</a></li>
+                        <li class="navbar-menus"><a href="?=inicio.html">Inicio</a></li>
                         <li class="navbar-menus"><a href="#">Tienda</a></li>
                         <li class="navbar-menus"><a href="#">Tips & consejos</a></li>
-                        <li class="navbar-menus"><a href="#">Recetas</a>
+                        <li class="navbar-menus"><a href="?=formulariosweb/mostrarVariasRecetas.html">Recetas</a>
                             <div class="contenedor-ul-navbar-dpdown-menus">
                                 <ul class="ul-navbar-menus">
                                     <h4>Comidas del día</h4>
@@ -119,7 +119,7 @@
                     <div class="modal-body">
                         <form action="" class="js-loginFormModal" style="width: 100%;">
                             <div>
-                                <input type="text" id="username-modal" name="username" maxlength="50"
+                                <input type="email" id="username-modal" name="correoElectronico" maxlength="50"
                                     placeholder="Ingrese su nombre de usuario o mail">
                                 <span class="error-text-modal"></span>
                             </div>
@@ -129,7 +129,7 @@
                                 <span class="error-text-modal"></span>
                             </div>
                             <div class="login-acceso-recordarme">
-                                <input type="checkbox" name="remember-me" id="checkRememberMe" checked />
+                                <input style="margin-right: 5px;" type="checkbox" name="remember-me" id="checkRememberMe" checked />
                                 <label for="remember-me" class="remember-me-text" style="font-size: 14px;">Recórdarme en
                                     este equipo</label>
                             </div>
@@ -165,8 +165,18 @@
                     <div class="modal-body">
                         <form action="" class="js-loginFormModal" style="width: 100%;">
                             <div>
-                                <input type="text" id="username-modal" name="username" maxlength="50"
+                                <input type="email" id="username-modal" name="correoElectronico" maxlength="50"
                                     placeholder="Ingresa tu email">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div class="contenedor-form-juntos">
+                                <input type="text" name="Nombre" id="nombre-modal" required placeholder="Ingresa tu nombre">
+                                <input type="text" name="Apellido" id="apellido-modal" required placeholder="Ingresa tu apellido">
+                                <span class="error-text-modal"></span>
+                            </div>
+                            <div class="contenedor-form-juntos">
+                                <input type="number" name="Nacimiento" id="nacimiento-modal" min="1900" max="2023" required placeholder="Ingresa tu año de nacimiento">
+                                <input type="text" name="Genero" id="genero-modal" required placeholder="Ingresa tu género"> 
                                 <span class="error-text-modal"></span>
                             </div>
                             <div>
@@ -193,8 +203,7 @@
 
     <main>
 
-        <section
-            style="position: relative; padding-bottom: 30px; background: linear-gradient(to right, #fd6d36, #ff8c62);">
+        <section style="position: relative; padding-bottom: 30px; background: linear-gradient(to right, #fd6d36, #ff8c62);">
             <article class="hero-article" style="padding: 30px 0px;">
                 <div class="contenedor-compo-hero">
                     <ul class="contenedor-lista-hero">
@@ -374,7 +383,7 @@
                                 <div class="overlay-receta overlay-hover"></div>
                                 <div class="receta-item">
                                     <div class="etiqueta-categoria">
-                                        <a href="#" style="background-color: #8b84e5;" class="btn-etiqueta slide">
+                                        <a href="#" style="background-color: #8b84e5;" class="btn-etiqueta slide-large">
                                             <i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
                                             <span class="etiqueta-titulo">Pollo</span>
                                         </a>
@@ -417,7 +426,7 @@
                                 <div class="overlay-receta"></div>
                                 <div class="receta-item">
                                     <div class="etiqueta-categoria">
-                                        <a href="#" style="background-color: #84a6e5;" class="btn-etiqueta slide"><i
+                                        <a href="#" style="background-color: #84a6e5;" class="btn-etiqueta slide-large"><i
                                                 class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span
                                                 class="etiqueta-titulo">Fácil</span></a>
                                     </div>
@@ -437,7 +446,7 @@
                                 <div class="overlay-receta"></div>
                                 <div class="receta-item">
                                     <div class="etiqueta-categoria">
-                                        <a href="#" style="background-color: #e5a484;" class="btn-etiqueta slide"><i
+                                        <a href="#" style="background-color: #e5a484;" class="btn-etiqueta slide-large"><i
                                                 class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span
                                                 class="etiqueta-titulo">Pasta</span></a>
                                     </div>
@@ -457,7 +466,7 @@
                                 <div class="overlay-receta"></div>
                                 <div class="receta-item">
                                     <div class="etiqueta-categoria">
-                                        <a href="#" style="background-color: #e584b9;" class="btn-etiqueta slide"><i
+                                        <a href="#" style="background-color: #e584b9;" class="btn-etiqueta slide-large"><i
                                                 class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span
                                                 class="etiqueta-titulo">Bebidas</span></a>
                                     </div>
@@ -478,7 +487,7 @@
                                 <div class="receta-item">
                                     <div class="etiqueta-categoria">
                                         <a href="#" style="background-color: rgb(229, 132, 132);"
-                                            class="btn-etiqueta slide"><i class="fa fa-tag cat-dot"
+                                            class="btn-etiqueta slide-large"><i class="fa fa-tag cat-dot"
                                                 style="margin-right: 10px;"></i><span
                                                 class="etiqueta-titulo">Navideña</span></a>
                                     </div>
@@ -494,11 +503,12 @@
                                 </div>
                                 <img src="static/imagenes/image5.jpg" alt="">
                             </a></div>
-                        <div class="item"><a href="#" class="a-hover">
+                        <div class="item">
+                            <a href="#" class="a-hover">
                                 <div class="overlay-receta"></div>
                                 <div class="receta-item">
                                     <div class="etiqueta-categoria">
-                                        <a href="#" style="background-color: #8b84e5;" class="btn-etiqueta slide"><i
+                                        <a href="#" style="background-color: #8b84e5;" class="btn-etiqueta slide-large"><i
                                                 class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span
                                                 class="etiqueta-titulo">Pollo</span></a>
                                     </div>
@@ -513,13 +523,14 @@
                                     </div>
                                 </div>
                                 <img src="static/imagenes/image4.jpg" alt="">
-                            </a></div>
+                            </a>
+                        </div>
                         <div class="item"><a href="#" class="a-hover">
                                 <div class="overlay-receta"></div>
                                 <div class="receta-item">
                                     <div class="etiqueta-categoria">
                                         <a href="#" style="background-color: rgb(229, 132, 189);"
-                                            class="btn-etiqueta slide"><i class="fa fa-tag cat-dot"
+                                            class="btn-etiqueta slide-large"><i class="fa fa-tag cat-dot"
                                                 style="margin-right: 10px;"></i><span
                                                 class="etiqueta-titulo">Cerdo</span></a>
                                     </div>

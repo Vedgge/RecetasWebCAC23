@@ -209,6 +209,7 @@ textarea::placeholder {
 .cancelar-popup {
     display: none;
     padding: 30px 20px !important;
+    top: 39% !important;
 }
 
 .overlay-cancelar {
@@ -224,10 +225,6 @@ textarea::placeholder {
 
 .modal-text {
     margin: 25px 0 35px 0;
-}
-
-.modal-title-main, .modal-body, .modal-popup {
-    display: block !important;
 }
 
 .contenedor-modal-footer {

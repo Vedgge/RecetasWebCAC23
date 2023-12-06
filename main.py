@@ -15,7 +15,7 @@ class Credenciales:
     # A modo de prueba es capaz de imprimirlas también.
 
     def __init__(self):
-        ruta = "RecetasWebCAC23/datos.txt"
+        ruta = "./datos.txt"
         if os.path.exists(ruta):
             with open(ruta, "r") as archivo:
                 lineas = archivo.readlines()    
@@ -25,7 +25,7 @@ class Credenciales:
                 self._database = lineas[3].strip()
                 archivo.close()
         else:
-            with open ("RecetasWebCAC23\datos.txt", "w") as archivo:
+            with open (".\datos.txt", "w") as archivo:
                 print("Desea crear archivo con las credenciales para operar en la base de datos?")
                 conf = input("S/N")
                 if conf.lower() =="s":
@@ -196,19 +196,19 @@ def reemplazosPagina(pagina): #Modificadas
         archivo.close()
 
     # Estilo 'subirReceta'
-    with open('RecetasWebCAC23/formulariosweb/estilos-subirReceta.html', 'r', encoding='utf-8') as archivo_estilo_subir_receta:
+    with open('./formulariosweb/estilos-subirReceta.html', 'r', encoding='utf-8') as archivo_estilo_subir_receta:
         pagina = pagina.replace("{{estilos-subirReceta}}", archivo_estilo_subir_receta.read())
 
     # Estilo 'mostrarVariasRecetas'
-    with open('RecetasWebCAC23/formulariosweb/estilos-mostrarVariasRecetas.html', 'r', encoding='utf-8') as archivo_estilos_mostrar_varias_recetas:
+    with open('./formulariosweb/estilos-mostrarVariasRecetas.html', 'r', encoding='utf-8') as archivo_estilos_mostrar_varias_recetas:
         pagina = pagina.replace("{{estilos-mostrarVariasRecetas}}", archivo_estilos_mostrar_varias_recetas.read())
         
     # Estilo 'mostrarReceta'
-    with open('RecetasWebCAC23/formulariosweb/estilos-mostrarReceta.html', 'r', encoding='utf-8') as archivo_estilos_mostrar_receta:
+    with open('./formulariosweb/estilos-mostrarReceta.html', 'r', encoding='utf-8') as archivo_estilos_mostrar_receta:
         pagina = pagina.replace("{{estilos-mostrarReceta}}", archivo_estilos_mostrar_receta.read())
     
     # Estilo 'modificarElementos'
-    with open('RecetasWebCAC23/formulariosweb/estilos-modificarElementos.html', 'r', encoding='utf-8') as archivo_estilos_modificar_elementos:
+    with open('./formulariosweb/estilos-modificarElementos.html', 'r', encoding='utf-8') as archivo_estilos_modificar_elementos:
         pagina = pagina.replace("{{estilos-modificarElementos}}", archivo_estilos_modificar_elementos.read())
 
     # Carga de categorias en forma de lista
@@ -232,7 +232,52 @@ def reemplazosPagina(pagina): #Modificadas
                     categ = el['Categoria']
                     break
         
-            seleccion += f'''<div class="item"><a href="/recetaid?={item['idReceta']}" class="a-hover"><div class="overlay-receta overlay-hover"></div><div class="receta-item"><div class="etiqueta-categoria"><a href="/buscar-receta-categoria?categoria={categ}" style="background-color: #8b84e5;" class="btn-etiqueta slide"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i><span class="etiqueta-titulo">{categ}</span></a></div><div class="titulo-receta"><h3><a href="/recetaid?={item['idReceta']}">{item['Receta']}</a></h3></div><div class="fecha-tiempo"><span>{item['fechaCreacion']}</span><div class="separador-dot"></div><span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span></div></div><img src="{item['urlImagen']}" alt=""></a></div>'''
+            # ANTERIOR F
+            #         <div class="item">
+            #     <a href="/recetaid?={item['idReceta']}" class="a-hover">
+            #         <div class="overlay-receta overlay-hover"></div>
+            #             <div class="receta-item">
+            #                 <div class="etiqueta-categoria">
+            #                     <a href="/buscar-receta-categoria?categoria={categ}" style="background-color: #8b84e5;" class="btn-etiqueta slide-large">
+            #                         <i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
+            #                         <span class="etiqueta-titulo">{categ}</span>
+            #                     </a>
+            #                 </div>
+            #                 <div class="titulo-receta">
+            #                     <h3><a href="/recetaid?={item['idReceta']}">{item['Receta']}</a></h3>
+            #                 </div>
+            #                 <div class="fecha-tiempo">
+            #                     <span>{item['fechaCreacion']}</span>
+            #                     <div class="separador-dot"></div>
+            #                     <span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span>
+            #                 </div>
+            #             </div><img src="{item['urlImagen']}" alt="">
+            #         </a>
+            # </div>
+        
+        
+            seleccion += f'''
+            <div class="item">
+                <a href="/recetaid?={item['idReceta']}" class="a-hover">
+                    <div class="overlay-receta"></div>
+                        <div class="receta-item">
+                            <div class="etiqueta-categoria">
+                                <a href="/buscar-receta-categoria?categoria={categ}" style="background-color: #8b84e5;" class="btn-etiqueta slide-large"><i class="fa fa-tag cat-dot" style="margin-right: 10px;"></i>
+                                <span class="etiqueta-titulo">{categ}</span></a>
+                            </div>
+                            <div class="titulo-receta">
+                                <h3><a href="/recetaid?={item['idReceta']}">{item['NombreReceta']}</a></h3>
+                            </div>
+                            <div class="fecha-tiempo">
+                                <span>{item['fechaCreacion']}</span>
+                                <div class="separador-dot"></div>
+                                <span><i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 5px;"></i>{item['TiempoMin']} min</span>
+                            </div>
+                        </div>
+                        <img src="{item['urlImagen']}" alt="imagen url receta">
+                    </a>
+            </div>
+            '''
     pagina = pagina.replace("{{carrusel}}",seleccion)
 
     # Mostrar editar receta
@@ -243,7 +288,7 @@ def reemplazosPagina(pagina): #Modificadas
 #
 
 def reemplazosReceta(pagina,idReceta):
-    with open ('RecetasWebCAC23/formulariosweb/mostrarReceta.html', 'r', encoding='utf-8') as archivo:
+    with open ('./formulariosweb/mostrarReceta.html', 'r', encoding='utf-8') as archivo:
         pagina = pagina.replace("{{receta}}",archivo.read())
         archivo.close()
     pagina = pagina.replace("{{idReceta}}",idReceta)
@@ -258,7 +303,7 @@ def reemplazosReceta(pagina,idReceta):
     return pagina
 #
 def reemplazosVariasRecetas(resultados,busqueda=False):
-    with open ('RecetasWebCAC23/formulariosweb/mostrarVariasRecetas.html', 'r', encoding='utf-8') as archivo:
+    with open ('./formulariosweb/mostrarVariasRecetas.html', 'r', encoding='utf-8') as archivo:
         pagina = archivo.read()
         archivo.close()
 
@@ -298,9 +343,9 @@ def reemplazosVariasRecetas(resultados,busqueda=False):
 def inicial():
     data = request.args
     if data == {}:
-        direccion = 'RecetasWebCAC23/index.html'
+        direccion = './index.html'
     else:
-        direccion = f'RecetasWebCAC23/{data[""]}'
+        direccion = f'./{data[""]}'
 
     f = open(direccion, 'r', encoding='utf-8')
     pagina = f.read()
@@ -439,7 +484,7 @@ def editarReceta():
     receta.consultar()
     # receta.imprimir()
 
-    direccion = f'RecetasWebCAC23/formulariosWeb/modificarElementos.html'
+    direccion = f'./formulariosWeb/modificarElementos.html'
     f = open(direccion, 'r', encoding='utf-8')
     pagina = f.read()
     
