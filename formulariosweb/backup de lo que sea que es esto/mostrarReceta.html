@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultas Carga de Datos</title>
-    {{style}}
+    <title>Ver receta</title>
+    {{estilos-mostrarReceta}}
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/static/assets/favicon.png" type="image/x-icon">
@@ -13,11 +13,15 @@
     <!-- ESTILOS GENERALES -->
     <link rel="stylesheet" href="/static/assets/style.css">
 
-    <!-- Custom JS GENERAL -->
+    <!-- JS GENERAL -->
     <script src="/static/assets/general-script.js" defer></script>
 
-    <!-- Validación JS REGISTRO -->
-    <script src="/static/assets/validacion-registro.js" defer></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/formulariosweb/estilos-mostrarReceta.css">
+
+    <!-- Custom JS -->
+    <script src="/formulariosweb/mostrarReceta.js" defer></script>
+
 </head>
 
 <body>
@@ -116,7 +120,7 @@
                     <div class="modal-body">
                         <form action="" class="js-loginFormModal" style="width: 100%;">
                             <div>
-                                <input type="text" id="username-modal" name="correoElectronico" maxlength="50"
+                                <input type="text" id="username-modal" name="username" maxlength="50"
                                     placeholder="Ingrese su nombre de usuario o mail">
                                 <span class="error-text-modal"></span>
                             </div>
@@ -126,7 +130,7 @@
                                 <span class="error-text-modal"></span>
                             </div>
                             <div class="login-acceso-recordarme">
-                                <input style="margin-right: 5px;" type="checkbox" name="remember-me" id="checkRememberMe" checked />
+                                <input type="checkbox" name="remember-me" id="checkRememberMe" checked />
                                 <label for="remember-me" class="remember-me-text" style="font-size: 14px;">Recórdarme en
                                     este equipo</label>
                             </div>
@@ -162,18 +166,8 @@
                     <div class="modal-body">
                         <form action="" class="js-loginFormModal" style="width: 100%;">
                             <div>
-                                <input type="email" id="username-modal" name="correoElectronico" maxlength="50"
+                                <input type="text" id="username-modal" name="username" maxlength="50"
                                     placeholder="Ingresa tu email">
-                                <span class="error-text-modal"></span>
-                            </div>
-                            <div class="contenedor-form-juntos">
-                                <input type="text" name="Nombre" id="nombre-modal" required placeholder="Ingresa tu nombre">
-                                <input type="text" name="Apellido" id="apellido-modal" required placeholder="Ingresa tu apellido">
-                                <span class="error-text-modal"></span>
-                            </div>
-                            <div class="contenedor-form-juntos">
-                                <input type="number" name="Nacimiento" id="nacimiento-modal" min="1900" max="2023" required placeholder="Ingresa tu año de nacimiento">
-                                <input type="text" name="Genero" id="genero-modal" required placeholder="Ingresa tu género"> 
                                 <span class="error-text-modal"></span>
                             </div>
                             <div>
@@ -198,23 +192,131 @@
         </nav>
     </header>
 
-
     <main>
-        <h1>Nuevo Usuario</h1>
-        <div class="formulario">
-            <form method="post" action="/registro-usuario">
-                <p>Nombre<input type="text" name="Nombre" required></p>
-                <p>Apellido<input type="text" name="Apellido" required></p>
-                <p>Año de Nacimiento<input type="number" name="Nacimiento" required></p>
-                <p>E-mail<input type="email" name="correoElectronico" required></p>
-                <p>Contraseña<input type="text" name="Contrasena" required></p>
-                <p class="tareafutura">validarla con JAVA</p>
-                <p>Género<input type="text" name="Genero" required></p>
-                <button type="submit">Dale</button>
-            </form>
-        </div>
+        <section>
+            <article>
+                <div class="formulario">
+                    <form method="post" action="/edicion-receta">
+                        <div class="wrapper-titulo-descripcion-tiempo wrapper-form-section">
+                            <fieldset>
+                                <div class="parte-sup-header">
+                                    <div class="columna-1">
+                                        <div class="titulo-receta">
+                                            <label for="id">Id de la receta</label>
+                                            <input type="number" id="id" name="id" readonly value="{{idReceta}}"
+                                                required class="form-text-input">
+                                        </div>
+                                        <div class="titulo-receta">
+                                            <label for="NombreReceta">Titulo de la receta</label>
+                                            <input type="text" id="NombreReceta" name="NombreReceta" required
+                                                value="{{NombreReceta}}" placeholder="Dale un titulo a tu receta"
+                                                required class="form-text-input">
+                                        </div>
+                                        <div class="nombre-usuario">
+                                            <label for="id-usuario">Id del Usuario</label>
+                                            <input type="number" id="id-Usuario" name="idUsuario" required
+                                                value="{{idUsuario}}" placeholder="Dinos tu nick de usuario" required
+                                                class="form-text-input">
+                                        </div>
+                                        <!-- <p>Usuario<input type="text" name="nombreUsuario" required></p> -->
+                                        <!-- <div class="descripcion-receta">
+                                                <label for="descripcion">Descripción</label>
+                                                <textarea class="form-text-input" name="descripcion" id="descripcion"
+                                                    cols="30" rows="10"
+                                                    placeholder="Comparte la historia detras de tu receta, que la hace especial y direcciones extra!"
+                                                    required></textarea>
+                                            </div> -->
+                                    </div>
+                                    <div class="columna-2">
+                                        <div class="agregar-img-receta">
+                                            <label for="" id="imgFile">Imagen (opcional)</label>
+                                            <div class="subir-img-layout">
+                                                <input type="file" id="imgFile" name="imgFile" accept="">
+                                            </div>
+                                            <input type="text" name="urlImagen" required value="{{urlImagen}}"
+                                                placeholder="Pegá el URL de la imagen">
+                                            <p>Usa formato JPEG o PNG. Debe ser al menos 960 x 960. Tamaño max: 30MB
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="parte-inf-header">
+                                    <div class="porciones-info"
+                                        style="display: flex; flex-direction: row; gap: 30px; margin: 32px 0;">
+                                        <label for="porciones">Porciones</label>
+                                        <div class="input-contenedor">
+                                            <input class="form-option-input" type="number" id="porciones"
+                                                name="Porciones" placeholder="P. ej.: 8" min="1" required
+                                                value="{{Porciones}}">
+                                        </div>
+                                    </div>
+                                    <div class="tiempo-info">
+                                        <!-- <p>Tiempo de cocción<input type="number" name="TiempoMin" required></p> -->
+                                        <label for="prep-time">Tiempo de preparación en minutos</label>
+                                        <div class="input-contenedor">
+                                            <input class="form-element-input" type="number" name="TiempoMin"
+                                                id="prep-time" placeholder="0" min="0" required value="{{TiempoMin}}">
+                                        </div>
+                                    </div>
+                                    <div class="categoria-info">
+                                        <label for="idCategoría">Categoría</label>
+                                        <select class="form-option-input" name="idCategoria" id="idCategoria">
+                                            {{opciones}}
+                                            <!-- <option value="desayuno merienda">Desayuno & Merienda</option>
+                                                <option value="almuerzo">Almuerzo</option>
+                                                <option value="cena">Cena</option>
+                                                <option value="bebidas">Bebidas</option>
+                                                <option value="vegetarianas">Vegetarianas</option>
+                                                <option value="postres y dulces">Postres & Dulces</option> -->
+                                        </select>
+                                    </div>
+                                    <div class="dificultad-info">
+                                        <label for="dificultad">Dificultad</label>
+                                        <select class="form-option-input" name="dificultad" id="dificultad"
+                                            value="{{dificultad}}">
+                                            <option value="principiante">Fácil</option>
+                                            <option value="intermedio">Intermedio</option>
+                                            <option value="Avanzado">Difícil</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="wrapper-ingredientes wrapper-form-section">
+                            <fieldset>
+                                <legend>Ingredientes</legend>
+                                <p>Ingrese los ingredientes en el cuadro inferior. Incluya la cantidad (es decir, tazas,
+                                    cucharadas) y cualquier preparación especial (es decir, tamizada, ablandada,
+                                    picada).
+                                    Trate de organizarlos para que sean legibles.</p>
+                                <textarea class="form-text-input" name="Ingredientes" id="" cols="30" rows="10"
+                                    placeholder="Por ejemplo, 2 tazas de harina tamizada, 1 taza de azúcar..."
+                                    required>{{Ingredientes}}</textarea>
+                            </fieldset>
+                        </div>
+                        <div class="wrapper-pasos-a-seguir wrapper-form-section">
+                            <fieldset>
+                                <legend>Pasos a seguir</legend>
+                                <p>Explique cómo hacer su receta, incluidas las temperaturas del horno, los tiempos de
+                                    cocción o cocción, los tamaños de la sartén, etc. Trate de organizarlos para que
+                                    sean
+                                    legibles..</p>
+                                <textarea name="Receta" id="" cols="30" rows="10"
+                                    placeholder="p. ej.: Precalentar el horno a 350 grados F, verter en bandejas engrasadas..."
+                                    required>{{Receta}}</textarea>
+                            </fieldset>
+                        </div>
+                        <div class="form-layout-btn">
+                            <div class="contenedor-btns-form">
+                                <a href="#" class="cancelar-btn" id="#mostrar-modal-cancelar" role="button">CANCELAR</a>
+                                <input type="submit" class="btn-submit" value="Enviar Receta">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </section>
     </main>
-
     <footer style="position: relative;">
         <div class="contenido-footer">
             <div class="contenedor-columnas-footer">
@@ -266,9 +368,5 @@
         <div class="volver-inicio"><a href="#top"><span>Volver al inicio </span><i class="fa-solid fa-arrow-up"></i></a>
         </div>
     </footer>
-    <!-- Bootstrap bundle JS & Font Awesome -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/4e89c87464.js" crossorigin="anonymous"></script>
 </body>
-
 </html>

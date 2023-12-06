@@ -104,16 +104,40 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-    
+
     const btnLimpiarFiltros = document.querySelector(".clean-form-filters");
     // Al hacer click en el botón limpiar filtros, desmarca todos los checkbox
 
-    btnLimpiarFiltros.addEventListener("click", function(){
+    btnLimpiarFiltros.addEventListener("click", function () {
         minutosTiempoItems.forEach(item => {
             item.classList.remove('checked');
         });
     });
 
+
+    // Cosa que se me ocurrio a las 3AM
+    var spanElemento = document.getElementById('etiqueta-span');
+    var linkElemento = document.getElementById('etiqueta-link');
+
+    if (spanElemento) {
+        var categoria = spanElemento.textContent.trim().toLowerCase();
+
+        switch (categoria) {
+            case 'cerdo':
+                linkElemento.style.backgroundColor = '#ff7f50'; // Coral color
+                break;
+            case 'empanadas':
+                linkElemento.style.backgroundColor = '#8a2be2'; // Blue Violet color
+                break;
+            case 'ensaladas':
+                linkElemento.style.backgroundColor = '#008000'; // Green color
+                break;
+            // Add cases for other categories
+            default:
+                // Default color or no change
+                break;
+        }
+    }
     //Owl carrusel
     var owl1 = $("#carrusel-1");
     owl1.owlCarousel({
