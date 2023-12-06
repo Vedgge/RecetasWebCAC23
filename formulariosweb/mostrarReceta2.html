@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver receta</title>
+    {{estilos-mostrarReceta}}
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/favicon.png" type="image/x-icon">
+
+    <!-- ESTILOS GENERALES -->
+    <link rel="stylesheet" href="/static/assets/style.css">
+
+    <!-- JS GENERAL -->
+    <script src="/static/assets/general-script.js" defer></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/formulariosweb/estilos-mostrarReceta.css">
+
+    <!-- Custom JS -->
+    <script src="/formulariosweb/mostrarReceta.js" defer></script>
+
+    <!-- Owl JS -->
+    <link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.theme.default.min.css">
+</head>
+
+<body>
+    <header class="sticky">
+        <nav>
+            <div class="navheader">
+                <div class="contenedor-items-menu">
+                    <div class="icono-cookingology">
+                        <a href="inicio.html"><img src="/static/assets/img/icono-cookingology.png" alt=""
+                                style="height: 80px;"></a>
+                    </div>
+                    <ul class="lista-navbar-menu-btns">
+                        <li class="navbar-menus"><a href="/">Inicio</a></li>
+                        <li class="navbar-menus"><a href="#">Tienda</a></li>
+                        <li class="navbar-menus"><a href="#">Tips & consejos</a></li>
+                        <li class="navbar-menus"><a href="#">Recetas</a>
+                            <div class="contenedor-ul-navbar-dpdown-menus">
+                                <ul class="ul-navbar-menus">
+                                    <h4>Comidas del día</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Almuerzo</a>
+                                    </li>
+                                    <li class="recetas-items-dropdown"><a href="#">Cena</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Postres</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Bebidas y cocteles</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Desayuno y merienda</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Ver todas las categorías<i class="fa-solid fa-chevron-right ver-mas-flecha "></i></a></li>
+                                </ul>
+                                <ul class="ul-navbar-menus">
+                                    <h4>Recetas por ingredientes</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Pollo</a>
+                                    </li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Carne">Carne vacuna</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Cerdo">Carne de cerdo</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Vegetarianas">Vegetarianas</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Pizzas+%2F+Tartas">Pastas y
+                                            harinas</a></li>
+                                    <li class="recetas-items-dropdown"><a
+                                            href="/buscar-receta-categoria?categoria=Helados">Ver más recetas por ingredientes<i class="fa-solid fa-chevron-right ver-mas-flecha "></i></a></li>
+                                    <!-- <li class="recetas-items-dropdown"><a href="#">COMPLICACION EN EL BACK Ver todos los
+                                            ingredientes</a></li> -->
+                                </ul>
+                                <ul class="ul-navbar-menus">
+                                    <h4>Celebraciones y eventos</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Aniversarios</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Casamientos</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Cumpleaños</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Navidad</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Pascúas</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Ver más recetas para eventos<i class="fa-solid fa-chevron-right ver-mas-flecha"></i></a></li>                                    
+                                </ul>
+                                <ul class="ul-navbar-menus" style="border: 0;">
+                                    <h4>Recetas subidas</h4>
+                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Recetas de
+                                            la comunidad</a></li>
+                                    <li class="recetas-items-dropdown"><a href="#">Recetas oficiales</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="navbar-menus"><a href="?=formulariosweb/SubirReceta.html">Subir receta</a></li>
+                        <li class="navbar-menus"><a href="#"><i class="fa-solid fa-circle-user"></i></a>
+                            <div class="contenedor-ul-navbar-dpdown-menus form-dropdown">
+                                <ul class="ul-navbar-menus">
+                                    <li><button id="mostrar-modal-login">Iniciar sesión</button></li>
+                                    <li><button id="mostrar-modal-signup">Registrarse</button></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formulario">
+                <form method="post" action="/edicion-receta">
+                    <div class="wrapper-titulo-descripcion-tiempo wrapper-form-section">
+                        <fieldset>
+                            <div class="parte-sup-header">
+                                <div class="columna-1">
+                                    <div class="titulo-receta">
+                                        <label for="id">Id de la receta</label>
+                                        <input type="number" id="id" name="id" readonly value="{{idReceta}}" required
+                                            class="form-text-input">
+                                    </div>
+                                    <div class="titulo-receta">
+                                        <label for="NombreReceta">Titulo de la receta</label>
+                                        <input type="text" id="NombreReceta" name="NombreReceta" required
+                                            value="{{NombreReceta}}" placeholder="Dale un titulo a tu receta" required
+                                            class="form-text-input">
+                                    </div>
+                                    <div class="nombre-usuario">
+                                        <label for="id-usuario">Id del Usuario</label>
+                                        <input type="number" id="id-Usuario" name="idUsuario" required
+                                            value="{{idUsuario}}" placeholder="Dinos tu nick de usuario" required
+                                            class="form-text-input">
+                                    </div>
+                                    <!-- <p>Usuario<input type="text" name="nombreUsuario" required></p> -->
+                                    <!-- <div class="descripcion-receta">
+                                                <label for="descripcion">Descripción</label>
+                                                <textarea class="form-text-input" name="descripcion" id="descripcion"
+                                                    cols="30" rows="10"
+                                                    placeholder="Comparte la historia detras de tu receta, que la hace especial y direcciones extra!"
+                                                    required></textarea>
+                                            </div> -->
+                                </div>
+                                <div class="columna-2">
+                                    <div class="agregar-img-receta">
+                                        <label for="" id="imgFile">Imagen (opcional)</label>
+                                        <div class="subir-img-layout">
+                                            <input type="file" id="imgFile" name="imgFile" accept="">
+                                        </div>
+                                        <input type="text" name="urlImagen" required value="{{urlImagen}}"
+                                            placeholder="Pegá el URL de la imagen">
+                                        <p>Usa formato JPEG o PNG. Debe ser al menos 960 x 960. Tamaño max: 30MB
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="parte-inf-header">
+                                <div class="porciones-info"
+                                    style="display: flex; flex-direction: row; gap: 30px; margin: 32px 0;">
+                                    <label for="porciones">Porciones</label>
+                                    <div class="input-contenedor">
+                                        <input class="form-option-input" type="number" id="porciones" name="Porciones"
+                                            placeholder="P. ej.: 8" min="1" required value="{{Porciones}}">
+                                    </div>
+                                </div>
+                                <div class="tiempo-info">
+                                    <!-- <p>Tiempo de cocción<input type="number" name="TiempoMin" required></p> -->
+                                    <label for="prep-time">Tiempo de preparación en minutos</label>
+                                    <div class="input-contenedor">
+                                        <input class="form-element-input" type="number" name="TiempoMin" id="prep-time"
+                                            placeholder="0" min="0" required value="{{TiempoMin}}">
+                                    </div>
+                                </div>
+                                <div class="categoria-info">
+                                    <label for="idCategoría">Categoría</label>
+                                    <select class="form-option-input" name="idCategoria" id="idCategoria">
+                                        {{opciones}}
+                                        <!-- <option value="desayuno merienda">Desayuno & Merienda</option>
+                                                <option value="almuerzo">Almuerzo</option>
+                                                <option value="cena">Cena</option>
+                                                <option value="bebidas">Bebidas</option>
+                                                <option value="vegetarianas">Vegetarianas</option>
+                                                <option value="postres y dulces">Postres & Dulces</option> -->
+                                    </select>
+                                </div>
+                                <div class="dificultad-info">
+                                    <label for="dificultad">Dificultad</label>
+                                    <select class="form-option-input" name="dificultad" id="dificultad"
+                                        value="{{dificultad}}">
+                                        <option value="principiante">Fácil</option>
+                                        <option value="intermedio">Intermedio</option>
+                                        <option value="Avanzado">Difícil</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="wrapper-ingredientes wrapper-form-section">
+                        <fieldset>
+                            <legend>Ingredientes</legend>
+                            <p>Ingrese los ingredientes en el cuadro inferior. Incluya la cantidad (es decir, tazas,
+                                cucharadas) y cualquier preparación especial (es decir, tamizada, ablandada, picada).
+                                Trate de organizarlos para que sean legibles.</p>
+                            <textarea class="form-text-input" name="Ingredientes" id="" cols="30" rows="10"
+                                placeholder="Por ejemplo, 2 tazas de harina tamizada, 1 taza de azúcar..."
+                                required>{{Ingredientes}}</textarea>
+                        </fieldset>
+                    </div>
+                    <div class="wrapper-pasos-a-seguir wrapper-form-section">
+                        <fieldset>
+                            <legend>Pasos a seguir</legend>
+                            <p>Explique cómo hacer su receta, incluidas las temperaturas del horno, los tiempos de
+                                cocción o cocción, los tamaños de la sartén, etc. Trate de organizarlos para que sean
+                                legibles..</p>
+                            <textarea name="Receta" id="" cols="30" rows="10"
+                                placeholder="p. ej.: Precalentar el horno a 350 grados F, verter en bandejas engrasadas..."
+                                required>{{Receta}}</textarea>
+                        </fieldset>
+                    </div>
+                    <div class="form-layout-btn">
+                        <div class="contenedor-btns-form">
+                            <a href="#" class="cancelar-btn" id="#mostrar-modal-cancelar" role="button">CANCELAR</a>
+                            <input type="submit" class="btn-submit" value="Enviar Receta">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </article>
+</section>
+

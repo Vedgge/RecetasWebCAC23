@@ -1,99 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver receta</title>
-    {{estilos-mostrarReceta}}
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/static/assets/favicon.png" type="image/x-icon">
-
-    <!-- ESTILOS GENERALES -->
-    <link rel="stylesheet" href="/static/assets/style.css">
-
-    <!-- JS GENERAL -->
-    <script src="/static/assets/general-script.js" defer></script>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/static/assets/estilos-mostrarReceta.css">
-
-    <!-- Custom JS -->
-    <script src="/static/assets/mostrarReceta.js" defer></script>
-
-</head>
-
-<body>
-    <header class="sticky">
-        <nav>
-            <div class="navheader">
-                <div class="contenedor-items-menu">
-                    <div class="icono-cookingology">
-                        <a href="?=inicio.html"><img src="/static/assets/img/icono-cookingology.png" alt=""
-                                style="height: 80px;"></a>
-                    </div>
-                    <ul class="lista-navbar-menu-btns">
-                        <li class="navbar-menus"><a href="?=inicio.html">Inicio</a></li>
-                        <li class="navbar-menus"><a href="#">Tienda</a></li>
-                        <li class="navbar-menus"><a href="#">Tips & consejos</a></li>
-                        <li class="navbar-menus"><a href="?=formulariosweb/mostrarVariasRecetas.html">Recetas</a>
-                            <div class="contenedor-ul-navbar-dpdown-menus">
-                                <ul class="ul-navbar-menus">
-                                    <h4>Comidas del día</h4>
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Almuerzo</a>
-                                    </li>
-                                    <li class="recetas-items-dropdown"><a href="#">Cena</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Postres</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Bebidas y cocteles</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Desayuno y merienda</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Ver todas las categorías<i class="fa-solid fa-chevron-right ver-mas-flecha "></i></a></li>
-                                </ul>
-                                <ul class="ul-navbar-menus">
-                                    <h4>Recetas por ingredientes</h4>
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Pollo</a>
-                                    </li>
-                                    <li class="recetas-items-dropdown"><a
-                                            href="/buscar-receta-categoria?categoria=Carne">Carne vacuna</a></li>
-                                    <li class="recetas-items-dropdown"><a
-                                            href="/buscar-receta-categoria?categoria=Cerdo">Carne de cerdo</a></li>
-                                    <li class="recetas-items-dropdown"><a
-                                            href="/buscar-receta-categoria?categoria=Vegetarianas">Vegetarianas</a></li>
-                                    <li class="recetas-items-dropdown"><a
-                                            href="/buscar-receta-categoria?categoria=Pizzas+%2F+Tartas">Pastas y
-                                            harinas</a></li>
-                                    <li class="recetas-items-dropdown"><a
-                                            href="/buscar-receta-categoria?categoria=Helados">Ver más recetas por ingredientes<i class="fa-solid fa-chevron-right ver-mas-flecha "></i></a></li>
-                                    <!-- <li class="recetas-items-dropdown"><a href="#">COMPLICACION EN EL BACK Ver todos los
-                                            ingredientes</a></li> -->
-                                </ul>
-                                <ul class="ul-navbar-menus">
-                                    <h4>Celebraciones y eventos</h4>
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Aniversarios</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Casamientos</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Cumpleaños</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Navidad</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Pascúas</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Ver más recetas para eventos<i class="fa-solid fa-chevron-right ver-mas-flecha"></i></a></li>                                    
-                                </ul>
-                                <ul class="ul-navbar-menus" style="border: 0;">
-                                    <h4>Recetas subidas</h4>
-                                    <li class="recetas-items-dropdown" style="margin-top: 0px;"><a href="#">Recetas de
-                                            la comunidad</a></li>
-                                    <li class="recetas-items-dropdown"><a href="#">Recetas oficiales</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="navbar-menus"><a href="?=formulariosweb/SubirReceta.html">Subir receta</a></li>
-                        <li class="navbar-menus"><a href="#"><i class="fa-solid fa-circle-user"></i></a>
-                            <div class="contenedor-ul-navbar-dpdown-menus form-dropdown">
-                                <ul class="ul-navbar-menus">
-                                    <li><button id="mostrar-modal-login">Iniciar sesión</button></li>
-                                    <li><button id="mostrar-modal-signup">Registrarse</button></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+<section>
+    <article class="article-agregar-receta">
+        <div class="contenedor-agregar-receta">
+            <div class="banner">
+                <div class="wrapper-title">
+                    <h1 class="title-agregar-receta">Modificar una receta</h1>
+                </div>
+                <div class="wrapper-sub">
+                    <p>¡Subir recetas personales es fácil! Agrega el tuyo a tus favoritos, compartilo con amigos,
+                        familiares o toda la comunidad de Cookingology.</p>
                 </div>
             </div>
             <div class="overlay"></div>
