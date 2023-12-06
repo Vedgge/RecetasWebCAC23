@@ -1,0 +1,300 @@
+<style>
+    main {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    padding-right: max(2rem,calc(50% - 38.125rem));
+    padding-left: max(2rem,calc(50% - 38.125rem));
+}
+
+.ruta-contenedor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px dotted #888;
+    margin-bottom: 10px;
+    padding-bottom: 10px; 
+}
+
+.ruta-contenedor a {
+    color: #222;
+    transition: 0.2s;
+}
+
+.ruta-contenedor a:hover {
+    color: rgb(251, 75, 20);
+}
+
+.contenedor-header-varias-recetas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor-header-varias-recetas h1 {
+    font-size: 3rem;
+    line-height: 3.25rem;
+    text-underline-offset: 0.75rem;
+}
+
+.contenedor-header-varias-recetas p{
+    margin: 1.75rem;
+}
+
+.contenedor-header-varias-recetas button {
+    margin-bottom: 1.75rem;
+}
+
+.categorias-varias-ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    max-height: 9.1875rem;
+}
+
+.categorias-varias-ul li a {
+    color: #222;
+}
+
+.categorias-varias-ul .item-categoria-ul a span {
+    font-weight: bold;
+    position: relative;
+}
+
+.categorias-varias-ul .item-categoria-ul a span:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0%;
+    width: 0;
+    height: 2px;
+    background: #000000;
+    transition: .3s;
+}
+
+#ver-todas-categorias {
+    position: relative;
+    border: 0;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+#ver-todas-categorias:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0%;
+    width: 0;
+    height: 2px;
+    background: #d54215;
+    transition: .3s;
+}
+
+#ver-todas-categorias:hover:after{
+    width: 100%;
+}
+
+.fa-chevron-down {
+    margin-left: 5px;
+    color: #d54215;
+}
+
+.categorias-varias-ul .item-categoria-ul a span:hover:after{
+    width: 100%;
+} 
+
+.categorias-varias-ul li {
+    margin: 0px 1.25rem 1.25rem 1.25rem;
+    text-align: center;
+}
+
+.hidden-categoria {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.flecha-categorias {
+    transition: transform 0.3s ease;
+}
+
+.categorias-varias-ul .item-categoria-ul {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.categorias-varias-ul .hidden-categoria .item-categoria-ul {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+
+/* Agregar la clase oculto para ocultar los elementos */
+.categorias-varias-ul li.oculto {
+    display: none;
+}
+
+.contenedor-recetas-varias-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1.5em 1.5em;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "receta-varias-1 receta-varias-2 receta-varias-3 receta-varias-4"
+        "receta-varias-5 receta-varias-6 receta-varias-7 receta-varias-8"
+        "receta-varias-9 receta-varias-10 receta-varias-11 receta-varias-12";
+}
+
+.contenedor-recetas-varias-grid > div {
+    position: relative;
+    height: 525px;
+    /* width: 285px; */
+    /* background: rgb(251, 75, 20); */
+    border-radius: 5px;
+    cursor: pointer;
+    /* border: 1px solid red; */
+}
+
+.contenedor-recetas-varias-grid > div img {
+    display: block;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 233px;
+    object-fit: cover;
+    filter: brightness(0.7); 
+    transition: 0.3s ease;
+}
+
+.contenedor-recetas-varias-grid > div:hover img {
+    filter: brightness(1); 
+}
+
+.receta-varias-1 {
+    grid-area: receta-varias-1;
+}
+
+.receta-varias-2 {
+    grid-area: receta-varias-2;
+}
+
+.receta-varias-3 {
+    grid-area: receta-varias-3;
+}
+
+.receta-varias-4 {
+    grid-area: receta-varias-4;
+}
+
+.receta-varias-5 {
+    grid-area: receta-varias-5;
+}
+
+.receta-varias-6 {
+    grid-area: receta-varias-6;
+}
+
+.receta-varias-7 {
+    grid-area: receta-varias-7;
+}
+
+.receta-varias-8 {
+    grid-area: receta-varias-8;
+}
+
+.receta-varias-9 {
+    grid-area: receta-varias-9;
+}
+
+.receta-varias-10 {
+    grid-area: receta-varias-10;
+}
+
+.receta-varias-11 {
+    grid-area: receta-varias-11;
+}
+
+.receta-varias-12 {
+    grid-area: receta-varias-12;
+}
+
+.contenedor-footer-recetas-varias-elemento {
+    display: flex;
+    justify-content: space-between;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid #e0dede;
+    height: 232px;
+    flex-direction: column;
+    padding: 30px;
+    flex-grow: 1;
+}
+
+.etiqueta-receta-varias { 
+    z-index: 2;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.etiqueta-receta-varias a {
+    width:auto;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 6px 16px;
+    text-transform: uppercase;
+    transition: 0.25s;
+}
+
+.usuario-receta-varias {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-categoria-title{
+    margin-bottom: 30px;
+}
+
+.header-categoria-title h3 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.fecha-tiempo {
+    color: #9F9F9F;
+    text-align: start !important;
+}
+
+.footer-descrip-receta {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    max-height: 80px; 
+}
+
+.footer-descrip-receta p {
+    margin: 0; 
+}
+
+
+</style>

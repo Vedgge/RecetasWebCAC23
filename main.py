@@ -189,26 +189,35 @@ class EliminarDatos(Credenciales):
 print("\033[32m","#"*60,"\033[0m")
 
 def reemplazosPagina(pagina):
-    # Agregar esta función en cada @app.route que contenga un "return pagina"
-    # Creación de estilos PROBABLEMENTE DEBA ELIMINARSE
-    with open ('RecetasWebCAC23/formulariosweb/style.html', 'r', encoding='utf-8') as archivo:
-        pagina = pagina.replace("{{style}}",archivo.read())
-        archivo.close()
+    # Estilo 'subirReceta'
+    with open('RecetasWebCAC23/formulariosweb/estilos-subirReceta.html', 'r', encoding='utf-8') as archivo_estilo_subir_receta:
+        pagina = pagina.replace("{{estilos-subirReceta}}", archivo_estilo_subir_receta.read())
+
+    # Estilo 'mostrarVariasRecetas'
+    with open('RecetasWebCAC23/formulariosweb/estilos-mostrarVariasRecetas.html', 'r', encoding='utf-8') as archivo_estilos_mostrar_varias_recetas:
+        pagina = pagina.replace("{{estilos-mostrarVariasRecetas}}", archivo_estilos_mostrar_varias_recetas.read())
+        
+    # Estilo 'mostrarReceta'
+    with open('RecetasWebCAC23/formulariosweb/estilos-mostrarReceta.html', 'r', encoding='utf-8') as archivo_estilos_mostrar_receta:
+        pagina = pagina.replace("{{estilos-mostrarReceta}}", archivo_estilos_mostrar_receta.read())
     
+    # Estilo 'modificarElementos'
+    with open('RecetasWebCAC23/formulariosweb/estilos-modificarElementos.html', 'r', encoding='utf-8') as archivo_estilos_modificar_elementos:
+        pagina = pagina.replace("{{estilos-modificarElementos}}", archivo_estilos_modificar_elementos.read())
+
     # Carga de categorias en forma de lista
-    categorias = Consulta('*','categorias')
+    categorias = Consulta('*', 'categorias')
     categorias.consultar()
     seleccion = ""
-    
-    
+
     for item in categorias.resultados:
         seleccion += f'''<option value="{item['Categoria']}">{item['Categoria']}</option>'''
-    
-    pagina = pagina.replace("{{opciones}}",seleccion)
+
+    pagina = pagina.replace("{{opciones}}", seleccion)
 
     # Carrusel página principal
     seleccion = ""
-    recetasNuevas = Consulta('*','recetas',False,"fechaCreacion")
+    recetasNuevas = Consulta('*', 'recetas', False, "fechaCreacion")
     recetasNuevas.consultar()
 
     for item in recetasNuevas.resultados:
@@ -221,9 +230,9 @@ def reemplazosPagina(pagina):
     pagina = pagina.replace("{{carrusel}}",seleccion)
 
     # Mostrar editar receta
-    pagina = pagina.replace("{{receta}}","")
-    pagina = pagina.replace("{{idReceta}}","")
-
+    pagina = pagina.replace("{{receta}}", "")
+    pagina = pagina.replace("{{idReceta}}", "")
+    
     return pagina
 #
 

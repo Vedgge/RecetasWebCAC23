@@ -744,7 +744,8 @@ header.sticky {
 
 /* RECETAS POPULARES INDEX */
 .contenedor-grid-recetas-populares {
-    height: 600px;
+    position: relative;
+    /* height: 600px; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -756,10 +757,93 @@ header.sticky {
 }
 
 .contenedor-grid-recetas-populares>div {
+    position: relative;
+    cursor: pointer;
     border-radius: 12px;
-    background-color: #FF4B2B;
-    height: 100%;
     width: 100%;
+    overflow: hidden;
+}
+
+.img-recetas-populares-contenedor {
+    height: 100%;
+}
+
+.contenedor-grid-recetas-populares > div img {
+    display: block;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7); 
+    transition: 0.3s ease;
+}
+
+.contenedor-grid-recetas-populares > div:hover img {
+    filter: brightness(1); 
+}
+
+.footer-recetas-populares-contenedor {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    border-top-right-radius: 12px;
+    background: #f5f6eae3 ;
+    flex-direction: column;
+    padding: 15px 15px 0 15px;
+    padding-bottom: 0;
+    flex-grow: 1;
+    bottom: 0;
+    width: 208px;
+    left: -100%; 
+    transition: left 0.3s ease; 
+}
+
+.contenedor-grid-recetas-populares > div:hover .footer-recetas-populares-contenedor {
+    left: 0; 
+}
+
+.etiqueta-receta-varias { 
+    z-index: 2;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.etiqueta-receta-varias a {
+    width:auto;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 6px 16px;
+    text-transform: uppercase;
+    transition: 0.25s;
+}
+
+.usuario-receta-varias {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-categoria-title{
+    margin-bottom: 15px;
+}
+
+.header-categoria-title h3 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.fecha-tiempo {
+    color: #9F9F9F;
+    text-align: start !important;
 }
 
 .receta-mas-popular {
@@ -1042,6 +1126,11 @@ header.sticky {
     border-radius: 12px;
     width: 1300px;
     height: 200px;
+    background-image: url(https://wp.wp-preview.com/cookandmeal/cookandmeal-2/wp-content/uploads/2021/07/image-from-rawpixel-id-2222957-png.png);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: cover;
+    background-attachment: scroll;
 }
 
 .row-newsletter {
@@ -1077,6 +1166,7 @@ header.sticky {
 footer {
     width: 100%;
     background-color: rgba(0,0,0,.05);
+    border-top: 1px solid rgb(107, 107, 107);
 }
 
 .contenido-footer{
