@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultas Carga de Datos</title>
-    {{style}}
+    <!-- {{style}} -->
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/static/assets/favicon.png" type="image/x-icon">
 
     <!-- ESTILOS GENERALES -->
-    <link rel="stylesheet" href="/static/assets/style.css">
+    <link rel="stylesheet" href="/static/assets/estilos-inicio-general.css">
 
     <!-- Custom JS GENERAL -->
     <script src="/static/assets/general-script.js" defer></script>
@@ -160,11 +160,14 @@
                         <span style="font-size: 14px;">o utiliza tu email para el registro</span>
                     </div>
                     <div class="modal-body">
-                        <form action="" class="js-loginFormModal" style="width: 100%;">
+                        <form method="post" action="/registro-usuario" class="js-loginFormModal" style="width: 100%;" >
                             <div>
                                 <input type="email" id="username-modal" name="correoElectronico" maxlength="50"
                                     placeholder="Ingresa tu email">
                                 <span class="error-text-modal"></span>
+                            </div>
+                            <div>
+                                <input type="text" id="username-modal" name="NombreUsuario" maxlength="15" placeholder="Crea tu nombre de usuario">
                             </div>
                             <div class="contenedor-form-juntos">
                                 <input type="text" name="Nombre" id="nombre-modal" required placeholder="Ingresa tu nombre">
@@ -177,15 +180,15 @@
                                 <span class="error-text-modal"></span>
                             </div>
                             <div>
-                                <input type="password" id="password-modal" name="password"
+                                <input type="password" id="password-modal" name="Contrasena"
                                     placeholder="Crea tu contraseña (más de 6 caracteres)">
                                 <span class="error-text-modal"></span>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <input type="password" id="password-confirmn" name="password-confirmn"
                                     placeholder="Confirma tu contraseña (más de 6 caracteres)">
                                 <span class="error-text-modal"></span>
-                            </div>
+                            </div> -->
                             <div class="modal-body-down">
                                 <input type="submit" value="Registrarme" class="btn-submit">
                                 <span style="font-size: 14px;">¿Ya tenes una cuenta en el sitio? <a href="#"
