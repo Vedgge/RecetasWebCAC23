@@ -35,7 +35,7 @@ class Credenciales:
                     self._password = input("password: ")
                     self._database = input("database: ")
                     
-                    archivo.write(f"{self.host_}\n")
+                    archivo.write(f"{self._host}\n")
                     archivo.write(f"{self._user}\n")
                     archivo.write(f"{self._password}\n")
                     archivo.write(f"{self._database}\n")
